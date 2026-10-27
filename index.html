@@ -1,0 +1,2435 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Shreyas Manohar — Book of Business · AMER Public Sector SLED</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    color-scheme: light;
+    --navy: #0F2644;
+    --navy-mid: #1B4F8A;
+    --navy-light: #2B6CB0;
+    --bg: #EEF2F8;
+    --card: #FFFFFF;
+    --border: #D1DCF0;
+    --text: #0F2644;
+    --text-secondary: #4A6080;
+    --text-muted: #7A8FA8;
+    --green: #00A878;
+    --green-bg: #E6F7F3;
+    --amber: #E8892C;
+    --amber-bg: #FEF3E2;
+    --red: #D64045;
+    --red-bg: #FDECEA;
+    --mono: 'IBM Plex Mono', monospace;
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'IBM Plex Sans', -apple-system, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ── HEADER ── */
+  .header {
+    background: var(--navy);
+    color: white;
+    padding: 0 40px;
+    display: flex;
+    align-items: stretch;
+    justify-content: space-between;
+    gap: 40px;
+    min-height: 80px;
+  }
+  .header-identity { display: flex; align-items: center; gap: 20px; padding: 20px 0; }
+  .avatar {
+    width: 44px; height: 44px; border-radius: 50%;
+    background: var(--navy-mid); border: 2px solid rgba(255,255,255,0.2);
+    display: flex; align-items: center; justify-content: center;
+    font-weight: 600; font-size: 16px; flex-shrink: 0; letter-spacing: 0.01em;
+  }
+  .header-name { font-size: 17px; font-weight: 600; letter-spacing: -0.01em; }
+  .header-title { font-size: 13px; color: rgba(255,255,255,0.55); margin-top: 2px; font-weight: 400; }
+  .header-meta { display: flex; align-items: center; gap: 32px; padding: 20px 0; }
+  .meta-stat { text-align: right; }
+  .meta-stat-value { font-size: 22px; font-weight: 700; letter-spacing: -0.02em; line-height: 1; }
+  .meta-stat-label { font-size: 11px; color: rgba(255,255,255,0.5); margin-top: 4px; font-weight: 400; }
+  .meta-divider { width: 1px; height: 36px; background: rgba(255,255,255,0.12); }
+  .header-badge {
+    display: flex; align-items: center; gap: 8px;
+    background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.12);
+    border-radius: 6px; padding: 8px 14px; font-size: 12px;
+    color: rgba(255,255,255,0.7); font-weight: 500;
+  }
+  .pulse-dot {
+    width: 7px; height: 7px; border-radius: 50%; background: var(--green);
+    animation: pulse 2.4s ease-in-out infinite;
+  }
+  @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
+  @media (prefers-reduced-motion: reduce) { .pulse-dot { animation: none; } }
+
+  /* ── LAYOUT ── */
+  .main { max-width: 1280px; margin: 0 auto; padding: 32px 40px 48px; }
+  .section-label {
+    font-size: 11px; font-weight: 600; color: var(--text-muted);
+    letter-spacing: 0.06em; margin-bottom: 14px; text-transform: uppercase;
+  }
+
+  /* ── ALERT BANNER ── */
+  .alert-banner {
+    background: var(--amber-bg); border: 1px solid rgba(232, 137, 44, 0.3);
+    border-radius: 8px; padding: 12px 20px;
+    display: flex; align-items: center; gap: 12px; margin-bottom: 28px;
+  }
+  .alert-icon {
+    width: 28px; height: 28px; border-radius: 50%; background: var(--amber);
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0; font-size: 14px;
+  }
+  .alert-text { font-size: 13.5px; color: #7A4A0A; font-weight: 500; }
+  .alert-text strong { font-weight: 700; }
+
+  /* ── GRID ── */
+  .grid-two {
+    display: grid; grid-template-columns: 1fr 340px;
+    gap: 24px; align-items: start;
+  }
+  @media (max-width: 900px) { .grid-two { grid-template-columns: 1fr; } }
+
+  /* ── ACCOUNTS ── */
+  .accounts-stack { display: flex; flex-direction: column; gap: 12px; }
+  .cohort-header {
+    display: flex; align-items: center; gap: 10px;
+    padding: 8px 0 6px; border-bottom: 1.5px solid var(--border); margin-bottom: 4px;
+  }
+  .cohort-dot { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; }
+  .cohort-title { font-size: 14px; font-weight: 600; color: var(--text); letter-spacing: -0.01em; }
+  .cohort-count { font-size: 12px; font-weight: 500; color: var(--text-muted); margin-left: auto; }
+
+  /* ── ACCOUNT CARD ── */
+  .account-card {
+    background: var(--card); border: 1px solid var(--border);
+    border-radius: 10px; overflow: hidden;
+    position: relative; transition: box-shadow 0.15s ease;
+  }
+  .account-card:hover { box-shadow: 0 4px 16px rgba(15, 38, 68, 0.09); }
+  .account-card::before {
+    content: ''; position: absolute; left: 0; top: 0; bottom: 0;
+    width: 3px; border-radius: 10px 0 0 10px;
+  }
+  .account-card.healthy::before { background: var(--green); }
+  .account-card.observation::before { background: var(--amber); }
+
+  /* Card summary row */
+  .card-summary {
+    padding: 16px 20px; display: grid;
+    grid-template-columns: 1fr auto; gap: 12px; align-items: start;
+    cursor: pointer; user-select: none;
+  }
+  .card-summary:focus { outline: 2px solid var(--navy-light); outline-offset: -2px; border-radius: 9px; }
+  .card-main { min-width: 0; }
+  .card-name-row { display: flex; align-items: center; gap: 8px; margin-bottom: 3px; }
+  .card-name {
+    font-size: 15.5px; font-weight: 600; letter-spacing: -0.015em;
+    color: var(--text); white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+  }
+  .card-chevron {
+    width: 18px; height: 18px; flex-shrink: 0; color: var(--text-muted);
+    transition: transform 0.2s ease; margin-left: 2px;
+  }
+  .account-card.open .card-chevron { transform: rotate(180deg); }
+  .card-state { font-size: 12px; color: var(--text-muted); margin-bottom: 10px; }
+  .card-tags { display: flex; flex-wrap: wrap; gap: 6px; }
+  .tag {
+    font-size: 11.5px; font-weight: 500; padding: 3px 8px;
+    border-radius: 4px; font-family: var(--mono);
+  }
+  .tag-cloud { background: #EAF2FF; color: #1B4F8A; }
+  .tag-cloud-plus { background: #EDE9FF; color: #5B21B6; }
+  .tag-server { background: #F0F0F0; color: #4A5568; }
+  .tag-status-ok { background: var(--green-bg); color: #00705A; }
+  .tag-status-ext { background: var(--amber-bg); color: #965B12; }
+  .tag-pod { background: var(--bg); color: var(--text-muted); border: 1px solid var(--border); }
+
+  .card-right { display: flex; flex-direction: column; align-items: flex-end; gap: 8px; flex-shrink: 0; }
+  .card-gdc { font-size: 22px; font-weight: 700; letter-spacing: -0.03em; color: var(--navy); line-height: 1; }
+  .card-gdc-label { font-size: 10px; color: var(--text-muted); text-align: right; margin-top: 1px; }
+  .renewal-badge {
+    font-size: 11.5px; font-weight: 600; font-family: var(--mono);
+    padding: 4px 9px; border-radius: 5px; text-align: right; white-space: nowrap;
+  }
+  .renewal-urgent { background: #FEE2E2; color: #991B1B; }
+  .renewal-soon { background: var(--amber-bg); color: #9A4E00; }
+  .renewal-ok { background: var(--green-bg); color: #065F46; }
+  .renewal-far { background: #EEF2F8; color: var(--text-muted); }
+
+  /* ── 360° DRAWER ── */
+  .card-drawer {
+    max-height: 0; overflow: hidden;
+    transition: max-height 0.28s cubic-bezier(0.4,0,0.2,1);
+  }
+  .account-card.open .card-drawer { max-height: 9000px; }
+  .drawer-inner {
+    border-top: 1px solid var(--border);
+    padding: 18px 20px 20px;
+    display: flex; flex-direction: column; gap: 16px;
+  }
+
+  /* Salesforce links */
+  .sf-links { display: flex; flex-wrap: wrap; gap: 8px; }
+  .sf-link {
+    display: inline-flex; align-items: center; gap: 6px;
+    font-size: 12px; font-weight: 600; color: var(--navy-mid);
+    text-decoration: none; padding: 6px 12px; border-radius: 6px;
+    border: 1.5px solid var(--border); background: var(--bg);
+    transition: background 0.12s, border-color 0.12s;
+  }
+  .sf-link:hover { background: #D8E6F5; border-color: var(--navy-mid); }
+  .sf-link:focus { outline: 2px solid var(--navy-light); outline-offset: 2px; }
+  .sf-link svg { flex-shrink: 0; }
+
+  /* Renewal opp details */
+  .drawer-grid {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 10px;
+  }
+  .drawer-field { display: flex; flex-direction: column; gap: 2px; }
+  .drawer-field-label { font-size: 10.5px; font-weight: 600; color: var(--text-muted); letter-spacing: 0.03em; }
+  .drawer-field-value { font-size: 13px; font-weight: 500; color: var(--text); }
+
+  /* CSM Notes */
+  .notes-section { display: flex; flex-direction: column; gap: 6px; }
+  .notes-header { display: flex; align-items: center; justify-content: space-between; }
+  .notes-label { font-size: 11px; font-weight: 600; color: var(--text-muted); letter-spacing: 0.04em; text-transform: uppercase; }
+  .notes-edit-btn {
+    font-size: 11px; font-weight: 600; color: var(--navy-mid);
+    background: none; border: none; cursor: pointer; padding: 2px 6px;
+    border-radius: 4px; transition: background 0.1s;
+  }
+  .notes-edit-btn:hover { background: var(--bg); }
+  .notes-display {
+    font-size: 13px; line-height: 1.6; color: var(--text-secondary);
+    background: var(--bg); border-radius: 6px; padding: 10px 12px;
+    min-height: 52px; border: 1px solid transparent;
+    cursor: text;
+  }
+  .notes-display.empty { color: var(--text-muted); font-style: italic; }
+  .notes-textarea {
+    font-size: 13px; line-height: 1.6; color: var(--text);
+    background: var(--card); border-radius: 6px; padding: 10px 12px;
+    border: 1.5px solid var(--navy-light); width: 100%; resize: vertical;
+    min-height: 72px; font-family: 'IBM Plex Sans', sans-serif;
+    display: none;
+  }
+  .notes-textarea:focus { outline: none; box-shadow: 0 0 0 3px rgba(43,108,176,0.15); }
+  .notes-save-btn {
+    align-self: flex-end; font-size: 12px; font-weight: 600;
+    background: var(--navy); color: white; border: none;
+    border-radius: 5px; padding: 6px 14px; cursor: pointer;
+    display: none; transition: background 0.1s;
+  }
+  .notes-save-btn:hover { background: var(--navy-mid); }
+
+  /* Quick note chip on closed card */
+  .card-note-chip {
+    margin-top: 8px; font-size: 11.5px; color: var(--text-secondary);
+    background: var(--bg); border-radius: 4px; padding: 4px 8px;
+    border: 1px solid var(--border); line-height: 1.4;
+    max-width: 320px; overflow: hidden; text-overflow: ellipsis;
+    white-space: nowrap; display: none;
+  }
+  .card-note-chip.visible { display: block; }
+
+  /* ── SECTION GAP ── */
+  .section-gap { margin-top: 28px; }
+
+  /* ── RIGHT PANEL ── */
+  .right-panel { display: flex; flex-direction: column; gap: 20px; }
+  .panel-card { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 20px; }
+  .panel-title { font-size: 13px; font-weight: 600; color: var(--text); margin-bottom: 16px; letter-spacing: -0.01em; }
+
+  /* Donut */
+  .donut-wrap { display: flex; align-items: center; gap: 20px; }
+  .donut-svg { flex-shrink: 0; }
+  .donut-center-text { font-size: 20px; font-weight: 700; fill: var(--navy); font-family: 'IBM Plex Sans', sans-serif; }
+  .donut-center-sub { font-size: 9px; fill: var(--text-muted); font-family: 'IBM Plex Sans', sans-serif; }
+  .donut-legend { flex: 1; display: flex; flex-direction: column; gap: 9px; }
+  .legend-item { display: flex; align-items: center; gap: 8px; }
+  .legend-swatch { width: 10px; height: 10px; border-radius: 2px; flex-shrink: 0; }
+  .legend-name { font-size: 12px; color: var(--text); flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-weight: 500; }
+  .legend-pct { font-size: 12px; font-weight: 600; color: var(--text); font-family: var(--mono); }
+
+  /* Health bar */
+  .cohort-summary { display: flex; flex-direction: column; gap: 10px; }
+  .cohort-row { display: flex; align-items: center; gap: 10px; }
+  .cohort-row-label { font-size: 12.5px; font-weight: 500; color: var(--text); width: 120px; flex-shrink: 0; }
+  .cohort-bar-track { flex: 1; height: 7px; background: var(--bg); border-radius: 99px; overflow: hidden; }
+  .cohort-bar-fill { height: 100%; border-radius: 99px; }
+  .cohort-row-count { font-size: 12px; font-weight: 600; color: var(--text-muted); font-family: var(--mono); width: 18px; text-align: right; }
+
+  /* State rows */
+  .state-rows { display: flex; flex-direction: column; gap: 2px; }
+  .state-row { display: flex; align-items: center; gap: 10px; padding: 7px 10px; border-radius: 6px; transition: background 0.1s; }
+  .state-row:hover { background: var(--bg); }
+  .state-flag { font-size: 18px; line-height: 1; flex-shrink: 0; }
+  .state-name { font-size: 13px; font-weight: 600; color: var(--text); width: 90px; }
+  .state-accts { font-size: 12px; color: var(--text-muted); flex: 1; }
+  .state-alloc { font-size: 13px; font-weight: 700; font-family: var(--mono); color: var(--navy); }
+
+  /* ── RENEWAL TIMELINE ── */
+  .timeline-section { margin-top: 28px; }
+  .timeline-track { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 24px 28px 20px; }
+  .timeline-axis { position: relative; height: 2px; background: var(--border); margin: 12px 0 28px; border-radius: 1px; }
+  .timeline-now-marker { position: absolute; top: -6px; width: 2px; height: 14px; background: var(--navy); border-radius: 1px; }
+  .timeline-now-label { position: absolute; top: -22px; font-size: 10px; font-weight: 600; color: var(--navy); transform: translateX(-50%); font-family: var(--mono); white-space: nowrap; }
+  .timeline-events { position: relative; height: 64px; }
+  .timeline-event { position: absolute; top: 0; transform: translateX(-50%); display: flex; flex-direction: column; align-items: center; gap: 4px; cursor: pointer; }
+  .timeline-event-dot {
+    width: 12px; height: 12px; border-radius: 50%;
+    border: 2px solid white; flex-shrink: 0;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.15);
+    transition: transform 0.15s;
+  }
+  .timeline-event:hover .timeline-event-dot { transform: scale(1.35); }
+  .timeline-event-name { font-size: 10.5px; font-weight: 600; color: var(--text); white-space: nowrap; text-align: center; max-width: 88px; overflow: hidden; text-overflow: ellipsis; line-height: 1.2; }
+  .timeline-event-date { font-size: 10px; color: var(--text-muted); font-family: var(--mono); white-space: nowrap; }
+  .timeline-month-labels { display: flex; justify-content: space-between; margin-top: 8px; }
+  .timeline-month { font-size: 10px; color: var(--text-muted); font-family: var(--mono); }
+
+  /* ── OU FOOTER ── */
+  .ou-footer {
+    margin-top: 20px; background: var(--navy); border-radius: 10px;
+    padding: 16px 24px; display: flex; align-items: center;
+    justify-content: space-between; flex-wrap: wrap; gap: 12px;
+  }
+  .ou-label { font-size: 11px; color: rgba(255,255,255,0.45); font-weight: 500; }
+  .ou-names { font-size: 13.5px; color: rgba(255,255,255,0.9); font-weight: 500; margin-top: 2px; }
+  .ou-status-wrap { display: flex; gap: 20px; }
+  .ou-status-item { text-align: center; }
+  .ou-status-n { font-size: 22px; font-weight: 700; letter-spacing: -0.03em; line-height: 1; color: white; }
+  .ou-status-l { font-size: 10px; color: rgba(255,255,255,0.45); margin-top: 2px; }
+  .ou-gdc-total { text-align: right; }
+  .ou-gdc-number { font-size: 28px; font-weight: 700; color: white; letter-spacing: -0.03em; line-height: 1; }
+  .ou-gdc-sub { font-size: 11px; color: rgba(255,255,255,0.45); margin-top: 3px; }
+
+  /* ── SYNC BADGE ── */
+  .sync-badge {
+    display: flex; align-items: center; gap: 6px;
+    font-size: 11px; color: rgba(255,255,255,0.65);
+    background: rgba(0,168,120,0.15); border: 1px solid rgba(0,168,120,0.3);
+    border-radius: 5px; padding: 5px 10px;
+  }
+  .sync-badge svg { flex-shrink: 0; color: #6EE7B7; }
+
+  /* ── CARD PERSONNEL ROW ── */
+  .card-personnel {
+    display: flex; align-items: center; gap: 6px; flex-wrap: wrap;
+    font-size: 12px; color: var(--text-secondary);
+    margin-top: 7px; font-weight: 500;
+  }
+  .personnel-sep { color: var(--text-muted); font-size: 10px; }
+  .sentiment-dot {
+    width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0;
+    display: inline-block;
+  }
+
+  /* ── DRAWER SECTIONS ── */
+  .drawer-section { display: flex; flex-direction: column; gap: 8px; }
+  .drawer-section-header { display: flex; align-items: center; gap: 8px; }
+  .drawer-section-title {
+    font-size: 10.5px; font-weight: 600; color: var(--text-muted);
+    letter-spacing: 0.05em; text-transform: uppercase; flex: 1;
+  }
+  .source-badge {
+    font-size: 10px; font-weight: 700; padding: 2px 7px;
+    border-radius: 4px; letter-spacing: 0.04em; font-family: var(--mono);
+  }
+  .orgcs-badge { background: rgba(0,168,120,0.1); color: #00705A; border: 1px solid rgba(0,168,120,0.25); }
+  .org62-badge { background: rgba(27,79,138,0.08); color: var(--navy-mid); border: 1px solid rgba(27,79,138,0.2); }
+
+  /* ── INLINE EDITABLE FIELDS ── */
+  .editable-row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+  .editable-field { display: flex; flex-direction: column; gap: 3px; }
+  .ef-label { font-size: 10.5px; font-weight: 600; color: var(--text-muted); letter-spacing: 0.03em; }
+  .ef-display {
+    font-size: 13px; font-weight: 500; color: var(--text);
+    padding: 5px 8px; border-radius: 5px; border: 1.5px solid transparent;
+    background: var(--bg); cursor: text; min-height: 30px; line-height: 1.4;
+    transition: border-color 0.12s;
+  }
+  .ef-display:hover { border-color: var(--border); }
+  .ef-display.empty { color: var(--text-muted); font-style: italic; font-weight: 400; font-size: 12px; }
+  .ef-input {
+    font-size: 13px; font-weight: 500; color: var(--text);
+    padding: 5px 8px; border-radius: 5px; border: 1.5px solid var(--navy-light);
+    background: white; display: none; width: 100%; font-family: inherit;
+    box-sizing: border-box;
+  }
+  .ef-input:focus { outline: none; box-shadow: 0 0 0 3px rgba(43,108,176,0.15); }
+  .ef-textarea {
+    font-size: 13px; line-height: 1.6; color: var(--text);
+    padding: 8px 10px; border-radius: 5px; border: 1.5px solid transparent;
+    background: var(--bg); width: 100%; resize: vertical; min-height: 60px;
+    font-family: 'IBM Plex Sans', sans-serif; cursor: text;
+    transition: border-color 0.12s; box-sizing: border-box;
+  }
+  .ef-textarea:hover { border-color: var(--border); }
+  .ef-textarea:focus { outline: none; border-color: var(--navy-light); box-shadow: 0 0 0 3px rgba(43,108,176,0.15); background: white; }
+  .ef-textarea.empty { color: var(--text-muted); font-style: italic; }
+
+  /* CSG notes rich text display */
+  .csg-notes-display ul { padding-left: 18px; margin: 4px 0; }
+  .csg-notes-display li { margin: 3px 0; font-size: 12.5px; line-height: 1.5; color: var(--text-secondary); }
+  .csg-notes-display strong { color: var(--text); }
+
+  /* ── READ-ONLY MODE — all fields display live data, no editing ── */
+  .ef-display { cursor: default !important; pointer-events: none; }
+  .ef-display:hover { border-color: transparent !important; }
+  .ef-input { display: none !important; }
+  .ef-textarea { cursor: default !important; pointer-events: none; resize: none !important;
+    border-color: transparent !important; background: var(--bg) !important; }
+  .ef-textarea:hover, .ef-textarea:focus { border-color: transparent !important;
+    box-shadow: none !important; background: var(--bg) !important; }
+  .notes-edit-btn, .notes-save-btn { display: none !important; }
+  .notes-textarea { display: none !important; }
+  .notes-display { cursor: default !important; pointer-events: none; }
+  .notes-display.empty { font-style: italic; color: var(--text-muted); }
+  .notes-display.empty::after { content: '—'; }
+
+  /* ── LCS SCORE GRID ── */
+  .lcs-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; margin-top: 4px; }
+  .lcs-item { background: var(--bg); border-radius: 6px; padding: 8px 10px; text-align: center; }
+  .lcs-label { font-size: 10.5px; color: var(--text-muted); font-weight: 600; letter-spacing: 0.04em;
+    text-transform: uppercase; margin-bottom: 4px; }
+  .lcs-value { font-size: 16px; font-weight: 700; color: var(--text); letter-spacing: -0.02em; }
+  .lcs-value.lcs-above { color: var(--green); }
+  .lcs-value.lcs-below { color: var(--amber); }
+  .lcs-value.lcs-na { font-size: 13px; color: var(--text-muted); font-weight: 500; font-style: italic; }
+  .lcs-note { font-size: 11px; color: var(--text-muted); margin-top: 6px; font-style: italic; }
+
+  /* ── LCS OVERVIEW PANEL (right sidebar) ── */
+  .lcs-q-tab {
+    font-size: 10.5px; font-weight: 600; padding: 4px 0; border-radius: 5px; flex: 1;
+    border: 1.5px solid var(--border); background: var(--bg); color: var(--text-muted);
+    cursor: pointer; transition: all 0.12s; font-family: inherit; text-align: center;
+  }
+  .lcs-q-tab:hover { border-color: var(--navy-light); color: var(--navy); }
+  .lcs-q-tab.active { background: var(--navy); color: white; border-color: var(--navy); }
+  .lcs-m-tab {
+    font-size: 10.5px; font-weight: 500; padding: 3px 10px; border-radius: 4px;
+    border: 1px solid var(--border); background: white; color: var(--text-muted);
+    cursor: pointer; transition: all 0.1s; font-family: inherit;
+  }
+  .lcs-m-tab:hover { border-color: var(--navy-light); color: var(--navy); }
+  .lcs-m-tab.active { background: var(--navy-light); color: white; border-color: var(--navy-light); }
+  .lcs-pill {
+    font-size: 10px; font-weight: 600; padding: 3px 8px; border-radius: 10px;
+    border: 1px solid var(--border); background: white; color: var(--text-muted);
+    cursor: pointer; transition: all 0.1s; font-family: inherit; white-space: nowrap;
+  }
+  .lcs-pill:hover { border-color: var(--navy-mid); color: var(--navy); }
+  .lcs-pill.active { background: var(--navy-mid); color: white; border-color: var(--navy-mid); }
+  .lcs-ov-header {
+    display: grid; grid-template-columns: 1.6fr 0.7fr 0.7fr 0.7fr;
+    font-size: 9.5px; font-weight: 700; color: var(--text-muted); letter-spacing: 0.05em;
+    text-transform: uppercase; padding: 4px 6px; border-bottom: 1.5px solid var(--border);
+    margin-bottom: 2px;
+  }
+  .lcs-ov-row {
+    display: grid; grid-template-columns: 1.6fr 0.7fr 0.7fr 0.7fr;
+    font-size: 12px; padding: 6px 6px; border-radius: 5px;
+    transition: background 0.1s; align-items: center;
+  }
+  .lcs-ov-row:hover { background: var(--bg); }
+  .lcs-ov-name { font-weight: 600; color: var(--text); font-size: 11.5px; }
+  .lcs-above { color: var(--green); font-weight: 700; }
+  .lcs-below { color: var(--amber); font-weight: 700; }
+  .lcs-neutral { color: var(--text-secondary); font-weight: 600; }
+  .lcs-na { color: var(--text-muted); font-style: italic; font-size: 10.5px; }
+  .lcs-live-placeholder {
+    text-align: center; padding: 18px 0; color: var(--text-muted); font-size: 12px; font-style: italic;
+  }
+  .lcs-live-btn {
+    display: flex; align-items: center; justify-content: center; gap: 5px;
+    margin-top: 10px; padding: 8px 10px; border-radius: 6px;
+    background: var(--bg); border: 1.5px solid var(--border);
+    font-size: 11.5px; font-weight: 600; color: var(--navy-mid); text-decoration: none;
+    transition: all 0.12s; cursor: pointer;
+  }
+  .lcs-live-btn:hover { background: var(--navy); color: white; border-color: var(--navy); }
+
+  /* ── Engagements section ── */
+  .eng-table { width: 100%; border-collapse: collapse; font-size: 11px; margin-top: 4px; }
+  .eng-table th { font-size: 10px; font-weight: 700; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.4px; padding: 3px 6px; border-bottom: 1.5px solid var(--border); text-align: left; }
+  .eng-table td { padding: 4px 6px; border-bottom: 1px solid var(--border); vertical-align: top; }
+  .eng-table tr:last-child td { border-bottom: none; }
+  .eng-stage { display: inline-block; font-size: 9.5px; font-weight: 700; padding: 1px 5px; border-radius: 3px; text-transform: uppercase; letter-spacing: 0.3px; }
+  .eng-stage.new { background: #e8f4fd; color: #1a6fa8; }
+  .eng-stage.prepare { background: #fff3e0; color: #b85c00; }
+  .eng-stage.deliver { background: #e3f5e8; color: #1d7a3a; }
+  .eng-stage.closed { background: #f0f0f0; color: #666; }
+
+  /* ── Activities section ── */
+  .act-list { list-style: none; margin: 4px 0 0; padding: 0; }
+  .act-item { display: flex; gap: 8px; align-items: baseline; padding: 5px 0; border-bottom: 1px solid var(--border); font-size: 11px; }
+  .act-item:last-child { border-bottom: none; }
+  .act-date { color: var(--text-muted); font-size: 10px; white-space: nowrap; min-width: 62px; }
+  .act-type { font-size: 9.5px; font-weight: 700; padding: 1px 5px; border-radius: 3px; white-space: nowrap; background: #e8f0fe; color: #1a5cc8; }
+  .act-type.meeting { background: #e8f5e9; color: #1d7a3a; }
+  .act-type.internal { background: #f3e5f5; color: #7b1fa2; }
+  .act-subj { color: var(--text); line-height: 1.35; }
+
+  /* ── Cases panel ── */
+  .cases-panel { background: var(--card); border-radius: 10px; padding: 16px; }
+  .cases-ov-header { display: grid; grid-template-columns: 1.8fr 0.6fr 0.6fr 0.7fr; gap: 4px; font-size: 10px; font-weight: 700; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.4px; padding: 4px 8px; border-bottom: 1.5px solid var(--border); margin-bottom: 2px; }
+  .cases-ov-row { display: grid; grid-template-columns: 1.8fr 0.6fr 0.6fr 0.7fr; gap: 4px; font-size: 11px; padding: 5px 8px; border-bottom: 1px solid var(--border); align-items: start; }
+  .cases-ov-row:last-child { border-bottom: none; }
+  .cases-subj { line-height: 1.3; color: var(--text); }
+  .cases-status.open { color: var(--amber); font-weight: 700; }
+  .cases-status.closed { color: var(--text-muted); }
+  .cases-status.working { color: #1a6fa8; font-weight: 700; }
+  .cases-status.needinfo { color: var(--amber); font-weight: 700; font-size: 10px; }
+  .cases-sev.sev1 { color: #c0392b; font-weight: 700; }
+  .cases-sev.sev2 { color: var(--amber); font-weight: 700; }
+  .cases-sev.sev3 { color: #2980b9; font-weight: 700; }
+
+  .panel-section-label {
+    font-size: 10.5px; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase;
+    color: var(--text-muted); margin-bottom: 8px;
+  }
+
+  @media print {
+    body { background: white; }
+    .header, .account-card::before { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  }
+
+  /* ── OPEX KPI ── */
+  .opex-row { display:flex; align-items:center; gap:5px; margin-top:8px; flex-wrap:wrap; }
+  .opex-row-lbl { font-size:9.5px; font-weight:700; color:var(--text-muted); letter-spacing:.06em; text-transform:uppercase; margin-right:2px; }
+  .opex-chip {
+    display:inline-flex; align-items:center; gap:3px;
+    font-size:10px; font-weight:700; font-family:var(--mono);
+    padding:2px 7px; border-radius:3px; cursor:default; white-space:nowrap;
+  }
+  .opex-k { font-size:9px; font-weight:700; opacity:.65; margin-right:1px; }
+  .opex-ok   { background:var(--green-bg); color:#00705A; }
+  .opex-warn { background:var(--amber-bg); color:#9A4E00; }
+  .opex-flag { background:#FEE2E2; color:#991B1B; }
+  .opex-kpi-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:8px; margin-top:4px; }
+  .opex-kpi-box { background:var(--bg); border-radius:6px; padding:10px 12px; }
+  .opex-kpi-title { font-size:9.5px; font-weight:700; color:var(--text-muted); letter-spacing:.05em; text-transform:uppercase; margin-bottom:4px; }
+  .opex-kpi-val { font-size:12.5px; font-weight:700; margin-bottom:3px; }
+  .opex-kpi-detail { font-size:11px; color:var(--text-secondary); line-height:1.4; }
+  .opex-src { font-size:11px; color:var(--text-muted); font-style:italic; margin-top:5px; }
+  .opex-ov { background:var(--card); border:1px solid var(--border); border-radius:10px; padding:14px 18px; margin-bottom:14px; }
+  .opex-ov-hdr { display:flex; align-items:center; justify-content:space-between; margin-bottom:8px; gap:12px; }
+  .opex-ov-title { font-size:12px; font-weight:700; color:var(--text); letter-spacing:-.01em; }
+  .opex-ov-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:7px; }
+  @media(max-width:700px) { .opex-ov-grid { grid-template-columns:1fr 1fr; } }
+  .opex-ov-cell { background:var(--bg); border-radius:7px; padding:8px 10px; }
+  .opex-ov-acct { font-size:11px; font-weight:700; color:var(--text); margin-bottom:5px; }
+  .opex-ov-chips { display:flex; gap:4px; flex-wrap:wrap; }
+</style>
+</head>
+<body>
+
+<!-- ═══ HEADER ═══ -->
+<header class="header">
+  <div class="header-identity">
+    <div class="avatar">SM</div>
+    <div>
+      <div class="header-name">Shreyas Manohar</div>
+      <div class="header-title">Customer Success Manager · AMER Public Sector SLED</div>
+    </div>
+  </div>
+  <div class="header-meta">
+    <div class="meta-stat">
+      <div class="meta-stat-value">6</div>
+      <div class="meta-stat-label">Active accounts</div>
+    </div>
+    <div class="meta-divider"></div>
+    <div class="meta-stat" style="cursor:pointer;" title="View live LCS Scores dashboard in OrgCS"
+         onclick="window.open('https://orgcs.lightning.force.com/lightning/page/analytics?wave__assetType=dashboard&wave__assetId=0FKHx0000000MmvOAE&wave__pageId=04aa854d-85cc-40ee-b6c2-132c7410fd50&wave__savedViewId=8wkHx00000011WjIAI','_blank')">
+      <div class="meta-stat-value">55</div>
+      <div class="meta-stat-label">Agg. Actual · View Live ↗</div>
+    </div>
+    <div class="meta-divider"></div>
+    <div class="meta-stat">
+      <div class="meta-stat-value" style="color:#F5B85A;">2d</div>
+      <div class="meta-stat-label">Next renewal</div>
+    </div>
+    <div class="meta-divider"></div>
+    <div class="header-badge">
+      <div class="pulse-dot"></div>
+      AMER PUB SEC SLED
+    </div>
+    <div class="sync-badge">
+      <svg width="12" height="12" fill="none" viewBox="0 0 12 12"><path d="M10 6A4 4 0 1 1 6 2M10 2v4H6" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      OrgCS + Org62 · Oct 27, 2026 · Read-only
+    </div>
+  </div>
+</header>
+
+<!-- ═══ MAIN ═══ -->
+<main class="main">
+
+  <!-- Urgent alert -->
+  <div class="alert-banner">
+    <div class="alert-icon">⚑</div>
+    <div class="alert-text">
+      <strong>FL Commerce</strong> renews in 2 days (Oct 24, 2026) and is currently on a Courtesy Extension with engagement not yet started. Renewal opportunity is open — immediate action recommended.
+    </div>
+  </div>
+
+  <div class="grid-two">
+
+    <!-- LEFT: Account Cards -->
+    <div class="accounts-stack">
+
+      <!-- ── OPEX KPI OVERVIEW ── -->
+      <div class="opex-ov">
+        <div class="opex-ov-hdr">
+          <div class="opex-ov-title">Opex KPI Status &nbsp;·&nbsp; SP = Success Plan &nbsp;·&nbsp; SR = Success Review &nbsp;·&nbsp; EP = Engagements Planned</div>
+          <a href="https://prod-uswest-c.online.tableau.com/#/site/salesforce/views/OperationalExcellenceKPIDashboard/KPIsOverview" target="_blank" rel="noopener" style="font-size:11px;font-weight:600;color:var(--navy-mid);text-decoration:none;white-space:nowrap;flex-shrink:0;">View live Opex ↗</a>
+        </div>
+        <div class="opex-ov-grid">
+          <div class="opex-ov-cell">
+            <div class="opex-ov-acct">MetroPlus</div>
+            <div class="opex-ov-chips">
+              <span class="opex-chip opex-ok"   title="Active Success Plan">SP Active</span>
+              <span class="opex-chip opex-warn"  title="Success Review Q4 in New stage · due Oct 31 (ENG-0613127)">SR Q4 Planned</span>
+              <span class="opex-chip opex-ok"   title="6 open: 1 Deliver + 5 New">EP 6 open</span>
+            </div>
+          </div>
+          <div class="opex-ov-cell">
+            <div class="opex-ov-acct">NY ITS</div>
+            <div class="opex-ov-chips">
+              <span class="opex-chip opex-ok"   title="Active Success Plan">SP Active</span>
+              <span class="opex-chip opex-flag" title="No Success Review scheduled this fiscal year">SR Missing</span>
+              <span class="opex-chip opex-ok"   title="7 open: 1 Prepare + 6 New">EP 7 open</span>
+            </div>
+          </div>
+          <div class="opex-ov-cell">
+            <div class="opex-ov-acct">NJ DEP</div>
+            <div class="opex-ov-chips">
+              <span class="opex-chip opex-ok"   title="Active Success Plan">SP Active</span>
+              <span class="opex-chip opex-flag" title="No Success Review scheduled this fiscal year">SR Missing</span>
+              <span class="opex-chip opex-ok"   title="2 open: 2 New stage · due Nov 4">EP 2 open</span>
+            </div>
+          </div>
+          <div class="opex-ov-cell">
+            <div class="opex-ov-acct">NJ DOH ⚠</div>
+            <div class="opex-ov-chips">
+              <span class="opex-chip opex-ok"   title="Active Success Plan">SP Active</span>
+              <span class="opex-chip opex-flag" title="No Success Review scheduled this fiscal year">SR Missing</span>
+              <span class="opex-chip opex-flag" title="All 29 engagements are Closed — none open or planned">EP None</span>
+            </div>
+          </div>
+          <div class="opex-ov-cell">
+            <div class="opex-ov-acct">FL Commerce</div>
+            <div class="opex-ov-chips">
+              <span class="opex-chip opex-ok"   title="Active Success Plans (FL WINS Internal + External)">SP Active</span>
+              <span class="opex-chip opex-flag" title="All prior SR engagements Cancelled (Customer Opt Out)">SR Cancelled</span>
+              <span class="opex-chip opex-ok"   title="1 open: ENG-0688701 · Prepare stage · due Sep 2027">EP 1 open</span>
+            </div>
+          </div>
+          <div class="opex-ov-cell">
+            <div class="opex-ov-acct">FL Prepaid</div>
+            <div class="opex-ov-chips">
+              <span class="opex-chip opex-ok"   title="3 Active Success Plans (Tableau Cloud + MCE + Core)">SP Active</span>
+              <span class="opex-chip opex-ok"   title="SR Q2 (Sep 21), Q3 (Dec 31), Q4 FY27 (Mar 31) · all New stage">SR 3 planned</span>
+              <span class="opex-chip opex-ok"   title="20 open: 3 Deliver + 1 Prepare + 16 New">EP 20 open</span>
+            </div>
+          </div>
+        </div>
+        <div style="font-size:10.5px;color:var(--text-muted);margin-top:8px;font-style:italic;">Derived from OrgCS csc__Success_Plan__c + csc__Playbook__c · Synced Oct 27, 2026 · Expand any account card below for full Opex detail</div>
+      </div>
+
+      <!-- ── HEALTHY COHORT ── -->
+      <div class="cohort-header">
+        <div class="cohort-dot" style="background:var(--green);"></div>
+        <div class="cohort-title">Healthy / Fully Engaged</div>
+        <div class="cohort-count">4 accounts · 82% GDC</div>
+      </div>
+
+      <!-- MetroPlus -->
+      <div class="account-card healthy" id="card-metroplus">
+        <div class="card-summary" tabindex="0" role="button" aria-expanded="false"
+             onclick="toggleCard('metroplus')" onkeydown="if(event.key==='Enter'||event.key===' ')toggleCard('metroplus')">
+          <div class="card-main">
+            <div class="card-name-row">
+              <div class="card-name">MetroPlus Health Plan</div>
+              <div class="sentiment-dot" id="sentiment-dot-metroplus" style="background:var(--green);"></div>
+              <svg class="card-chevron" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </div>
+            <div class="card-state">New York · AMER PUB SEC SLED</div>
+            <div class="card-tags">
+              <span class="tag tag-cloud">Cloud</span>
+              <span class="tag tag-status-ok">Engaged</span>
+              <span class="tag tag-pod">useast-1</span>
+            </div>
+            <div class="card-personnel">
+              <span>AE: <span id="card-ae-metroplus">—</span></span>
+              <span class="personnel-sep">·</span>
+              <span>RM: <span id="card-rm-metroplus">—</span></span>
+              <span class="personnel-sep">·</span>
+              <span style="color:var(--green); font-weight:600;">Green →</span>
+            </div>
+            <div class="card-note-chip" id="chip-metroplus"></div>
+          </div>
+          <div class="card-right">
+            <div>
+              <div class="card-gdc">24%</div>
+              <div class="card-gdc-label">GDC · $5M–10M</div>
+            </div>
+            <div class="renewal-badge renewal-far">Dec 31, 2027 · 442d</div>
+          </div>
+        </div>
+        <div class="card-drawer" id="drawer-metroplus">
+          <div class="drawer-inner">
+            <div class="sf-links">
+              <a href="https://orgcs.lightning.force.com/lightning/r/csc__Success_Plan__c/aB9Hx0000002VHRKA2/view" class="sf-link" target="_blank" rel="noopener">
+                <svg width="14" height="14" fill="none" viewBox="0 0 14 14"><circle cx="7" cy="7" r="6" stroke="currentColor" stroke-width="1.3"/><path d="M4.5 7h5M7 4.5v5" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>
+                OrgCS Success Plan
+              </a>
+              <a href="https://orgcs.lightning.force.com/lightning/r/Account/0013000001E8HC1AAN/view" class="sf-link" target="_blank" rel="noopener">
+                <svg width="14" height="14" fill="none" viewBox="0 0 14 14"><rect x="2" y="3" width="10" height="8" rx="1.5" stroke="currentColor" stroke-width="1.3"/><path d="M2 5.5h10" stroke="currentColor" stroke-width="1.3"/></svg>
+                Org62 Account
+              </a>
+              <a href="https://org62.lightning.force.com/lightning/r/Opportunity/006ed000006h8oUAAQ/view" class="sf-link" target="_blank" rel="noopener">
+                <svg width="14" height="14" fill="none" viewBox="0 0 14 14"><path d="M7 2l1.545 3.13 3.455.5-2.5 2.435.59 3.435L7 9.885l-3.09 1.615.59-3.435L2 5.63l3.455-.5L7 2z" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round"/></svg>
+                Current Opportunity
+              </a>
+              <a href="https://org62.lightning.force.com/lightning/r/Opportunity/006ed00000RTDojAAH/view" class="sf-link" target="_blank" rel="noopener">
+                <svg width="14" height="14" fill="none" viewBox="0 0 14 14"><path d="M2 12l3-3m7-7L9.5 4.5M5 9l4-4" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>
+                Renewal Opportunity
+              </a>
+            </div>
+            <div class="drawer-grid">
+              <div class="drawer-field">
+                <div class="drawer-field-label">Start Date</div>
+                <div class="drawer-field-value">Jan 1, 2026</div>
+              </div>
+              <div class="drawer-field">
+                <div class="drawer-field-label">Renewal Date</div>
+                <div class="drawer-field-value">Dec 31, 2027</div>
+              </div>
+              <div class="drawer-field">
+                <div class="drawer-field-label">Renewal Status</div>
+                <div class="drawer-field-value">Completed</div>
+              </div>
+              <div class="drawer-field">
+                <div class="drawer-field-label">POD</div>
+                <div class="drawer-field-value">useast-1</div>
+              </div>
+            </div>
+            <div class="drawer-section">
+              <div class="drawer-section-header">
+                <div class="drawer-section-title">Account Team</div>
+                <div class="source-badge org62-badge">Org62</div>
+              </div>
+              <div class="editable-row">
+                <div class="editable-field">
+                  <div class="ef-label">Account Executive (Tableau Specialist)</div>
+                  <div class="ef-display empty" id="ae-display-metroplus" onclick="editInline('ae','metroplus')">Click to edit…</div>
+                  <input class="ef-input" id="ae-input-metroplus" type="text" placeholder="Enter Tableau AE name…" onblur="saveInline('ae','metroplus')" onkeydown="if(event.key==='Enter')saveInline('ae','metroplus');if(event.key==='Escape')cancelInline('ae','metroplus')">
+                </div>
+                <div class="editable-field">
+                  <div class="ef-label">Renewal Manager</div>
+                  <div class="ef-display empty" id="rm-display-metroplus" onclick="editInline('rm','metroplus')">Click to edit…</div>
+                  <input class="ef-input" id="rm-input-metroplus" type="text" placeholder="Enter RM name…" onblur="saveInline('rm','metroplus')" onkeydown="if(event.key==='Enter')saveInline('rm','metroplus');if(event.key==='Escape')cancelInline('rm','metroplus')">
+                </div>
+              </div>
+            </div>
+            <div class="drawer-section">
+              <div class="drawer-section-header">
+                <div class="drawer-section-title">Renewal Opportunity</div>
+                <div class="source-badge org62-badge">Org62</div>
+              </div>
+              <div class="editable-row">
+                <div class="editable-field">
+                  <div class="ef-label">Stage</div>
+                  <div class="ef-display empty" id="stage-display-metroplus" onclick="editInline('stage','metroplus')">Click to edit…</div>
+                  <input class="ef-input" id="stage-input-metroplus" type="text" placeholder="e.g. Commit" onblur="saveInline('stage','metroplus')" onkeydown="if(event.key==='Enter')saveInline('stage','metroplus');if(event.key==='Escape')cancelInline('stage','metroplus')">
+                </div>
+                <div class="editable-field">
+                  <div class="ef-label">Amount</div>
+                  <div class="ef-display empty" id="amount-display-metroplus" onclick="editInline('amount','metroplus')">Click to edit…</div>
+                  <input class="ef-input" id="amount-input-metroplus" type="text" placeholder="e.g. $1,200,000" onblur="saveInline('amount','metroplus')" onkeydown="if(event.key==='Enter')saveInline('amount','metroplus');if(event.key==='Escape')cancelInline('amount','metroplus')">
+                </div>
+                <div class="editable-field">
+                  <div class="ef-label">Prior ACV</div>
+                  <div class="ef-display empty" id="prioracv-display-metroplus" onclick="editInline('prioracv','metroplus')">Click to edit…</div>
+                  <input class="ef-input" id="prioracv-input-metroplus" type="text" placeholder="e.g. $1,100,000" onblur="saveInline('prioracv','metroplus')" onkeydown="if(event.key==='Enter')saveInline('prioracv','metroplus');if(event.key==='Escape')cancelInline('prioracv','metroplus')">
+                </div>
+                <div class="editable-field">
+                  <div class="ef-label">Forecasted Attrition</div>
+                  <div class="ef-display empty" id="attrition-display-metroplus" onclick="editInline('attrition','metroplus')">Click to edit…</div>
+                  <input class="ef-input" id="attrition-input-metroplus" type="text" placeholder="e.g. None" onblur="saveInline('attrition','metroplus')" onkeydown="if(event.key==='Enter')saveInline('attrition','metroplus');if(event.key==='Escape')cancelInline('attrition','metroplus')">
+                </div>
+              </div>
+              <div class="editable-field" style="margin-top:4px;">
+                <div class="ef-label">Description</div>
+                <textarea class="ef-textarea empty" id="desc-metroplus" placeholder="Click to add renewal description…" onblur="saveTextarea('desc','metroplus')" onfocus="this.classList.remove('empty')"></textarea>
+              </div>
+            </div>
+            <div class="drawer-section">
+              <div class="drawer-section-header">
+                <div class="drawer-section-title">Next Steps</div>
+                <div class="source-badge org62-badge">RM · Org62</div>
+              </div>
+              <div class="notes-header"><button class="notes-edit-btn" onclick="editNote('ns-metroplus')">Edit</button></div>
+              <div class="notes-display empty" id="notes-display-ns-metroplus" onclick="editNote('ns-metroplus')">Click to add next steps…</div>
+              <textarea class="notes-textarea" id="notes-textarea-ns-metroplus" placeholder="Document next steps from the Renewal Manager…"></textarea>
+              <button class="notes-save-btn" id="notes-save-ns-metroplus" onclick="saveNote('ns-metroplus')">Save</button>
+            </div>
+            <div class="drawer-section">
+              <div class="drawer-section-header">
+                <div class="drawer-section-title">CSG Notes</div>
+                <div class="source-badge org62-badge">Org62</div>
+              </div>
+              <div class="notes-header"><button class="notes-edit-btn" onclick="editNote('csg-metroplus')">Edit</button></div>
+              <div class="notes-display csg-notes-display" id="notes-display-csg-metroplus" onclick="editNote('csg-metroplus')"></div>
+              <textarea class="notes-textarea" id="notes-textarea-csg-metroplus" placeholder="CSG team notes…"></textarea>
+              <button class="notes-save-btn" id="notes-save-csg-metroplus" onclick="saveNote('csg-metroplus')">Save</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- New York ITS -->
+      <div class="account-card healthy" id="card-nyits">
+        <div class="card-summary" tabindex="0" role="button" aria-expanded="false"
+             onclick="toggleCard('nyits')" onkeydown="if(event.key==='Enter'||event.key===' ')toggleCard('nyits')">
+          <div class="card-main">
+            <div class="card-name-row">
+              <div class="card-name">New York ITS</div>
+              <div class="sentiment-dot" style="background:var(--green);"></div>
+              <svg class="card-chevron" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </div>
+            <div class="card-state">New York · AMER PUB SEC SLED</div>
+            <div class="card-tags">
+              <span class="tag tag-server">Server</span>
+              <span class="tag tag-status-ok">Engaged</span>
+            </div>
+            <div class="card-personnel">
+              <span>AE: <span id="card-ae-nyits">—</span></span>
+              <span class="personnel-sep">·</span>
+              <span>RM: <span id="card-rm-nyits">—</span></span>
+              <span class="personnel-sep">·</span>
+              <span style="color:var(--green); font-weight:600;">Green →</span>
+            </div>
+            <div class="card-note-chip" id="chip-nyits"></div>
+          </div>
+          <div class="card-right">
+            <div>
+              <div class="card-gdc">24%</div>
+              <div class="card-gdc-label">GDC · $1M–5M</div>
+            </div>
+            <div class="renewal-badge renewal-soon">Dec 4, 2026 · 50d</div>
+          </div>
+        </div>
+        <div class="card-drawer" id="drawer-nyits">
+          <div class="drawer-inner">
+            <div class="sf-links">
+              <a href="https://orgcs.lightning.force.com/lightning/r/csc__Success_Plan__c/aB9Hx0000001hanKAA/view" class="sf-link" target="_blank" rel="noopener">
+                <svg width="14" height="14" fill="none" viewBox="0 0 14 14"><circle cx="7" cy="7" r="6" stroke="currentColor" stroke-width="1.3"/><path d="M4.5 7h5M7 4.5v5" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>
+                OrgCS Success Plan
+              </a>
+              <a href="https://org62.lightning.force.com/lightning/r/Account/0013000001CBVZnAAP/view" class="sf-link" target="_blank" rel="noopener">
+                <svg width="14" height="14" fill="none" viewBox="0 0 14 14"><rect x="2" y="3" width="10" height="8" rx="1.5" stroke="currentColor" stroke-width="1.3"/><path d="M2 5.5h10" stroke="currentColor" stroke-width="1.3"/></svg>
+                Org62 Account
+              </a>
+              <a href="https://org62.lightning.force.com/lightning/r/Opportunity/006ed00000YoiLeAAJ/view" class="sf-link" target="_blank" rel="noopener">
+                <svg width="14" height="14" fill="none" viewBox="0 0 14 14"><path d="M2 12l3-3m7-7L9.5 4.5M5 9l4-4" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>
+                Renewal Opportunity
+              </a>
+            </div>
+            <div class="drawer-grid">
+              <div class="drawer-field">
+                <div class="drawer-field-label">Start Date</div>
+                <div class="drawer-field-value">Dec 5, 2025</div>
+              </div>
+              <div class="drawer-field">
+                <div class="drawer-field-label">Renewal Date</div>
+                <div class="drawer-field-value">Dec 4, 2026</div>
+              </div>
+              <div class="drawer-field">
+                <div class="drawer-field-label">Renewal Status</div>
+                <div class="drawer-field-value">Completed</div>
+              </div>
+              <div class="drawer-field">
+                <div class="drawer-field-label">Deployment</div>
+                <div class="drawer-field-value">Server</div>
+              </div>
+            </div>
+            <div class="drawer-section">
+              <div class="drawer-section-header"><div class="drawer-section-title">Account Team</div><div class="source-badge org62-badge">Org62</div></div>
+              <div class="editable-row">
+                <div class="editable-field"><div class="ef-label">Account Executive (Tableau Specialist)</div>
+                  <div class="ef-display empty" id="ae-display-nyits" onclick="editInline('ae','nyits')">Click to edit…</div>
+                  <input class="ef-input" id="ae-input-nyits" type="text" placeholder="Enter Tableau AE name…" onblur="saveInline('ae','nyits')" onkeydown="if(event.key==='Enter')saveInline('ae','nyits');if(event.key==='Escape')cancelInline('ae','nyits')">
+                </div>
+                <div class="editable-field"><div class="ef-label">Renewal Manager</div>
+                  <div class="ef-display empty" id="rm-display-nyits" onclick="editInline('rm','nyits')">Click to edit…</div>
+                  <input class="ef-input" id="rm-input-nyits" type="text" placeholder="Enter RM name…" onblur="saveInline('rm','nyits')" onkeydown="if(event.key==='Enter')saveInline('rm','nyits');if(event.key==='Escape')cancelInline('rm','nyits')">
+                </div>
+              </div>
+            </div>
+            <div class="drawer-section">
+              <div class="drawer-section-header"><div class="drawer-section-title">Renewal Opportunity</div><div class="source-badge org62-badge">Org62</div></div>
+              <div class="editable-row">
+                <div class="editable-field"><div class="ef-label">Stage</div><div class="ef-display empty" id="stage-display-nyits" onclick="editInline('stage','nyits')">Click to edit…</div><input class="ef-input" id="stage-input-nyits" type="text" onblur="saveInline('stage','nyits')" onkeydown="if(event.key==='Enter')saveInline('stage','nyits');if(event.key==='Escape')cancelInline('stage','nyits')"></div>
+                <div class="editable-field"><div class="ef-label">Amount</div><div class="ef-display empty" id="amount-display-nyits" onclick="editInline('amount','nyits')">Click to edit…</div><input class="ef-input" id="amount-input-nyits" type="text" onblur="saveInline('amount','nyits')" onkeydown="if(event.key==='Enter')saveInline('amount','nyits');if(event.key==='Escape')cancelInline('amount','nyits')"></div>
+                <div class="editable-field"><div class="ef-label">Prior ACV</div><div class="ef-display empty" id="prioracv-display-nyits" onclick="editInline('prioracv','nyits')">Click to edit…</div><input class="ef-input" id="prioracv-input-nyits" type="text" onblur="saveInline('prioracv','nyits')" onkeydown="if(event.key==='Enter')saveInline('prioracv','nyits');if(event.key==='Escape')cancelInline('prioracv','nyits')"></div>
+                <div class="editable-field"><div class="ef-label">Forecasted Attrition</div><div class="ef-display empty" id="attrition-display-nyits" onclick="editInline('attrition','nyits')">Click to edit…</div><input class="ef-input" id="attrition-input-nyits" type="text" onblur="saveInline('attrition','nyits')" onkeydown="if(event.key==='Enter')saveInline('attrition','nyits');if(event.key==='Escape')cancelInline('attrition','nyits')"></div>
+              </div>
+              <div class="editable-field" style="margin-top:4px;"><div class="ef-label">Description</div><textarea class="ef-textarea empty" id="desc-nyits" placeholder="Click to add renewal description…" onblur="saveTextarea('desc','nyits')" onfocus="this.classList.remove('empty')"></textarea></div>
+            </div>
+            <div class="drawer-section">
+              <div class="drawer-section-header"><div class="drawer-section-title">Next Steps</div><div class="source-badge org62-badge">RM · Org62</div></div>
+              <div class="notes-header"><button class="notes-edit-btn" onclick="editNote('ns-nyits')">Edit</button></div>
+              <div class="notes-display empty" id="notes-display-ns-nyits" onclick="editNote('ns-nyits')">Click to add next steps…</div>
+              <textarea class="notes-textarea" id="notes-textarea-ns-nyits" placeholder="Document next steps from the Renewal Manager…"></textarea>
+              <button class="notes-save-btn" id="notes-save-ns-nyits" onclick="saveNote('ns-nyits')">Save</button>
+            </div>
+            <div class="drawer-section">
+              <div class="drawer-section-header"><div class="drawer-section-title">CSG Notes</div><div class="source-badge org62-badge">Org62</div></div>
+              <div class="notes-header"><button class="notes-edit-btn" onclick="editNote('csg-nyits')">Edit</button></div>
+              <div class="notes-display csg-notes-display" id="notes-display-csg-nyits" onclick="editNote('csg-nyits')"></div>
+              <textarea class="notes-textarea" id="notes-textarea-csg-nyits" placeholder="CSG team notes…"></textarea>
+              <button class="notes-save-btn" id="notes-save-csg-nyits" onclick="saveNote('csg-nyits')">Save</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- NJ DEP -->
+      <div class="account-card healthy" id="card-njdep">
+        <div class="card-summary" tabindex="0" role="button" aria-expanded="false"
+             onclick="toggleCard('njdep')" onkeydown="if(event.key==='Enter'||event.key===' ')toggleCard('njdep')">
+          <div class="card-main">
+            <div class="card-name-row">
+              <div class="card-name">NJ DEP</div>
+              <div class="sentiment-dot" style="background:var(--green);"></div>
+              <svg class="card-chevron" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </div>
+            <div class="card-state">New Jersey · AMER PUB SEC SLED</div>
+            <div class="card-tags">
+              <span class="tag tag-cloud">Cloud</span>
+              <span class="tag tag-status-ok">Engaged</span>
+              <span class="tag tag-pod">useast-1</span>
+            </div>
+            <div class="card-personnel">
+              <span>AE: <span id="card-ae-njdep">—</span></span>
+              <span class="personnel-sep">·</span>
+              <span>RM: <span id="card-rm-njdep">—</span></span>
+              <span class="personnel-sep">·</span>
+              <span style="color:var(--green); font-weight:600;">Green →</span>
+            </div>
+            <div class="card-note-chip" id="chip-njdep"></div>
+          </div>
+          <div class="card-right">
+            <div>
+              <div class="card-gdc">17%</div>
+              <div class="card-gdc-label">GDC · $200K–600K</div>
+            </div>
+            <div class="renewal-badge renewal-ok">Mar 24, 2027 · 160d</div>
+          </div>
+        </div>
+        <div class="card-drawer" id="drawer-njdep">
+          <div class="drawer-inner">
+            <div class="sf-links">
+              <a href="https://orgcs.lightning.force.com/lightning/r/csc__Success_Plan__c/aB9Hx0000002iwDKAQ/view" class="sf-link" target="_blank" rel="noopener">
+                <svg width="14" height="14" fill="none" viewBox="0 0 14 14"><circle cx="7" cy="7" r="6" stroke="currentColor" stroke-width="1.3"/><path d="M4.5 7h5M7 4.5v5" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>
+                OrgCS Success Plan
+              </a>
+              <a href="https://org62.lightning.force.com/lightning/r/Account/0013000000M1bPOAAZ/view" class="sf-link" target="_blank" rel="noopener">
+                <svg width="14" height="14" fill="none" viewBox="0 0 14 14"><rect x="2" y="3" width="10" height="8" rx="1.5" stroke="currentColor" stroke-width="1.3"/><path d="M2 5.5h10" stroke="currentColor" stroke-width="1.3"/></svg>
+                Org62 Account
+              </a>
+              <a href="https://org62.lightning.force.com/lightning/r/Opportunity/006ed00000AuGnVAAV/view" class="sf-link" target="_blank" rel="noopener">
+                <svg width="14" height="14" fill="none" viewBox="0 0 14 14"><path d="M7 2l1.545 3.13 3.455.5-2.5 2.435.59 3.435L7 9.885l-3.09 1.615.59-3.435L2 5.63l3.455-.5L7 2z" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round"/></svg>
+                Current Opportunity
+              </a>
+              <a href="https://org62.lightning.force.com/lightning/r/Opportunity/006ed00000XlSaZAAV/view" class="sf-link" target="_blank" rel="noopener">
+                <svg width="14" height="14" fill="none" viewBox="0 0 14 14"><path d="M2 12l3-3m7-7L9.5 4.5M5 9l4-4" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>
+                Renewal Opportunity
+              </a>
+            </div>
+            <div class="drawer-grid">
+              <div class="drawer-field">
+                <div class="drawer-field-label">Start Date</div>
+                <div class="drawer-field-value">Mar 25, 2026</div>
+              </div>
+              <div class="drawer-field">
+                <div class="drawer-field-label">Renewal Date</div>
+                <div class="drawer-field-value">Mar 24, 2027</div>
+              </div>
+              <div class="drawer-field">
+                <div class="drawer-field-label">Renewal Status</div>
+                <div class="drawer-field-value">Completed</div>
+              </div>
+              <div class="drawer-field">
+                <div class="drawer-field-label">POD</div>
+                <div class="drawer-field-value">useast-1</div>
+              </div>
+            </div>
+            <div class="drawer-section">
+              <div class="drawer-section-header"><div class="drawer-section-title">Account Team</div><div class="source-badge org62-badge">Org62</div></div>
+              <div class="editable-row">
+                <div class="editable-field"><div class="ef-label">Account Executive (Tableau Specialist)</div>
+                  <div class="ef-display empty" id="ae-display-njdep" onclick="editInline('ae','njdep')">Click to edit…</div>
+                  <input class="ef-input" id="ae-input-njdep" type="text" placeholder="Enter Tableau AE name…" onblur="saveInline('ae','njdep')" onkeydown="if(event.key==='Enter')saveInline('ae','njdep');if(event.key==='Escape')cancelInline('ae','njdep')">
+                </div>
+                <div class="editable-field"><div class="ef-label">Renewal Manager</div>
+                  <div class="ef-display empty" id="rm-display-njdep" onclick="editInline('rm','njdep')">Click to edit…</div>
+                  <input class="ef-input" id="rm-input-njdep" type="text" placeholder="Enter RM name…" onblur="saveInline('rm','njdep')" onkeydown="if(event.key==='Enter')saveInline('rm','njdep');if(event.key==='Escape')cancelInline('rm','njdep')">
+                </div>
+              </div>
+            </div>
+            <div class="drawer-section">
+              <div class="drawer-section-header"><div class="drawer-section-title">Renewal Opportunity</div><div class="source-badge org62-badge">Org62</div></div>
+              <div class="editable-row">
+                <div class="editable-field"><div class="ef-label">Stage</div><div class="ef-display empty" id="stage-display-njdep" onclick="editInline('stage','njdep')">Click to edit…</div><input class="ef-input" id="stage-input-njdep" type="text" onblur="saveInline('stage','njdep')" onkeydown="if(event.key==='Enter')saveInline('stage','njdep');if(event.key==='Escape')cancelInline('stage','njdep')"></div>
+                <div class="editable-field"><div class="ef-label">Amount</div><div class="ef-display empty" id="amount-display-njdep" onclick="editInline('amount','njdep')">Click to edit…</div><input class="ef-input" id="amount-input-njdep" type="text" onblur="saveInline('amount','njdep')" onkeydown="if(event.key==='Enter')saveInline('amount','njdep');if(event.key==='Escape')cancelInline('amount','njdep')"></div>
+                <div class="editable-field"><div class="ef-label">Prior ACV</div><div class="ef-display empty" id="prioracv-display-njdep" onclick="editInline('prioracv','njdep')">Click to edit…</div><input class="ef-input" id="prioracv-input-njdep" type="text" onblur="saveInline('prioracv','njdep')" onkeydown="if(event.key==='Enter')saveInline('prioracv','njdep');if(event.key==='Escape')cancelInline('prioracv','njdep')"></div>
+                <div class="editable-field"><div class="ef-label">Forecasted Attrition</div><div class="ef-display empty" id="attrition-display-njdep" onclick="editInline('attrition','njdep')">Click to edit…</div><input class="ef-input" id="attrition-input-njdep" type="text" onblur="saveInline('attrition','njdep')" onkeydown="if(event.key==='Enter')saveInline('attrition','njdep');if(event.key==='Escape')cancelInline('attrition','njdep')"></div>
+              </div>
+              <div class="editable-field" style="margin-top:4px;"><div class="ef-label">Description</div><textarea class="ef-textarea empty" id="desc-njdep" placeholder="Click to add renewal description…" onblur="saveTextarea('desc','njdep')" onfocus="this.classList.remove('empty')"></textarea></div>
+            </div>
+            <div class="drawer-section">
+              <div class="drawer-section-header"><div class="drawer-section-title">Next Steps</div><div class="source-badge org62-badge">RM · Org62</div></div>
+              <div class="notes-header"><button class="notes-edit-btn" onclick="editNote('ns-njdep')">Edit</button></div>
+              <div class="notes-display empty" id="notes-display-ns-njdep" onclick="editNote('ns-njdep')">Click to add next steps…</div>
+              <textarea class="notes-textarea" id="notes-textarea-ns-njdep" placeholder="Document next steps from the Renewal Manager…"></textarea>
+              <button class="notes-save-btn" id="notes-save-ns-njdep" onclick="saveNote('ns-njdep')">Save</button>
+            </div>
+            <div class="drawer-section">
+              <div class="drawer-section-header"><div class="drawer-section-title">CSG Notes</div><div class="source-badge org62-badge">Org62</div></div>
+              <div class="notes-header"><button class="notes-edit-btn" onclick="editNote('csg-njdep')">Edit</button></div>
+              <div class="notes-display csg-notes-display" id="notes-display-csg-njdep" onclick="editNote('csg-njdep')"></div>
+              <textarea class="notes-textarea" id="notes-textarea-csg-njdep" placeholder="CSG team notes…"></textarea>
+              <button class="notes-save-btn" id="notes-save-csg-njdep" onclick="saveNote('csg-njdep')">Save</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- NJ DOH -->
+      <div class="account-card healthy" id="card-njdoh">
+        <div class="card-summary" tabindex="0" role="button" aria-expanded="false"
+             onclick="toggleCard('njdoh')" onkeydown="if(event.key==='Enter'||event.key===' ')toggleCard('njdoh')">
+          <div class="card-main">
+            <div class="card-name-row">
+              <div class="card-name">NJ DOH</div>
+              <div class="sentiment-dot" style="background:var(--green);"></div>
+              <svg class="card-chevron" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </div>
+            <div class="card-state">New Jersey · AMER PUB SEC SLED</div>
+            <div class="card-tags">
+              <span class="tag tag-cloud">Cloud</span>
+              <span class="tag tag-status-ok">Engaged</span>
+              <span class="tag tag-pod">useast-1</span>
+            </div>
+            <div class="card-personnel">
+              <span>AE: <span id="card-ae-njdoh">—</span></span>
+              <span class="personnel-sep">·</span>
+              <span>RM: <span id="card-rm-njdoh">—</span></span>
+              <span class="personnel-sep">·</span>
+              <span style="color:var(--green); font-weight:600;">Green →</span>
+            </div>
+            <div class="card-note-chip" id="chip-njdoh"></div>
+          </div>
+          <div class="card-right">
+            <div>
+              <div class="card-gdc">17%</div>
+              <div class="card-gdc-label">GDC · $200K–600K</div>
+            </div>
+            <div class="renewal-badge renewal-ok">May 18, 2027 · 215d</div>
+          </div>
+        </div>
+        <div class="card-drawer" id="drawer-njdoh">
+          <div class="drawer-inner">
+            <div class="sf-links">
+              <a href="https://orgcs.lightning.force.com/lightning/r/csc__Success_Plan__c/aB9Hx0000002lPSKAY/view" class="sf-link" target="_blank" rel="noopener">
+                <svg width="14" height="14" fill="none" viewBox="0 0 14 14"><circle cx="7" cy="7" r="6" stroke="currentColor" stroke-width="1.3"/><path d="M4.5 7h5M7 4.5v5" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>
+                OrgCS Success Plan
+              </a>
+              <a href="https://org62.lightning.force.com/lightning/r/Account/0013000001MswTSAAZ/view" class="sf-link" target="_blank" rel="noopener">
+                <svg width="14" height="14" fill="none" viewBox="0 0 14 14"><rect x="2" y="3" width="10" height="8" rx="1.5" stroke="currentColor" stroke-width="1.3"/><path d="M2 5.5h10" stroke="currentColor" stroke-width="1.3"/></svg>
+                Org62 Account
+              </a>
+              <a href="https://org62.lightning.force.com/lightning/r/Opportunity/006ed00000DMS1NAAX/view" class="sf-link" target="_blank" rel="noopener">
+                <svg width="14" height="14" fill="none" viewBox="0 0 14 14"><path d="M7 2l1.545 3.13 3.455.5-2.5 2.435.59 3.435L7 9.885l-3.09 1.615.59-3.435L2 5.63l3.455-.5L7 2z" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round"/></svg>
+                Current Opportunity
+              </a>
+              <a href="https://org62.lightning.force.com/lightning/r/Opportunity/006ed00000cL4nVAAS/view" class="sf-link" target="_blank" rel="noopener">
+                <svg width="14" height="14" fill="none" viewBox="0 0 14 14"><path d="M2 12l3-3m7-7L9.5 4.5M5 9l4-4" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>
+                Renewal Opportunity
+              </a>
+            </div>
+            <div class="drawer-grid">
+              <div class="drawer-field">
+                <div class="drawer-field-label">Start Date</div>
+                <div class="drawer-field-value">May 19, 2026</div>
+              </div>
+              <div class="drawer-field">
+                <div class="drawer-field-label">Renewal Date</div>
+                <div class="drawer-field-value">May 18, 2027</div>
+              </div>
+              <div class="drawer-field">
+                <div class="drawer-field-label">Renewal Status</div>
+                <div class="drawer-field-value">Completed</div>
+              </div>
+              <div class="drawer-field">
+                <div class="drawer-field-label">POD</div>
+                <div class="drawer-field-value">useast-1</div>
+              </div>
+            </div>
+            <div class="drawer-section">
+              <div class="drawer-section-header"><div class="drawer-section-title">Account Team</div><div class="source-badge org62-badge">Org62</div></div>
+              <div class="editable-row">
+                <div class="editable-field"><div class="ef-label">Account Executive (Tableau Specialist)</div>
+                  <div class="ef-display empty" id="ae-display-njdoh" onclick="editInline('ae','njdoh')">Click to edit…</div>
+                  <input class="ef-input" id="ae-input-njdoh" type="text" placeholder="Enter Tableau AE name…" onblur="saveInline('ae','njdoh')" onkeydown="if(event.key==='Enter')saveInline('ae','njdoh');if(event.key==='Escape')cancelInline('ae','njdoh')">
+                </div>
+                <div class="editable-field"><div class="ef-label">Renewal Manager</div>
+                  <div class="ef-display empty" id="rm-display-njdoh" onclick="editInline('rm','njdoh')">Click to edit…</div>
+                  <input class="ef-input" id="rm-input-njdoh" type="text" placeholder="Enter RM name…" onblur="saveInline('rm','njdoh')" onkeydown="if(event.key==='Enter')saveInline('rm','njdoh');if(event.key==='Escape')cancelInline('rm','njdoh')">
+                </div>
+              </div>
+            </div>
+            <div class="drawer-section">
+              <div class="drawer-section-header"><div class="drawer-section-title">Renewal Opportunity</div><div class="source-badge org62-badge">Org62</div></div>
+              <div class="editable-row">
+                <div class="editable-field"><div class="ef-label">Stage</div><div class="ef-display empty" id="stage-display-njdoh" onclick="editInline('stage','njdoh')">Click to edit…</div><input class="ef-input" id="stage-input-njdoh" type="text" onblur="saveInline('stage','njdoh')" onkeydown="if(event.key==='Enter')saveInline('stage','njdoh');if(event.key==='Escape')cancelInline('stage','njdoh')"></div>
+                <div class="editable-field"><div class="ef-label">Amount</div><div class="ef-display empty" id="amount-display-njdoh" onclick="editInline('amount','njdoh')">Click to edit…</div><input class="ef-input" id="amount-input-njdoh" type="text" onblur="saveInline('amount','njdoh')" onkeydown="if(event.key==='Enter')saveInline('amount','njdoh');if(event.key==='Escape')cancelInline('amount','njdoh')"></div>
+                <div class="editable-field"><div class="ef-label">Prior ACV</div><div class="ef-display empty" id="prioracv-display-njdoh" onclick="editInline('prioracv','njdoh')">Click to edit…</div><input class="ef-input" id="prioracv-input-njdoh" type="text" onblur="saveInline('prioracv','njdoh')" onkeydown="if(event.key==='Enter')saveInline('prioracv','njdoh');if(event.key==='Escape')cancelInline('prioracv','njdoh')"></div>
+                <div class="editable-field"><div class="ef-label">Forecasted Attrition</div><div class="ef-display empty" id="attrition-display-njdoh" onclick="editInline('attrition','njdoh')">Click to edit…</div><input class="ef-input" id="attrition-input-njdoh" type="text" onblur="saveInline('attrition','njdoh')" onkeydown="if(event.key==='Enter')saveInline('attrition','njdoh');if(event.key==='Escape')cancelInline('attrition','njdoh')"></div>
+              </div>
+              <div class="editable-field" style="margin-top:4px;"><div class="ef-label">Description</div><textarea class="ef-textarea empty" id="desc-njdoh" placeholder="Click to add renewal description…" onblur="saveTextarea('desc','njdoh')" onfocus="this.classList.remove('empty')"></textarea></div>
+            </div>
+            <div class="drawer-section">
+              <div class="drawer-section-header"><div class="drawer-section-title">Next Steps</div><div class="source-badge org62-badge">RM · Org62</div></div>
+              <div class="notes-header"><button class="notes-edit-btn" onclick="editNote('ns-njdoh')">Edit</button></div>
+              <div class="notes-display empty" id="notes-display-ns-njdoh" onclick="editNote('ns-njdoh')">Click to add next steps…</div>
+              <textarea class="notes-textarea" id="notes-textarea-ns-njdoh" placeholder="Document next steps from the Renewal Manager…"></textarea>
+              <button class="notes-save-btn" id="notes-save-ns-njdoh" onclick="saveNote('ns-njdoh')">Save</button>
+            </div>
+            <div class="drawer-section">
+              <div class="drawer-section-header"><div class="drawer-section-title">CSG Notes</div><div class="source-badge org62-badge">Org62</div></div>
+              <div class="notes-header"><button class="notes-edit-btn" onclick="editNote('csg-njdoh')">Edit</button></div>
+              <div class="notes-display csg-notes-display" id="notes-display-csg-njdoh" onclick="editNote('csg-njdoh')"></div>
+              <textarea class="notes-textarea" id="notes-textarea-csg-njdoh" placeholder="CSG team notes…"></textarea>
+              <button class="notes-save-btn" id="notes-save-csg-njdoh" onclick="saveNote('csg-njdoh')">Save</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── OBSERVATION COHORT ── -->
+      <div class="cohort-header section-gap">
+        <div class="cohort-dot" style="background:var(--amber);"></div>
+        <div class="cohort-title">Observation / Partially Engaged</div>
+        <div class="cohort-count">2 accounts · 43% GDC</div>
+      </div>
+
+      <!-- FL Commerce -->
+      <div class="account-card observation" id="card-flcommerce">
+        <div class="card-summary" tabindex="0" role="button" aria-expanded="false"
+             onclick="toggleCard('flcommerce')" onkeydown="if(event.key==='Enter'||event.key===' ')toggleCard('flcommerce')">
+          <div class="card-main">
+            <div class="card-name-row">
+              <div class="card-name">FL Commerce</div>
+              <div class="sentiment-dot" style="background:var(--amber);"></div>
+              <svg class="card-chevron" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </div>
+            <div class="card-state">Florida · AMER PUB SEC SLED</div>
+            <div class="card-tags">
+              <span class="tag tag-server">Server</span>
+              <span class="tag tag-status-ext">Courtesy Extension</span>
+            </div>
+            <div style="margin-top:8px; font-size:12px; color:#7A4A0A; font-weight:500; background:var(--amber-bg); padding:5px 9px; border-radius:5px; display:inline-block;">
+              Engagement not yet started — immediate attention needed
+            </div>
+            <div class="card-personnel">
+              <span>AE: <span id="card-ae-flcommerce">—</span></span>
+              <span class="personnel-sep">·</span>
+              <span>RM: <span id="card-rm-flcommerce">—</span></span>
+              <span class="personnel-sep">·</span>
+              <span style="color:var(--amber); font-weight:600;">Yellow ↓</span>
+            </div>
+            <div class="card-note-chip" id="chip-flcommerce"></div>
+          </div>
+          <div class="card-right">
+            <div>
+              <div class="card-gdc">17%</div>
+              <div class="card-gdc-label">GDC · $1M–5M</div>
+            </div>
+            <div class="renewal-badge renewal-urgent">Oct 24, 2026 · 2d</div>
+          </div>
+        </div>
+        <div class="card-drawer" id="drawer-flcommerce">
+          <div class="drawer-inner">
+            <div class="sf-links">
+              <a href="https://orgcs.lightning.force.com/lightning/r/csc__Success_Plan__c/aB9Hx0000001Q5JKAU/view" class="sf-link" target="_blank" rel="noopener">
+                <svg width="14" height="14" fill="none" viewBox="0 0 14 14"><circle cx="7" cy="7" r="6" stroke="currentColor" stroke-width="1.3"/><path d="M4.5 7h5M7 4.5v5" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>
+                OrgCS Success Plan
+              </a>
+              <a href="https://org62.lightning.force.com/lightning/r/Account/0013y00001g9NhyAAE/view" class="sf-link" target="_blank" rel="noopener">
+                <svg width="14" height="14" fill="none" viewBox="0 0 14 14"><rect x="2" y="3" width="10" height="8" rx="1.5" stroke="currentColor" stroke-width="1.3"/><path d="M2 5.5h10" stroke="currentColor" stroke-width="1.3"/></svg>
+                Org62 Account
+              </a>
+              <a href="https://org62.lightning.force.com/lightning/r/Opportunity/006ed000002ZkGXAA0/view" class="sf-link" target="_blank" rel="noopener">
+                <svg width="14" height="14" fill="none" viewBox="0 0 14 14"><path d="M7 2l1.545 3.13 3.455.5-2.5 2.435.59 3.435L7 9.885l-3.09 1.615.59-3.435L2 5.63l3.455-.5L7 2z" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round"/></svg>
+                Current Opportunity
+              </a>
+              <a href="https://org62.lightning.force.com/lightning/r/Opportunity/006ed00000LZKMLAA5/view" class="sf-link" target="_blank" rel="noopener">
+                <svg width="14" height="14" fill="none" viewBox="0 0 14 14"><path d="M2 12l3-3m7-7L9.5 4.5M5 9l4-4" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>
+                Renewal Opportunity
+              </a>
+            </div>
+            <div class="drawer-grid">
+              <div class="drawer-field">
+                <div class="drawer-field-label">Start Date</div>
+                <div class="drawer-field-value">Sep 25, 2026</div>
+              </div>
+              <div class="drawer-field">
+                <div class="drawer-field-label">Renewal Date</div>
+                <div class="drawer-field-value">Oct 24, 2026</div>
+              </div>
+              <div class="drawer-field">
+                <div class="drawer-field-label">Renewal Status</div>
+                <div class="drawer-field-value" style="color:var(--amber); font-weight:600;">On Courtesy Extension</div>
+              </div>
+              <div class="drawer-field">
+                <div class="drawer-field-label">Deployment</div>
+                <div class="drawer-field-value">Server</div>
+              </div>
+            </div>
+            <div class="drawer-section">
+              <div class="drawer-section-header"><div class="drawer-section-title">Account Team</div><div class="source-badge org62-badge">Org62</div></div>
+              <div class="editable-row">
+                <div class="editable-field"><div class="ef-label">Account Executive (Tableau Specialist)</div>
+                  <div class="ef-display empty" id="ae-display-flcommerce" onclick="editInline('ae','flcommerce')">Click to edit…</div>
+                  <input class="ef-input" id="ae-input-flcommerce" type="text" placeholder="Enter Tableau AE name…" onblur="saveInline('ae','flcommerce')" onkeydown="if(event.key==='Enter')saveInline('ae','flcommerce');if(event.key==='Escape')cancelInline('ae','flcommerce')">
+                </div>
+                <div class="editable-field"><div class="ef-label">Renewal Manager</div>
+                  <div class="ef-display empty" id="rm-display-flcommerce" onclick="editInline('rm','flcommerce')">Click to edit…</div>
+                  <input class="ef-input" id="rm-input-flcommerce" type="text" placeholder="Enter RM name…" onblur="saveInline('rm','flcommerce')" onkeydown="if(event.key==='Enter')saveInline('rm','flcommerce');if(event.key==='Escape')cancelInline('rm','flcommerce')">
+                </div>
+              </div>
+            </div>
+            <div class="drawer-section">
+              <div class="drawer-section-header"><div class="drawer-section-title">Renewal Opportunity</div><div class="source-badge org62-badge">Org62</div></div>
+              <div class="editable-row">
+                <div class="editable-field"><div class="ef-label">Stage</div><div class="ef-display empty" id="stage-display-flcommerce" onclick="editInline('stage','flcommerce')">Click to edit…</div><input class="ef-input" id="stage-input-flcommerce" type="text" onblur="saveInline('stage','flcommerce')" onkeydown="if(event.key==='Enter')saveInline('stage','flcommerce');if(event.key==='Escape')cancelInline('stage','flcommerce')"></div>
+                <div class="editable-field"><div class="ef-label">Amount</div><div class="ef-display empty" id="amount-display-flcommerce" onclick="editInline('amount','flcommerce')">Click to edit…</div><input class="ef-input" id="amount-input-flcommerce" type="text" onblur="saveInline('amount','flcommerce')" onkeydown="if(event.key==='Enter')saveInline('amount','flcommerce');if(event.key==='Escape')cancelInline('amount','flcommerce')"></div>
+                <div class="editable-field"><div class="ef-label">Prior ACV</div><div class="ef-display empty" id="prioracv-display-flcommerce" onclick="editInline('prioracv','flcommerce')">Click to edit…</div><input class="ef-input" id="prioracv-input-flcommerce" type="text" onblur="saveInline('prioracv','flcommerce')" onkeydown="if(event.key==='Enter')saveInline('prioracv','flcommerce');if(event.key==='Escape')cancelInline('prioracv','flcommerce')"></div>
+                <div class="editable-field"><div class="ef-label">Forecasted Attrition</div><div class="ef-display empty" id="attrition-display-flcommerce" onclick="editInline('attrition','flcommerce')">Click to edit…</div><input class="ef-input" id="attrition-input-flcommerce" type="text" onblur="saveInline('attrition','flcommerce')" onkeydown="if(event.key==='Enter')saveInline('attrition','flcommerce');if(event.key==='Escape')cancelInline('attrition','flcommerce')"></div>
+              </div>
+              <div class="editable-field" style="margin-top:4px;"><div class="ef-label">Description</div><textarea class="ef-textarea empty" id="desc-flcommerce" placeholder="Click to add renewal description…" onblur="saveTextarea('desc','flcommerce')" onfocus="this.classList.remove('empty')"></textarea></div>
+            </div>
+            <div class="drawer-section">
+              <div class="drawer-section-header"><div class="drawer-section-title">Next Steps</div><div class="source-badge org62-badge">RM · Org62</div></div>
+              <div class="notes-header"><button class="notes-edit-btn" onclick="editNote('ns-flcommerce')">Edit</button></div>
+              <div class="notes-display empty" id="notes-display-ns-flcommerce" onclick="editNote('ns-flcommerce')">Click to add next steps…</div>
+              <textarea class="notes-textarea" id="notes-textarea-ns-flcommerce" placeholder="Document next steps from the Renewal Manager…"></textarea>
+              <button class="notes-save-btn" id="notes-save-ns-flcommerce" onclick="saveNote('ns-flcommerce')">Save</button>
+            </div>
+            <div class="drawer-section">
+              <div class="drawer-section-header"><div class="drawer-section-title">CSG Notes</div><div class="source-badge org62-badge">Org62</div></div>
+              <div class="notes-header"><button class="notes-edit-btn" onclick="editNote('csg-flcommerce')">Edit</button></div>
+              <div class="notes-display csg-notes-display" id="notes-display-csg-flcommerce" onclick="editNote('csg-flcommerce')"></div>
+              <textarea class="notes-textarea" id="notes-textarea-csg-flcommerce" placeholder="CSG team notes…"></textarea>
+              <button class="notes-save-btn" id="notes-save-csg-flcommerce" onclick="saveNote('csg-flcommerce')">Save</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- FL Prepaid -->
+      <div class="account-card observation" id="card-flprepaid">
+        <div class="card-summary" tabindex="0" role="button" aria-expanded="false"
+             onclick="toggleCard('flprepaid')" onkeydown="if(event.key==='Enter'||event.key===' ')toggleCard('flprepaid')">
+          <div class="card-main">
+            <div class="card-name-row">
+              <div class="card-name">FL Prepaid College Board</div>
+              <div class="sentiment-dot" style="background:var(--green);"></div>
+              <svg class="card-chevron" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </div>
+            <div class="card-state">Florida · AMER PUB SEC SLED</div>
+            <div class="card-tags">
+              <span class="tag tag-cloud-plus">Cloud+</span>
+              <span class="tag tag-status-ext" style="background:#FFF3CD; color:#795E00;">Engagement TBD</span>
+              <span class="tag tag-pod">useast-1</span>
+            </div>
+            <div class="card-personnel">
+              <span>AE: <span id="card-ae-flprepaid">—</span></span>
+              <span class="personnel-sep">·</span>
+              <span>RM: <span id="card-rm-flprepaid">—</span></span>
+              <span class="personnel-sep">·</span>
+              <span style="color:var(--green); font-weight:600;">Green →</span>
+            </div>
+            <div class="card-note-chip" id="chip-flprepaid"></div>
+          </div>
+          <div class="card-right">
+            <div>
+              <div class="card-gdc">26%</div>
+              <div class="card-gdc-label">GDC · $1M–5M</div>
+            </div>
+            <div class="renewal-badge renewal-ok">Mar 27, 2027 · 163d</div>
+          </div>
+        </div>
+        <div class="card-drawer" id="drawer-flprepaid">
+          <div class="drawer-inner">
+            <div class="sf-links">
+              <a href="https://orgcs.lightning.force.com/lightning/r/csc__Success_Plan__c/aB9Hx0000002j7VKAQ/view" class="sf-link" target="_blank" rel="noopener">
+                <svg width="14" height="14" fill="none" viewBox="0 0 14 14"><circle cx="7" cy="7" r="6" stroke="currentColor" stroke-width="1.3"/><path d="M4.5 7h5M7 4.5v5" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>
+                OrgCS Success Plan
+              </a>
+              <a href="https://org62.lightning.force.com/lightning/r/Account/0010M00001cDPT0QAO/view" class="sf-link" target="_blank" rel="noopener">
+                <svg width="14" height="14" fill="none" viewBox="0 0 14 14"><rect x="2" y="3" width="10" height="8" rx="1.5" stroke="currentColor" stroke-width="1.3"/><path d="M2 5.5h10" stroke="currentColor" stroke-width="1.3"/></svg>
+                Org62 Account
+              </a>
+              <a href="https://org62.lightning.force.com/lightning/r/Opportunity/006ed00000B5PQrAAN/view" class="sf-link" target="_blank" rel="noopener">
+                <svg width="14" height="14" fill="none" viewBox="0 0 14 14"><path d="M7 2l1.545 3.13 3.455.5-2.5 2.435.59 3.435L7 9.885l-3.09 1.615.59-3.435L2 5.63l3.455-.5L7 2z" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round"/></svg>
+                Current Opportunity
+              </a>
+              <a href="https://org62.lightning.force.com/lightning/r/Opportunity/006ed00000Y0hCfAAJ/view" class="sf-link" target="_blank" rel="noopener">
+                <svg width="14" height="14" fill="none" viewBox="0 0 14 14"><path d="M2 12l3-3m7-7L9.5 4.5M5 9l4-4" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>
+                Renewal Opportunity
+              </a>
+            </div>
+            <div class="drawer-grid">
+              <div class="drawer-field">
+                <div class="drawer-field-label">Start Date</div>
+                <div class="drawer-field-value">Mar 28, 2026</div>
+              </div>
+              <div class="drawer-field">
+                <div class="drawer-field-label">Renewal Date</div>
+                <div class="drawer-field-value">Mar 27, 2027</div>
+              </div>
+              <div class="drawer-field">
+                <div class="drawer-field-label">Renewal Status</div>
+                <div class="drawer-field-value">Completed</div>
+              </div>
+              <div class="drawer-field">
+                <div class="drawer-field-label">POD</div>
+                <div class="drawer-field-value">useast-1</div>
+              </div>
+            </div>
+            <div class="drawer-section">
+              <div class="drawer-section-header"><div class="drawer-section-title">Account Team</div><div class="source-badge org62-badge">Org62</div></div>
+              <div class="editable-row">
+                <div class="editable-field"><div class="ef-label">Account Executive (Tableau Specialist)</div>
+                  <div class="ef-display empty" id="ae-display-flprepaid" onclick="editInline('ae','flprepaid')">Click to edit…</div>
+                  <input class="ef-input" id="ae-input-flprepaid" type="text" placeholder="Enter Tableau AE name…" onblur="saveInline('ae','flprepaid')" onkeydown="if(event.key==='Enter')saveInline('ae','flprepaid');if(event.key==='Escape')cancelInline('ae','flprepaid')">
+                </div>
+                <div class="editable-field"><div class="ef-label">Renewal Manager</div>
+                  <div class="ef-display empty" id="rm-display-flprepaid" onclick="editInline('rm','flprepaid')">Click to edit…</div>
+                  <input class="ef-input" id="rm-input-flprepaid" type="text" placeholder="Enter RM name…" onblur="saveInline('rm','flprepaid')" onkeydown="if(event.key==='Enter')saveInline('rm','flprepaid');if(event.key==='Escape')cancelInline('rm','flprepaid')">
+                </div>
+              </div>
+            </div>
+            <div class="drawer-section">
+              <div class="drawer-section-header"><div class="drawer-section-title">Renewal Opportunity</div><div class="source-badge org62-badge">Org62</div></div>
+              <div class="editable-row">
+                <div class="editable-field"><div class="ef-label">Stage</div><div class="ef-display empty" id="stage-display-flprepaid" onclick="editInline('stage','flprepaid')">Click to edit…</div><input class="ef-input" id="stage-input-flprepaid" type="text" onblur="saveInline('stage','flprepaid')" onkeydown="if(event.key==='Enter')saveInline('stage','flprepaid');if(event.key==='Escape')cancelInline('stage','flprepaid')"></div>
+                <div class="editable-field"><div class="ef-label">Amount</div><div class="ef-display empty" id="amount-display-flprepaid" onclick="editInline('amount','flprepaid')">Click to edit…</div><input class="ef-input" id="amount-input-flprepaid" type="text" onblur="saveInline('amount','flprepaid')" onkeydown="if(event.key==='Enter')saveInline('amount','flprepaid');if(event.key==='Escape')cancelInline('amount','flprepaid')"></div>
+                <div class="editable-field"><div class="ef-label">Prior ACV</div><div class="ef-display empty" id="prioracv-display-flprepaid" onclick="editInline('prioracv','flprepaid')">Click to edit…</div><input class="ef-input" id="prioracv-input-flprepaid" type="text" onblur="saveInline('prioracv','flprepaid')" onkeydown="if(event.key==='Enter')saveInline('prioracv','flprepaid');if(event.key==='Escape')cancelInline('prioracv','flprepaid')"></div>
+                <div class="editable-field"><div class="ef-label">Forecasted Attrition</div><div class="ef-display empty" id="attrition-display-flprepaid" onclick="editInline('attrition','flprepaid')">Click to edit…</div><input class="ef-input" id="attrition-input-flprepaid" type="text" onblur="saveInline('attrition','flprepaid')" onkeydown="if(event.key==='Enter')saveInline('attrition','flprepaid');if(event.key==='Escape')cancelInline('attrition','flprepaid')"></div>
+              </div>
+              <div class="editable-field" style="margin-top:4px;"><div class="ef-label">Description</div><textarea class="ef-textarea empty" id="desc-flprepaid" placeholder="Click to add renewal description…" onblur="saveTextarea('desc','flprepaid')" onfocus="this.classList.remove('empty')"></textarea></div>
+            </div>
+            <div class="drawer-section">
+              <div class="drawer-section-header"><div class="drawer-section-title">Next Steps</div><div class="source-badge org62-badge">RM · Org62</div></div>
+              <div class="notes-header"><button class="notes-edit-btn" onclick="editNote('ns-flprepaid')">Edit</button></div>
+              <div class="notes-display empty" id="notes-display-ns-flprepaid" onclick="editNote('ns-flprepaid')">Click to add next steps…</div>
+              <textarea class="notes-textarea" id="notes-textarea-ns-flprepaid" placeholder="Document next steps from the Renewal Manager…"></textarea>
+              <button class="notes-save-btn" id="notes-save-ns-flprepaid" onclick="saveNote('ns-flprepaid')">Save</button>
+            </div>
+            <div class="drawer-section">
+              <div class="drawer-section-header"><div class="drawer-section-title">CSG Notes</div><div class="source-badge org62-badge">Org62</div></div>
+              <div class="notes-header"><button class="notes-edit-btn" onclick="editNote('csg-flprepaid')">Edit</button></div>
+              <div class="notes-display csg-notes-display" id="notes-display-csg-flprepaid" onclick="editNote('csg-flprepaid')"></div>
+              <textarea class="notes-textarea" id="notes-textarea-csg-flprepaid" placeholder="CSG team notes…"></textarea>
+              <button class="notes-save-btn" id="notes-save-csg-flprepaid" onclick="saveNote('csg-flprepaid')">Save</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- end accounts-stack -->
+
+    <!-- ── RIGHT PANEL ── -->
+    <div class="right-panel">
+
+      <!-- GDC Allocation -->
+      <div class="panel-card">
+        <div class="panel-title">GDC Allocation by Account</div>
+        <div class="donut-wrap">
+          <svg class="donut-svg" width="110" height="110" viewBox="0 0 110 110" aria-hidden="true">
+            <circle cx="55" cy="55" r="42" fill="none" stroke="#0F2644" stroke-width="14"
+              stroke-dasharray="63.46 202.23" stroke-dashoffset="0" transform="rotate(-90 55 55)"/>
+            <circle cx="55" cy="55" r="42" fill="none" stroke="#1B4F8A" stroke-width="14"
+              stroke-dasharray="63.46 202.23" stroke-dashoffset="-63.46" transform="rotate(-90 55 55)"/>
+            <circle cx="55" cy="55" r="42" fill="none" stroke="#2B6CB0" stroke-width="14"
+              stroke-dasharray="68.76 197.93" stroke-dashoffset="-126.92" transform="rotate(-90 55 55)"/>
+            <circle cx="55" cy="55" r="42" fill="none" stroke="#5B9BD5" stroke-width="14"
+              stroke-dasharray="44.98 220.71" stroke-dashoffset="-195.68" transform="rotate(-90 55 55)"/>
+            <circle cx="55" cy="55" r="42" fill="none" stroke="#90C0E8" stroke-width="14"
+              stroke-dasharray="44.98 220.71" stroke-dashoffset="-240.66" transform="rotate(-90 55 55)"/>
+            <circle cx="55" cy="55" r="42" fill="none" stroke="#C5DCF0" stroke-width="14"
+              stroke-dasharray="44.98 220.71" stroke-dashoffset="-285.64" transform="rotate(-90 55 55)"/>
+            <text x="55" y="51" text-anchor="middle" class="donut-center-text">125%</text>
+            <text x="55" y="63" text-anchor="middle" class="donut-center-sub">GDC Alloc.</text>
+          </svg>
+          <div class="donut-legend">
+            <div class="legend-item"><div class="legend-swatch" style="background:#0F2644;"></div><div class="legend-name">MetroPlus</div><div class="legend-pct">24%</div></div>
+            <div class="legend-item"><div class="legend-swatch" style="background:#1B4F8A;"></div><div class="legend-name">New York ITS</div><div class="legend-pct">24%</div></div>
+            <div class="legend-item"><div class="legend-swatch" style="background:#2B6CB0;"></div><div class="legend-name">FL Prepaid</div><div class="legend-pct">26%</div></div>
+            <div class="legend-item"><div class="legend-swatch" style="background:#5B9BD5;"></div><div class="legend-name">NJ DEP</div><div class="legend-pct">17%</div></div>
+            <div class="legend-item"><div class="legend-swatch" style="background:#90C0E8;"></div><div class="legend-name">NJ DOH</div><div class="legend-pct">17%</div></div>
+            <div class="legend-item"><div class="legend-swatch" style="background:#C5DCF0;"></div><div class="legend-name">FL Commerce</div><div class="legend-pct">17%</div></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Health cohorts -->
+      <div class="panel-card">
+        <div class="panel-title">Health Cohort Breakdown</div>
+        <div class="cohort-summary">
+          <div class="cohort-row">
+            <div class="cohort-row-label" style="color:var(--green); font-weight:600;">Healthy</div>
+            <div class="cohort-bar-track"><div class="cohort-bar-fill" style="width:66.7%; background:var(--green);"></div></div>
+            <div class="cohort-row-count">4</div>
+          </div>
+          <div class="cohort-row">
+            <div class="cohort-row-label" style="color:var(--amber); font-weight:600;">Observation</div>
+            <div class="cohort-bar-track"><div class="cohort-bar-fill" style="width:33.3%; background:var(--amber);"></div></div>
+            <div class="cohort-row-count">2</div>
+          </div>
+          <div class="cohort-row">
+            <div class="cohort-row-label" style="color:var(--red); font-weight:600;">Priority Risk</div>
+            <div class="cohort-bar-track"><div class="cohort-bar-fill" style="width:0%; background:var(--red);"></div></div>
+            <div class="cohort-row-count">0</div>
+          </div>
+        </div>
+        <div style="margin-top:14px; padding-top:14px; border-top:1px solid var(--border); display:flex; gap:16px;">
+          <div style="flex:1; text-align:center;">
+            <div style="font-size:11px; color:var(--text-muted); margin-bottom:4px;">Green</div>
+            <div style="font-size:22px; font-weight:700; color:var(--green); letter-spacing:-0.02em;">4</div>
+          </div>
+          <div style="flex:1; text-align:center;">
+            <div style="font-size:11px; color:var(--text-muted); margin-bottom:4px;">Yellow</div>
+            <div style="font-size:22px; font-weight:700; color:var(--amber); letter-spacing:-0.02em;">2</div>
+          </div>
+          <div style="flex:1; text-align:center;">
+            <div style="font-size:11px; color:var(--text-muted); margin-bottom:4px;">Red</div>
+            <div style="font-size:22px; font-weight:700; color:var(--text-muted); letter-spacing:-0.02em;">0</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- LCS Scores Overview -->
+      <div class="panel-card">
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;">
+          <div class="panel-title" style="margin-bottom:0;">LCS Scores · FY27</div>
+          <div class="source-badge orgcs-badge">OrgCS</div>
+        </div>
+
+        <!-- Account filter pills -->
+        <div style="display:flex;flex-wrap:wrap;gap:4px;margin-bottom:10px;">
+          <button class="lcs-pill active" data-id="all" onclick="lcsFilterAccount('all')">All</button>
+          <button class="lcs-pill" data-id="metroplus" onclick="lcsFilterAccount('metroplus')">MetroPlus</button>
+          <button class="lcs-pill" data-id="nyits" onclick="lcsFilterAccount('nyits')">NY ITS</button>
+          <button class="lcs-pill" data-id="njdep" onclick="lcsFilterAccount('njdep')">NJ DEP</button>
+          <button class="lcs-pill" data-id="njdoh" onclick="lcsFilterAccount('njdoh')">NJ DOH</button>
+          <button class="lcs-pill" data-id="flcommerce" onclick="lcsFilterAccount('flcommerce')">FL Commerce</button>
+          <button class="lcs-pill" data-id="flprepaid" onclick="lcsFilterAccount('flprepaid')">FL Prepaid</button>
+        </div>
+
+        <!-- Quarter tabs -->
+        <div style="display:flex;gap:4px;margin-bottom:8px;">
+          <button class="lcs-q-tab" data-q="Q1" onclick="lcsSelectQuarter('Q1')">Q1 Feb–Apr</button>
+          <button class="lcs-q-tab" data-q="Q2" onclick="lcsSelectQuarter('Q2')">Q2 May–Jul</button>
+          <button class="lcs-q-tab active" data-q="Q3" onclick="lcsSelectQuarter('Q3')">Q3 Aug–Oct ●</button>
+          <button class="lcs-q-tab" data-q="Q4" onclick="lcsSelectQuarter('Q4')">Q4 Nov–Jan</button>
+        </div>
+
+        <!-- Month sub-tabs per quarter -->
+        <div class="lcs-month-row" data-q="Q1" style="display:none;gap:5px;margin-bottom:10px;">
+          <button class="lcs-m-tab" data-m="Feb" onclick="lcsSelectMonth('Feb')">Feb</button>
+          <button class="lcs-m-tab" data-m="Mar" onclick="lcsSelectMonth('Mar')">Mar</button>
+          <button class="lcs-m-tab" data-m="Apr" onclick="lcsSelectMonth('Apr')">Apr</button>
+        </div>
+        <div class="lcs-month-row" data-q="Q2" style="display:none;gap:5px;margin-bottom:10px;">
+          <button class="lcs-m-tab" data-m="May" onclick="lcsSelectMonth('May')">May</button>
+          <button class="lcs-m-tab" data-m="Jun" onclick="lcsSelectMonth('Jun')">Jun</button>
+          <button class="lcs-m-tab" data-m="Jul" onclick="lcsSelectMonth('Jul')">Jul</button>
+        </div>
+        <div class="lcs-month-row" data-q="Q3" style="display:flex;gap:5px;margin-bottom:10px;">
+          <button class="lcs-m-tab" data-m="Aug" onclick="lcsSelectMonth('Aug')">Aug</button>
+          <button class="lcs-m-tab" data-m="Sep" onclick="lcsSelectMonth('Sep')">Sep</button>
+          <button class="lcs-m-tab active" data-m="Oct" onclick="lcsSelectMonth('Oct')">Oct ●</button>
+        </div>
+        <div class="lcs-month-row" data-q="Q4" style="display:none;gap:5px;margin-bottom:10px;">
+          <button class="lcs-m-tab" data-m="Nov" onclick="lcsSelectMonth('Nov')">Nov</button>
+          <button class="lcs-m-tab" data-m="Dec" onclick="lcsSelectMonth('Dec')">Dec</button>
+          <button class="lcs-m-tab" data-m="Jan" onclick="lcsSelectMonth('Jan')">Jan</button>
+        </div>
+
+        <!-- Q3 data table (current) -->
+        <div class="lcs-quarter-data" data-q="Q3">
+          <div class="lcs-ov-header">
+            <div>Account</div><div>Baseline</div><div>Actual</div><div>Target</div>
+          </div>
+          <div class="lcs-ov-row" data-id="metroplus">
+            <div class="lcs-ov-name">MetroPlus</div>
+            <div>76</div><div class="lcs-neutral">76</div><div>78</div>
+          </div>
+          <div class="lcs-ov-row" data-id="nyits">
+            <div class="lcs-ov-name">NY ITS</div>
+            <div>—</div><div class="lcs-na">Server</div><div>—</div>
+          </div>
+          <div class="lcs-ov-row" data-id="njdep">
+            <div class="lcs-ov-name">NJ DEP</div>
+            <div>69</div><div class="lcs-below">58</div><div>62</div>
+          </div>
+          <div class="lcs-ov-row" data-id="njdoh">
+            <div class="lcs-ov-name">NJ DOH</div>
+            <div>70</div><div class="lcs-below">67</div><div>72</div>
+          </div>
+          <div class="lcs-ov-row" data-id="flcommerce">
+            <div class="lcs-ov-name">FL Commerce</div>
+            <div>53.7%</div><div class="lcs-above">58%</div><div>—</div>
+          </div>
+          <div class="lcs-ov-row" data-id="flprepaid">
+            <div class="lcs-ov-name">FL Prepaid</div>
+            <div>36</div><div class="lcs-above">47</div><div>39</div>
+          </div>
+        </div>
+
+        <!-- Q1 placeholder -->
+        <div class="lcs-quarter-data" data-q="Q1" style="display:none;">
+          <div class="lcs-live-placeholder">Q1 (Feb–Apr 2026) data available in CRM Analytics dashboard</div>
+        </div>
+        <!-- Q2 placeholder -->
+        <div class="lcs-quarter-data" data-q="Q2" style="display:none;">
+          <div class="lcs-live-placeholder">Q2 (May–Jul 2026) data available in CRM Analytics dashboard</div>
+        </div>
+        <!-- Q4 placeholder -->
+        <div class="lcs-quarter-data" data-q="Q4" style="display:none;">
+          <div class="lcs-live-placeholder">Q4 (Nov 2026–Jan 2027) — not yet in period</div>
+        </div>
+
+        <a href="https://orgcs.lightning.force.com/lightning/page/analytics?wave__assetType=dashboard&wave__assetId=0FKHx0000000MmvOAE&wave__pageId=04aa854d-85cc-40ee-b6c2-132c7410fd50&wave__savedViewId=8wkHx00000011WjIAI"
+           target="_blank" rel="noopener" class="lcs-live-btn">
+          <svg width="13" height="13" fill="none" viewBox="0 0 14 14"><path d="M2 7h10M7 2l5 5-5 5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          View full LCS dashboard in OrgCS ↗
+        </a>
+      </div>
+
+      <!-- Support Cases panel -->
+      <div class="panel-card cases-panel">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">
+          <div style="font-weight:700;font-size:13px;color:var(--navy);">Support Cases <span style="font-size:11px;font-weight:400;color:var(--text-muted);">· Provider: Tableau</span></div>
+          <div class="source-badge orgcs-badge">OrgCS</div>
+        </div>
+        <div style="display:flex;flex-wrap:wrap;gap:4px;margin-bottom:10px;">
+          <span class="lcs-pill active" data-id="all" onclick="casesFilterAccount('all')">All</span>
+          <span class="lcs-pill" data-id="metroplus-case" onclick="casesFilterAccount('metroplus-case')">MetroPlus</span>
+          <span class="lcs-pill" data-id="nyits-case" onclick="casesFilterAccount('nyits-case')">NY ITS</span>
+          <span class="lcs-pill" data-id="njdep-case" onclick="casesFilterAccount('njdep-case')">NJ DEP</span>
+          <span class="lcs-pill" data-id="njdoh-case" onclick="casesFilterAccount('njdoh-case')">NJ DOH</span>
+          <span class="lcs-pill" data-id="flcommerce-case" onclick="casesFilterAccount('flcommerce-case')">FL Commerce</span>
+          <span class="lcs-pill" data-id="flprepaid-case" onclick="casesFilterAccount('flprepaid-case')">FL Prepaid</span>
+        </div>
+        <div class="cases-ov-header"><div>Subject</div><div>Status</div><div>Sev</div><div>Created</div></div>
+        <div id="cases-ov-rows"></div>
+      </div>
+
+      <!-- Aggregated Attainment -->
+      <div class="panel-card" style="background:var(--navy);color:white;">
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;">
+          <div style="font-size:10.5px;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;color:rgba(255,255,255,0.5);">Aggregated Attainment · IC: Shreyas Manohar</div>
+          <div class="source-badge orgcs-badge" style="background:rgba(0,168,120,0.2);border-color:rgba(0,168,120,0.4);color:#6EE7B7;">OrgCS</div>
+        </div>
+        <!-- Baseline / Actual / Target row -->
+        <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-bottom:14px;">
+          <div style="text-align:center;">
+            <div style="font-size:28px;font-weight:700;letter-spacing:-0.03em;line-height:1;color:rgba(255,255,255,0.75);">52</div>
+            <div style="font-size:10px;color:rgba(255,255,255,0.4);margin-top:3px;font-weight:600;letter-spacing:0.04em;text-transform:uppercase;">Baseline</div>
+          </div>
+          <div style="text-align:center;">
+            <div style="font-size:28px;font-weight:700;letter-spacing:-0.03em;line-height:1;color:#6EE7B7;">55</div>
+            <div style="font-size:10px;color:rgba(255,255,255,0.4);margin-top:3px;font-weight:600;letter-spacing:0.04em;text-transform:uppercase;">Actual</div>
+          </div>
+          <div style="text-align:center;">
+            <div style="font-size:28px;font-weight:700;letter-spacing:-0.03em;line-height:1;color:rgba(255,255,255,0.75);">55</div>
+            <div style="font-size:10px;color:rgba(255,255,255,0.4);margin-top:3px;font-weight:600;letter-spacing:0.04em;text-transform:uppercase;">Target</div>
+          </div>
+        </div>
+        <!-- Attainment score -->
+        <div style="display:flex;align-items:center;gap:10px;padding:8px 10px;background:rgba(255,255,255,0.07);border-radius:7px;margin-bottom:12px;">
+          <div>
+            <div style="font-size:20px;font-weight:700;color:#F5B85A;letter-spacing:-0.02em;">0.0</div>
+            <div style="font-size:10px;color:rgba(255,255,255,0.4);font-weight:600;letter-spacing:0.04em;text-transform:uppercase;">Attainment</div>
+          </div>
+          <div style="flex:1;height:6px;background:rgba(255,255,255,0.15);border-radius:3px;overflow:hidden;">
+            <div style="width:0%;height:100%;background:linear-gradient(90deg,#F5B85A,#E8892C);border-radius:3px;"></div>
+          </div>
+        </div>
+        <div style="font-size:10.5px;color:rgba(255,255,255,0.4);margin-bottom:10px;">FY27 Q3 snapshot · Source: LCS Scores dashboard · Quarterly breakdown requires OrgCS session</div>
+        <a href="https://orgcs.lightning.force.com/lightning/page/analytics?wave__assetType=dashboard&wave__assetId=0FKHx0000000MmvOAE&wave__pageId=04aa854d-85cc-40ee-b6c2-132c7410fd50&wave__savedViewId=8wkHx00000011WjIAI"
+           target="_blank" rel="noopener" class="lcs-live-btn"
+           style="background:rgba(255,255,255,0.1);border-color:rgba(255,255,255,0.2);color:white;">
+          <svg width="13" height="13" fill="none" viewBox="0 0 14 14"><path d="M2 7h10M7 2l5 5-5 5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          View quarterly breakdown in OrgCS LCS Dashboard ↗
+        </a>
+      </div>
+
+      <!-- State breakdown -->
+      <div class="panel-card">
+        <div class="panel-title">Accounts by State</div>
+        <div class="state-rows">
+          <div class="state-row">
+            <div class="state-flag">🗽</div>
+            <div class="state-name">New York</div>
+            <div class="state-accts">2 accounts</div>
+            <div class="state-alloc">48%</div>
+          </div>
+          <div class="state-row">
+            <div class="state-flag">🌿</div>
+            <div class="state-name">New Jersey</div>
+            <div class="state-accts">2 accounts</div>
+            <div class="state-alloc">34%</div>
+          </div>
+          <div class="state-row">
+            <div class="state-flag">☀️</div>
+            <div class="state-name">Florida</div>
+            <div class="state-accts">2 accounts</div>
+            <div class="state-alloc">43%</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Deployment mix -->
+      <div class="panel-card">
+        <div class="panel-title">Deployment Mix</div>
+        <div style="display:flex; gap:8px; flex-wrap:wrap;">
+          <div style="flex:1; background:var(--bg); border-radius:7px; padding:12px 14px; min-width:80px;">
+            <div style="font-size:20px; font-weight:700; color:var(--navy-mid); letter-spacing:-0.02em;">4</div>
+            <div style="font-size:11.5px; color:var(--text-muted); margin-top:2px; font-weight:500;">Cloud / Cloud+</div>
+          </div>
+          <div style="flex:1; background:var(--bg); border-radius:7px; padding:12px 14px; min-width:80px;">
+            <div style="font-size:20px; font-weight:700; color:var(--text-secondary); letter-spacing:-0.02em;">2</div>
+            <div style="font-size:11.5px; color:var(--text-muted); margin-top:2px; font-weight:500;">Server</div>
+          </div>
+          <div style="flex:1; background:var(--bg); border-radius:7px; padding:12px 14px; min-width:80px;">
+            <div style="font-size:20px; font-weight:700; color:var(--navy); letter-spacing:-0.02em;">5</div>
+            <div style="font-size:11.5px; color:var(--text-muted); margin-top:2px; font-weight:500;">useast-1 POD</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ═══ RENEWAL TIMELINE ═══ -->
+  <div class="timeline-section">
+    <div class="section-label">Renewal Timeline · Oct 2026 – Jan 2028</div>
+    <div class="timeline-track">
+      <div style="font-size:13px; color:var(--text-muted); margin-bottom:4px;">Click any marker to jump to that account card.</div>
+      <div class="timeline-axis" id="timeline-axis"></div>
+      <div class="timeline-events" id="timeline-events"></div>
+      <div class="timeline-month-labels" id="timeline-months"></div>
+    </div>
+  </div>
+
+  <!-- ═══ OU LEADER FOOTER ═══ -->
+  <div class="ou-footer">
+    <div>
+      <div class="ou-label">OU Leadership</div>
+      <div class="ou-names">Stephanie Adams · Steven Lowery-Lozano</div>
+    </div>
+    <div class="ou-status-wrap">
+      <div class="ou-status-item"><div class="ou-status-n">6</div><div class="ou-status-l">Accounts</div></div>
+      <div class="ou-status-item"><div class="ou-status-n" style="color:#F5B85A;">1</div><div class="ou-status-l">Urgent</div></div>
+      <div class="ou-status-item"><div class="ou-status-n" style="color:#6EE7B7;">0</div><div class="ou-status-l">Red</div></div>
+    </div>
+    <div class="ou-gdc-total" style="cursor:pointer;" title="View LCS Scores dashboard in OrgCS"
+         onclick="window.open('https://orgcs.lightning.force.com/lightning/page/analytics?wave__assetType=dashboard&wave__assetId=0FKHx0000000MmvOAE&wave__pageId=04aa854d-85cc-40ee-b6c2-132c7410fd50&wave__savedViewId=8wkHx00000011WjIAI','_blank')">
+      <div class="ou-gdc-number" style="font-size:22px;">52 · 55 · 55</div>
+      <div class="ou-gdc-sub">Agg. Attainment: Baseline · Actual · Target ↗</div>
+    </div>
+  </div>
+
+</main>
+
+<script>
+  // ── OrgCS data snapshot (synced Oct 27, 2026) ──
+  const ORGCS_DATA = {
+    metroplus: { ae:'Beaumont Papan', sentiment:'Green', trend:'Stable', lastActivity:'Oct 13, 2026',
+      csgNotes:'<ul><li><strong>Key Callout</strong><ul><li>Renewed to 2 years of Signature Success in Dec 2025.</li><li>ATHR completed Dec 2025. Success Review and Success Path completed with customer buy-in.</li><li>Received account Apr 2026 (OU alignment). Conducted Tableau Pulse + Tableau Agent demo — customer exploring AI capabilities for future add-ons.</li><li>Highly collaborative; responsive to enablement. Working on customized training plan across proficiency levels.</li></ul></li><li><strong>High Impact Technical</strong>: Expert Coaching planned for Cloud Security &amp; Governance. Completed sessions on RLS, Virtual Connections, Tableau Bridge, multi-site.</li><li><strong>High Impact Business</strong>: None.</li><li><strong>LCS</strong>: Baseline 76 · Target 78 · Actual 76 · AOV Baseline 10.8%</li><li><strong>Renewal</strong>: Dec 31, 2027 · 540 days · Red Account: N/A · Attrition: No</li></ul>' },
+    nyits: { ae:'Arielle Bernstein', sentiment:'Green', trend:'Stable', lastActivity:'Oct 14, 2026',
+      csgNotes:'<ul><li><strong>Key Callout</strong>: SEV1 resolved (external dashboards slow/timing out — underutilized cores). Full Architecture Design Review initiated; recommended +8 licensed cores for optimal topology. Success Path engagement kicked off Oct 2025. Auth Provider setup, new agency onboarding, and Tableau AI/MCP demo planned.</li><li><strong>GDC</strong>: Highly engaged. Positive customer feedback. Multi-agency NY State deployment (Corrections, Health, Justice Center, OGS, BSC, others).</li><li><strong>High Impact Technical</strong>: Time spent on Usage Reports for multiple agencies — awaiting details on data requested.</li><li><strong>High Impact Business</strong>: Renewal approval delayed ~3 months. AE and RM actively working.</li><li><strong>LCS</strong>: Tableau Server · Renewal: Dec 4, 2026 · Red Account: N/A · Attrition: No</li></ul>' },
+    njdep: { ae:'Peter Welling', sentiment:'Green', trend:'Stable', lastActivity:'Sep 22, 2026',
+      csgNotes:'<ul><li><strong>Key Callout</strong><ul><li>Actively engaged; weekly cadence. POC is a strong advocate for Signature Success Renewal.</li><li>Renewed Mar 2026. POC shared accolades with the AE on multiple occasions.</li><li>2nd Bridge Server set up for Embedded Environment — testing successful. Uses Tableau to embed dashboards on their public site.</li></ul></li><li><strong>High Impact Technical</strong>: SAML authentication setup delayed by OIT. CSM helped test SAML on test environment; production pending.</li><li><strong>High Impact Business</strong>: Data cleaning understanding crucial for team. Tableau Prep adoption increased via VILTs and Expert Coaching.</li><li><strong>LCS</strong>: Baseline 69 · Target 62 · Actual 58 · AOV Baseline 6%</li><li><strong>Renewal</strong>: Mar 24, 2027 · 160 days · Red Account: N/A</li></ul>' },
+    njdoh: { ae:'Peter Welling', sentiment:'Green', trend:'Stable', lastActivity:'Sep 15, 2026',
+      csgNotes:'<ul><li><strong>Key Callout</strong><ul><li>Actively engaged; weekly cadence. Renewed Signature Plan with $38k attrition (impressions reduced 300k→250k).</li><li>Unhappy with lack of impression consumption visibility in portal — feedback shared as VOC with Product; no movement yet.</li><li>No adoption goals; Tableau used only when required (research scientists). $105k VILT savings in prior contract.</li><li>New POCs (old POCs moved to different verticals).</li></ul></li><li><strong>Barriers</strong>: No adoption goals; POCs are IT persona; no exec connect; half of Creator licenses unactivated.</li><li><strong>High Impact Technical</strong>: Connected Apps + Custom Domain — resolved with Product &amp; Engineering.</li><li><strong>LCS</strong>: Baseline 70 · Target 72 · Actual 67 · AOV Baseline 9.8%</li><li><strong>Renewal</strong>: May 18, 2027 · 215 days · Red Account: N/A</li></ul>' },
+    flcommerce: { ae:'Malone Smith', sentiment:'Yellow', trend:'Down', lastActivity:'Sep 23, 2026',
+      csgNotes:'<ul><li><strong>Key Callout</strong><ul><li>Tableau part of C360 deal; not primary focus for ~2 years of SELA contract. Focus on Salesforce Core.</li><li>Tableau moved to Milestone 6 (was Milestone 4). Implementation timeline Jun–Sep 2026. IBM is IP.</li><li>Sentiment Yellow — hitting roadblocks due to rejection of Federal ARPA budgeting.</li><li>RM confirmed NO anticipated Tableau attrition; Core will have $914k attrition.</li><li>Future renewal complex: 5-month flat renewal to allow FL to procure funding, then full renewal Jan/Feb 2027.</li><li>Red account raised — Leadership informed and involved with Sales &amp; Renewals.</li></ul></li><li><strong>LCS</strong>: Baseline 53.7% · Actual 58% · AOV Baseline 55.5%</li><li><strong>Renewal</strong>: Oct 24, 2026 (2d) · Courtesy Extension · Forecasted Attrition: N/A for Tableau</li></ul>' },
+    flprepaid: { ae:'Makeda Boehm', sentiment:'Green', trend:'Stable', lastActivity:'Oct 13, 2026',
+      csgNotes:'<ul><li><strong>Key Callout</strong><ul><li>Focus: implement Salesforce Core first, then Tableau and Tableau NEXT. Tab NEXT provisioning required for Server Agent Analytics.</li><li>3 IPs working on Core + Tableau (Catalis &amp; Canopy Management as Tableau IP). Signature Onboarding completed Dec 2025.</li><li>Renewed Mar 2026. Monthly cadence with IPs. Scope: replicate 30 reports (previously on DOMO). Future scope TBD.</li><li>FL Leadership happy with pace and IP progress. ATHR + Architect Review initiated Oct 2026.</li></ul></li><li><strong>High Impact Business</strong>: Initial roadblock with Service Cloud Agent Analytics — redirected to Tableau NEXT setup.</li><li><strong>LCS</strong>: Baseline 36 · Target 39 · Actual 47 · AOV Baseline 7.4%</li><li><strong>Renewal</strong>: Mar 27, 2027 · 163 days · Red Account: N/A</li></ul>' }
+  };
+
+  // ── Org62 live data (synced Oct 27, 2026) ──
+  // AE = AccountTeamMember role "Analytics Specialist AE", title "Account Executive, Tableau Specialist"
+  const ORG62_DATA = {
+    metroplus: {
+      ae: 'Randy Davidson', rm: 'Anthony Fernicola',
+      stage: '01 Initiate', amount: '$251,284.50', prioracv: '$251,284.50', attrition: '$0',
+      description: '',
+      nextSteps: '',
+      csgNotes: '10/1 - Shreyas Manohar\nSP - Sig\nStatus - Green #NoRisk\nBi-weekly cadence scheduled. Interested in Pulse and not Agent. No Challenges reported. Training & Enablement is the focus for Sept/Oct. No concerns. Renewal in 2027.'
+    },
+    nyits: {
+      ae: 'Randy Davidson', rm: 'Mitch Metheny',
+      stage: '02 Negotiate', amount: '$2,195,054.95', prioracv: '$2,200,488.56', attrition: '-$5,433.60',
+      description: '10/1-MM: $2.1M tab renewal covering 50+ state agencies $210K iACV driven by ENT SKU and Signature Success upgrade. Quote published and with ITS - CIO sent demand survey to finalize agency quantities before issuing formal RFQ. Next touchpoint 10/6\n09/24-MM: Updated quote (accounted for recent add-ons) submitted for approval. Sending to Carahsoft as soon as approved\n09/15-MM: ITS tentatively moving forward with enterprise and Signature Success upgrade $175K iACV. RFQ to be released next week - Primary risk is timing. Weekly syncs setup Tuesday morning to drive urgency\n09/1-MM: ITS tentatively moving forward with wall to wall enterprise and Signature Success upgrade ($175K). Procurement finalizing agency buy-in before full committal.\n07/24-MM: 3 quotes prepared - Status quo, upgrade all to Signature and upgrade to Enterprise SKU. Meeting with AVP before sharing to ITS leadership',
+      nextSteps: '10/12-MM: $2.2M tab enterprise renewal, covers 50+ agencies. $175K iACV driven by Signature and Enterprise SKU upgrade. Quote under review with procurement - Agencies in process of submitting demand survey for 2027. Next touchpoint 10/13',
+      csgNotes: '10/1 - Shreyas Manohar\nSP - Sig\nStatus - Green #NoRisk\nWeekly cadence. Enablement training on hold until renewal. Consolidated from 26-4 tenants. Recently keys were swapped across environments. +ve sentiment on renewal + Signature on all environments.'
+    },
+    njdep: {
+      ae: 'Roger Keren', rm: 'Mitch Metheny',
+      stage: '02 Negotiate', amount: '$215,440.40', prioracv: '$216,574.40', attrition: '-$1,134.00',
+      description: '',
+      nextSteps: '05/19-MM: Budgetary quote submitted for approval. Routing to customer when ready',
+      csgNotes: '10/1 - Shreyas Manohar\nSP - Signature Renew\nStatus - Green #NoRisk\nEngaged - Weekly calls with CSM. No adoption goals due to their straight forward embedding use-cases. Recently setup 2nd Bridge Server. New user using Sig benefits of enablement'
+    },
+    njdoh: {
+      ae: 'Roger Keren', rm: 'Mitch Metheny',
+      stage: '01 Initiate', amount: '$406,627.20', prioracv: '$406,627.20', attrition: '$0',
+      description: '',
+      nextSteps: '',
+      csgNotes: '10/1 - SM\nSP - Sig Renew\nStatus - Green #NoRisk\nEngaged- Weekly calls happy with CSM. Do not have Goals. Adoption low since usage is low. Only blocker is with product as they require /dashboard breakdown of impressions.'
+    },
+    flcommerce: {
+      ae: 'Danny Cottler', rm: 'Tenzin Younten',
+      stage: '03 Agreed', amount: '$1,167,035.87', prioracv: '$1,167,035.87', attrition: '$0',
+      description: 'Phase 1: Sep - Feb: Deal Number: 02526094\nPhase 2: Feb-July: Deal Number: 02638424\n\nCarahsoft - TY - 9/24: Courtesy extension 1. Finalizing BOM for both phases before re-approving DD case: 67086785. NS: pending sales leadership review/approval of DRT.\nCarahsoft - TY - 9/17: Courtesy ext 1 needed. Sep-Feb deal mechanics approved, working w/ c360 team to finalize phase 2 before moving fwd.\nCarahsoft - TY - 8/14: Quote Q-11866465 approved and published to Carahsoft.\nCarahsoft - TY - 7/28: 5 mo on-time renewal w/ FDO QTY RAMP in Q4. ~$914k false attrition to book in Q3 but made whole in Q4.',
+      nextSteps: 'Carahsoft - TY - 9/24 - #c1: Courtesy extension 1. Finalizing BOM for both phase 1 and phase 2 of the deal before re-approving DD case: 67086785. NS: pending sales leadership review/approval of DRT.',
+      csgNotes: "10/1- Shreyas Manohar\nSP - Sig Renew\nStatus: Yellow\nImp for Nov,26. IBM showcased use-cases to FL team in July. IBM is engaged on a use-case basis. No Risk anticipated for Tableau. No POC's for Tableau at FL. Courtesy extension for 30 days - 10/24"
+    },
+    flprepaid: {
+      ae: 'Colin Jones', rm: 'Tenzin Younten',
+      stage: '01 Initiate', amount: '$173,014.80', prioracv: '$173,014.80', attrition: '$0',
+      description: '',
+      nextSteps: '',
+      csgNotes: "10/1- Shreyas Manohar\nSP - Sig\nStatus - Green #Imp\nSiloed development on Next and Cloud. Different IP's working on different projects on Next and Cloud. No cadence for Tableau discussions. Core CSM helping set up separate cadence for Tab and MC."
+    }
+  };
+
+  // ── LCS Scores (OrgCS Success Plan cssf_Team_Notes__c, synced Oct 27, 2026) ──
+  // Quarterly breakdown only available via CRM Analytics (Wave); snapshot values stored here.
+  const LCS_DATA = {
+    metroplus:  { baseline: '76',    target: '78', actual: '76',  aov: '10.8%', status: 'neutral' },
+    nyits:      { baseline: '—',     target: '—',  actual: '—',   aov: '—',     status: 'na'      },
+    njdep:      { baseline: '69',    target: '62', actual: '58',  aov: '6%',    status: 'below'   },
+    njdoh:      { baseline: '70',    target: '72', actual: '67',  aov: '9.8%',  status: 'below'   },
+    flcommerce: { baseline: '53.7%', target: '—',  actual: '58%', aov: '55.5%', status: 'above'   },
+    flprepaid:  { baseline: '36',    target: '39', actual: '47',  aov: '7.4%',  status: 'above'   }
+  };
+
+  const ENGAGEMENT_DATA = {
+    metroplus: [
+      { id:'ENG-0686269', name:'MetroPlus - Engagement - ENG-0686269', created:'2026-10-08', due:'2026-10-16', stage:'Closed', status:'Success' },
+      { id:'ENG-0668906', name:'MetroPlus - Engagement - ENG-0668906', created:'2026-08-17', due:'2026-09-30', stage:'Closed', status:'Canceled - Customer Opt Out' },
+      { id:'ENG-0657762', name:'F27 Success Path', created:'2026-07-27', due:'2026-08-31', stage:'Closed', status:'Success' },
+      { id:'ENG-0657018', name:'FY27 Q2 - MetroPlus SHR Remediation', created:'2026-07-24', due:'2026-07-31', stage:'Deliver', status:null },
+      { id:'ENG-0654794', name:'MetroPlus - Engagement - ENG-0654794', created:'2026-07-21', due:'2026-11-30', stage:'New', status:null },
+      { id:'ENG-0654793', name:'MetroPlus - Engagement - ENG-0654793', created:'2026-07-21', due:'2026-08-31', stage:'New', status:null },
+      { id:'ENG-0654788', name:'MetroPlus - Engagement - ENG-0654788', created:'2026-07-21', due:'2026-08-31', stage:'Closed', status:'Success' },
+      { id:'ENG-0638223', name:'MetroPlus - Engagement - ENG-0638223', created:'2026-06-10', due:'2026-07-01', stage:'Closed', status:'Success' },
+      { id:'ENG-0638025', name:'MetroPlus - Engagement - ENG-0638025', created:'2026-06-10', due:'2026-08-31', stage:'New', status:null },
+      { id:'ENG-0635762', name:'Winter 26 Release Readiness', created:'2026-06-04', due:'2026-11-01', stage:'Closed', status:'Success' },
+      { id:'ENG-0629098', name:'Summer 26 - Release Readiness MetroPlus', created:'2026-05-19', due:'2026-06-18', stage:'Closed', status:'Success' },
+      { id:'ENG-0624300', name:'MetroPlus - Engagement - ENG-0624300', created:'2026-05-08', due:'2026-07-31', stage:'Closed', status:'Canceled - Customer Opt Out' },
+      { id:'ENG-0624298', name:'MetroPlus - Engagement - ENG-0624298', created:'2026-05-08', due:'2026-07-31', stage:'Closed', status:'Success' },
+      { id:'ENG-0618272', name:'Architect: Architect Consultation', created:'2026-04-27', due:'2026-05-29', stage:'Closed', status:'Completed' },
+      { id:'ENG-0618270', name:'Architect: Architect Consultation', created:'2026-04-27', due:'2026-04-30', stage:'Closed', status:'Completed' },
+      { id:'ENG-0618265', name:'Architect: Architect Consultation', created:'2026-04-27', due:'2026-06-03', stage:'Closed', status:'Completed' },
+      { id:'ENG-0613127', name:'Success Review - Q4', created:'2026-04-14', due:'2026-10-31', stage:'New', status:null },
+      { id:'ENG-0613126', name:'Success Review - Q3', created:'2026-04-14', due:'2026-08-31', stage:'Closed', status:'Success' },
+      { id:'ENG-0613125', name:'Success Review - Q2', created:'2026-04-14', due:'2026-05-31', stage:'Closed', status:'Success' },
+      { id:'ENG-0589178', name:'Architect: Architect Consultation', created:'2026-02-26', due:'2026-04-27', stage:'Closed', status:'Completed' },
+      { id:'ENG-0558545', name:'Q4 FY26 Contact Review', created:'2026-01-08', due:'2026-01-31', stage:'Closed', status:'Success' },
+      { id:'ENG-0553616', name:'Q4 FY26 Contact Review', created:'2026-01-08', due:'2026-01-31', stage:'New', status:null },
+      { id:'ENG-0550891', name:'Success Review', created:'2026-01-02', due:'2026-04-30', stage:'Closed', status:'Canceled - Data Error' },
+      { id:'ENG-0538948', name:'Annual Technical Health Review - Tableau Cloud', created:'2025-11-20', due:'2025-12-30', stage:'Closed', status:'Success' },
+      { id:'ENG-0519998', name:'KEM: Release Readiness - Tableau', created:'2025-09-17', due:'2025-10-20', stage:'Closed', status:'Success' },
+      { id:'ENG-0507942', name:'Success Review - 2025 Q3', created:'2025-08-05', due:'2025-09-10', stage:'Closed', status:'Success' },
+      { id:'ENG-0492628', name:'Success Review', created:'2025-07-10', due:'2025-11-20', stage:'Closed', status:'Success' },
+      { id:'ENG-0479445', name:'Success Path', created:'2025-06-11', due:'2025-07-31', stage:'Closed', status:'Success' },
+      { id:'ENG-0472324', name:'Success Review', created:'2025-05-14', due:'2025-11-30', stage:'Closed', status:'Canceled - Data Error' },
+      { id:'ENG-0472323', name:'Success Path', created:'2025-05-14', due:'2025-08-12', stage:'Closed', status:'Success' },
+      { id:'ENG-0472322', name:'Annual Technical Health Review - Tableau Cloud', created:'2025-05-14', due:'2025-11-10', stage:'Closed', status:'Canceled - Data Error' },
+      { id:'ENG-0472321', name:'KEM: Customer Go-Live Support', created:'2025-05-14', due:'2025-09-11', stage:'Closed', status:'Canceled - Data Error' },
+      { id:'ENG-0472320', name:'Signature Onboarding', created:'2025-05-14', due:'2025-08-12', stage:'Closed', status:'Canceled - Data Error' },
+    ],
+    nyits: [
+      { id:'ENG-0686271', name:'NY ITS - Engagement - ENG-0686271', created:'2026-10-08', due:'2026-10-16', stage:'Closed', status:'Success' },
+      { id:'ENG-0686270', name:'NY ITS - Engagement - ENG-0686270', created:'2026-10-08', due:'2026-10-16', stage:'Closed', status:'Success' },
+      { id:'ENG-0681201', name:'KEM - Go Live', created:'2026-09-23', due:'2026-10-09', stage:'New', status:null },
+      { id:'ENG-0681202', name:'KEM - Go Live', created:'2026-09-23', due:'2026-10-09', stage:'New', status:null },
+      { id:'ENG-0681189', name:'ATHR - 2026 - NYS Office of Info Tech Svcs', created:'2026-09-23', due:'2026-11-02', stage:'Prepare', status:null },
+      { id:'ENG-0654792', name:'NY ITS - Engagement - ENG-0654792', created:'2026-07-21', due:'2026-11-30', stage:'New', status:null },
+      { id:'ENG-0654791', name:'NY ITS - Engagement - ENG-0654791', created:'2026-07-21', due:'2026-09-30', stage:'New', status:null },
+      { id:'ENG-0654790', name:'NY ITS - Engagement - ENG-0654790', created:'2026-07-21', due:'2026-11-30', stage:'New', status:null },
+      { id:'ENG-0654789', name:'NY ITS - Engagement - ENG-0654789', created:'2026-07-21', due:'2026-09-30', stage:'New', status:null },
+      { id:'ENG-0616879', name:'NY ITS - Engagement - ENG-0616879', created:'2026-04-23', due:'2026-05-08', stage:'Closed', status:'Success' },
+      { id:'ENG-0616870', name:'NY ITS - Engagement - ENG-0616870', created:'2026-04-23', due:'2026-05-08', stage:'Closed', status:'Success' },
+      { id:'ENG-0616841', name:'NY ITS - Engagement - ENG-0616841', created:'2026-04-23', due:'2026-05-23', stage:'Closed', status:'Canceled - Data Error' },
+      { id:'ENG-0616840', name:'NY ITS - Engagement - ENG-0616840', created:'2026-04-23', due:'2026-05-08', stage:'Closed', status:'Canceled - Data Error' },
+      { id:'ENG-0614069', name:'NY ITS - Engagement - ENG-0614069', created:'2026-04-16', due:'2026-07-15', stage:'Closed', status:'Canceled - Customer Opt Out' },
+      { id:'ENG-0614068', name:'NY ITS - Engagement - ENG-0614068', created:'2026-04-16', due:'2026-07-15', stage:'Closed', status:'Canceled - Customer Opt Out' },
+      { id:'ENG-0614067', name:'NY ITS - Engagement - ENG-0614067', created:'2026-04-16', due:'2026-07-15', stage:'Closed', status:'Canceled - Customer Opt Out' },
+      { id:'ENG-0614066', name:'NY ITS - Engagement - ENG-0614066', created:'2026-04-16', due:'2026-07-15', stage:'Closed', status:'Canceled - Customer Opt Out' },
+      { id:'ENG-0595962', name:'NY ITS - Engagement - ENG-0595962', created:'2026-03-11', due:'2026-05-13', stage:'Closed', status:'Canceled - Data Error' },
+      { id:'ENG-0557036', name:'Q4 FY26 Contact Review', created:'2026-01-08', due:'2026-01-31', stage:'Closed', status:'Canceled - Data Error' },
+      { id:'ENG-0524953', name:'Success Path', created:'2025-10-07', due:'2025-10-02', stage:'Closed', status:'Success' },
+      { id:'ENG-0520486', name:'Annual Technical Health Review - Tableau Server', created:'2025-09-18', due:'2025-12-15', stage:'Closed', status:'Success' },
+      { id:'ENG-0519999', name:'KEM: Release Readiness - Tableau', created:'2025-09-17', due:'2025-10-20', stage:'Closed', status:'Success' },
+      { id:'ENG-0508836', name:'Architect: Architecture Design Review', created:'2025-08-08', due:'2025-09-17', stage:'Closed', status:'Completed' },
+      { id:'ENG-0492627', name:'Success Review', created:'2025-07-10', due:'2026-02-28', stage:'Closed', status:'Success' },
+      { id:'ENG-0480867', name:'Success Path', created:'2025-06-13', due:'2025-07-31', stage:'Closed', status:'Canceled - Data Error' },
+    ],
+    njdep: [
+      { id:'ENG-0686266', name:'NJ DEP - Engagement - ENG-0686266', created:'2026-10-08', due:'2026-10-16', stage:'Closed', status:'Success' },
+      { id:'ENG-0686265', name:'NJ DEP - Engagement - ENG-0686265', created:'2026-10-08', due:'2026-10-16', stage:'Closed', status:'Success' },
+      { id:'ENG-0682760', name:'NJ DEP - Engagement - ENG-0682760', created:'2026-09-29', due:'2026-11-04', stage:'New', status:null },
+      { id:'ENG-0682759', name:'NJ DEP - Engagement - ENG-0682759', created:'2026-09-29', due:'2026-11-04', stage:'New', status:null },
+      { id:'ENG-0638229', name:'NJ DEP - Summer 26 Release Readiness', created:'2026-06-10', due:'2026-07-01', stage:'Closed', status:'Success' },
+      { id:'ENG-0638228', name:'NJ DEP - Summer 26 Release Readiness', created:'2026-06-10', due:'2026-07-01', stage:'Closed', status:'Success' },
+      { id:'ENG-0609750', name:'NJ DEP - Engagement - ENG-0609750', created:'2026-04-07', due:'2026-01-31', stage:'Closed', status:'Success' },
+      { id:'ENG-0558956', name:'Q4 FY26 Contact Review', created:'2026-01-08', due:'2026-01-31', stage:'Closed', status:'Success' },
+      { id:'ENG-0558955', name:'Q4 FY26 Contact Review', created:'2026-01-08', due:'2026-01-31', stage:'Closed', status:'Success' },
+      { id:'ENG-0540351', name:'NJ DEP - SAML Setup', created:'2025-11-25', due:'2025-12-01', stage:'Closed', status:'Redirected - Other' },
+      { id:'ENG-0532447', name:'Success Guide Expert Coaching - Tableau Prep', created:'2025-10-31', due:'2025-11-10', stage:'Closed', status:'Success' },
+      { id:'ENG-0526970', name:'KEM: Release Readiness - Tableau (Winter Release 26)', created:'2025-10-14', due:'2025-10-31', stage:'Closed', status:'Success' },
+      { id:'ENG-0520097', name:'Enablement - Training Plan', created:'2025-09-17', due:'2025-10-31', stage:'Closed', status:'Success' },
+      { id:'ENG-0520091', name:'Multi-Factor Authentication', created:'2025-09-17', due:'2025-09-09', stage:'Closed', status:'Canceled - Data Error' },
+      { id:'ENG-0520088', name:'KEM: Release Readiness - Tableau Winter 26 Release', created:'2025-09-17', due:'2025-10-31', stage:'Closed', status:'Success' },
+      { id:'ENG-0520084', name:'KEM: Release Readiness - Tableau Summer 25 Release', created:'2025-09-17', due:'2025-08-29', stage:'Closed', status:'Success' },
+      { id:'ENG-0518643', name:'Multi-Factor Authentication', created:'2025-09-11', due:'2025-09-26', stage:'Closed', status:'Success' },
+      { id:'ENG-0518638', name:'Success Guide Expert Coaching - Tableau Bridge', created:'2025-09-11', due:'2025-08-15', stage:'Closed', status:'Success' },
+      { id:'ENG-0518635', name:'Success Guide Expert Coaching - Tableau Pulse', created:'2025-09-11', due:'2025-06-23', stage:'Closed', status:'Success' },
+    ],
+    njdoh: [
+      { id:'ENG-0686268', name:'NJ DOH - Engagement - ENG-0686268', created:'2026-10-08', due:'2026-10-16', stage:'Closed', status:'Success' },
+      { id:'ENG-0686267', name:'NJ DOH - Engagement - ENG-0686267', created:'2026-10-08', due:'2026-10-16', stage:'Closed', status:'Success' },
+      { id:'ENG-0638222', name:'NJ DOH - Summer 26 Release Readiness', created:'2026-06-10', due:'2026-07-01', stage:'Closed', status:'Success' },
+      { id:'ENG-0638221', name:'NJ DOH - Summer 26 Release Readiness', created:'2026-06-10', due:'2026-07-01', stage:'Closed', status:'Success' },
+      { id:'ENG-0609752', name:'NJ DOH - Engagement - ENG-0609752', created:'2026-04-07', due:'2026-02-27', stage:'Closed', status:'Success' },
+      { id:'ENG-0603277', name:'Expert Coaching - Tableau Cloud: Admin Operations', created:'2026-03-25', due:'2026-04-08', stage:'Closed', status:'Success' },
+      { id:'ENG-0603275', name:'Expert Coaching - Tableau Cloud: Admin Operations', created:'2026-03-25', due:'2026-04-08', stage:'Closed', status:'Success' },
+      { id:'ENG-0559061', name:'Q4 FY26 Contact Review', created:'2026-01-08', due:'2026-01-31', stage:'Closed', status:'Success' },
+      { id:'ENG-0559060', name:'Q4 FY26 Contact Review', created:'2026-01-08', due:'2026-01-31', stage:'Closed', status:'Success' },
+      { id:'ENG-0545492', name:'Success Guide Expert Coaching - Data Integration & Management', created:'2025-12-11', due:'2026-01-31', stage:'Closed', status:'Success' },
+      { id:'ENG-0545491', name:'Success Guide Expert Coaching - Tableau Beginner Dashboards', created:'2025-12-11', due:'2026-01-31', stage:'Closed', status:'Success' },
+      { id:'ENG-0545490', name:'Success Guide Expert Coaching - Tableau Desktop', created:'2025-12-11', due:'2026-01-31', stage:'Closed', status:'Success' },
+      { id:'ENG-0545489', name:'Success Guide Expert Coaching - Tableau Cloud', created:'2025-12-11', due:'2026-01-31', stage:'Closed', status:'Success' },
+      { id:'ENG-0545488', name:'Success Guide Expert Coaching - Data Integration & Management', created:'2025-12-11', due:'2026-01-31', stage:'Closed', status:'Success' },
+      { id:'ENG-0545487', name:'Success Guide Expert Coaching - Tableau Beginner Dashboards', created:'2025-12-11', due:'2026-01-31', stage:'Closed', status:'Success' },
+      { id:'ENG-0545486', name:'Success Guide Expert Coaching - Tableau Desktop', created:'2025-12-11', due:'2026-01-31', stage:'Closed', status:'Success' },
+      { id:'ENG-0545485', name:'Success Guide Expert Coaching - Tableau Cloud', created:'2025-12-11', due:'2026-01-31', stage:'Closed', status:'Success' },
+      { id:'ENG-0520115', name:'Tableau Pilot customer - Tableau Custom Domain', created:'2025-09-17', due:'2025-10-31', stage:'Closed', status:'Success' },
+      { id:'ENG-0520096', name:'Enablement - Training Plan', created:'2025-09-17', due:'2025-10-31', stage:'Closed', status:'Success' },
+      { id:'ENG-0520089', name:'KEM: Release Readiness - Tableau Winter 26 Release', created:'2025-09-17', due:'2025-10-31', stage:'Closed', status:'Success' },
+      { id:'ENG-0520085', name:'KEM: Release Readiness - Tableau Summer 25 Release', created:'2025-09-17', due:'2025-08-29', stage:'Closed', status:'Success' },
+      { id:'ENG-0518678', name:'New Product Functionality Pilot - Custom Domain', created:'2025-09-11', due:'2025-08-29', stage:'Closed', status:'Success' },
+      { id:'ENG-0467066', name:'Annual Technical Health Review - Tableau Cloud', created:'2025-04-30', due:'2025-12-31', stage:'Closed', status:'Canceled - Data Error' },
+      { id:'ENG-0467065', name:'KEM: Customer Go-Live Support', created:'2025-04-30', due:'2025-10-10', stage:'Closed', status:'Success' },
+      { id:'ENG-0467064', name:'Signature Onboarding', created:'2025-04-30', due:'2025-07-29', stage:'Closed', status:'Success' },
+      { id:'ENG-0467063', name:'Success Review', created:'2025-04-30', due:'2026-07-31', stage:'Closed', status:'Canceled - Data Error' },
+      { id:'ENG-0467061', name:'Annual Technical Health Review - Tableau Cloud', created:'2025-04-30', due:'2025-12-31', stage:'Closed', status:'Success' },
+      { id:'ENG-0467060', name:'KEM: Customer Go-Live Support', created:'2025-04-30', due:'2025-10-01', stage:'Closed', status:'Success' },
+      { id:'ENG-0467059', name:'Signature Onboarding', created:'2025-04-30', due:'2025-10-31', stage:'Closed', status:'Success' },
+    ],
+    flcommerce: [
+      { id:'ENG-0688701', name:'FL Commerce - Engagement - ENG-0688701', created:'2026-10-15', due:'2027-09-01', stage:'Prepare', status:null },
+      { id:'ENG-0688695', name:'FL Commerce - Engagement - ENG-0688695', created:'2026-10-15', due:'2026-11-14', stage:'Closed', status:'Success' },
+      { id:'ENG-0688693', name:'FL Commerce - Engagement - ENG-0688693', created:'2026-10-15', due:'2026-11-14', stage:'Closed', status:'Success' },
+      { id:'ENG-0686275', name:'FL Commerce - Engagement - ENG-0686275', created:'2026-10-08', due:'2026-10-16', stage:'Closed', status:'Success' },
+      { id:'ENG-0686273', name:'FL Commerce - Engagement - ENG-0686273', created:'2026-10-08', due:'2026-10-16', stage:'Closed', status:'Success' },
+      { id:'ENG-0675916', name:'FL Commerce - Engagement - ENG-0675916', created:'2026-09-08', due:'2026-10-31', stage:'Closed', status:'Canceled - Data Error' },
+      { id:'ENG-0675913', name:'FL Commerce - Engagement - ENG-0675913', created:'2026-09-08', due:'2026-10-31', stage:'Closed', status:'Canceled - Data Error' },
+      { id:'ENG-0668898', name:'FL Commerce - Engagement - ENG-0668898', created:'2026-08-17', due:'2026-08-30', stage:'Closed', status:'Canceled - Customer Opt Out' },
+      { id:'ENG-0656406', name:'FL Commerce - Tableau Embedding Architecture in Salesforce', created:'2026-07-23', due:'2026-08-28', stage:'Closed', status:'Completed' },
+      { id:'ENG-0654796', name:'FL Commerce - Engagement - ENG-0654796', created:'2026-07-21', due:'2026-08-31', stage:'Closed', status:'Success' },
+      { id:'ENG-0654795', name:'FL Commerce - Engagement - ENG-0654795', created:'2026-07-21', due:'2026-08-31', stage:'Closed', status:'Success' },
+      { id:'ENG-0654091', name:'FY27 Q2 - FL Commerce SHR Remediation', created:'2026-07-20', due:'2026-10-30', stage:'Closed', status:'Canceled - Data Error' },
+      { id:'ENG-0652515', name:'FL Commerce - Engagement - ENG-0652515', created:'2026-07-15', due:'2026-08-19', stage:'Closed', status:'Canceled - Data Error' },
+      { id:'ENG-0646255', name:'FL Commerce - Engagement - ENG-0646255', created:'2026-06-30', due:'2026-07-31', stage:'Closed', status:'Canceled - Data Error' },
+      { id:'ENG-0646253', name:'FL Commerce - Engagement - ENG-0646253', created:'2026-06-30', due:'2026-07-31', stage:'Closed', status:'Canceled - Customer Opt Out' },
+      { id:'ENG-0636383', name:'FL Commerce - OAuth Config Publish Failure', created:'2026-06-05', due:'2026-06-09', stage:'Closed', status:'Redirected - Other' },
+      { id:'ENG-0628288', name:'FL Commerce - Engagement - ENG-0628288', created:'2026-05-18', due:'2026-12-25', stage:'Closed', status:'Canceled - Data Error' },
+      { id:'ENG-0628268', name:'FL Commerce - Engagement - ENG-0628268', created:'2026-05-18', due:'2026-06-17', stage:'Closed', status:'Success' },
+      { id:'ENG-0628267', name:'FL Commerce - Engagement - ENG-0628267', created:'2026-05-18', due:'2026-06-17', stage:'Closed', status:'Success' },
+      { id:'ENG-0594553', name:'FL Commerce - Engagement - ENG-0594553', created:'2026-03-09', due:'2026-11-30', stage:'Closed', status:'Canceled - Data Error' },
+      { id:'ENG-0594551', name:'FL Commerce - Engagement - ENG-0594551', created:'2026-03-09', due:'2026-11-30', stage:'Closed', status:'Canceled - Data Error' },
+      { id:'ENG-0560257', name:'Q4 FY26 Contact Review', created:'2026-01-08', due:'2026-03-31', stage:'Closed', status:'Success' },
+      { id:'ENG-0560256', name:'Q4 FY26 Contact Review', created:'2026-01-08', due:'2026-03-31', stage:'Closed', status:'Success' },
+      { id:'ENG-0556888', name:'Q4 FY26 Contact Review', created:'2026-01-08', due:'2026-01-31', stage:'Closed', status:'Success' },
+      { id:'ENG-0520173', name:'Success Review', created:'2025-09-17', due:'2025-12-16', stage:'Closed', status:'Success' },
+      { id:'ENG-0520170', name:'Success Path', created:'2025-09-17', due:'2025-12-16', stage:'Closed', status:'Success' },
+      { id:'ENG-0519428', name:'Success Review', created:'2025-09-15', due:'2026-04-30', stage:'Closed', status:'Canceled - Customer Opt Out' },
+      { id:'ENG-0519427', name:'Success Path', created:'2025-09-15', due:'2026-04-30', stage:'Closed', status:'Canceled - Customer Opt Out' },
+      { id:'ENG-0519426', name:'Success Review', created:'2025-09-15', due:'2026-04-30', stage:'Closed', status:'Canceled - Customer Opt Out' },
+      { id:'ENG-0519425', name:'Success Path', created:'2025-09-15', due:'2026-04-30', stage:'Closed', status:'Canceled - Customer Opt Out' },
+      { id:'ENG-0518667', name:'Solution Engineer - Tableau Workshop', created:'2025-09-11', due:'2025-07-25', stage:'Closed', status:'Success' },
+      { id:'ENG-0518663', name:'Solution Engineer - Tableau Workshop', created:'2025-09-11', due:'2025-05-13', stage:'Closed', status:'Success' },
+      { id:'ENG-0477615', name:'Success Path Q2 - June 18th, 2025', created:'2025-06-05', due:'2025-06-18', stage:'Closed', status:'Success' },
+    ],
+    flprepaid: [
+      { id:'ENG-0688712', name:'FL Prepaid - Engagement - ENG-0688712', created:'2026-10-15', due:'2026-11-14', stage:'Closed', status:'Success' },
+      { id:'ENG-0688711', name:'FL Prepaid - Engagement - ENG-0688711', created:'2026-10-15', due:'2026-11-14', stage:'Closed', status:'Success' },
+      { id:'ENG-0687809', name:'FL Prepaid - Engagement - ENG-0687809', created:'2026-10-13', due:'2026-11-12', stage:'New', status:null },
+      { id:'ENG-0687487', name:'FL Prepaid - Engagement - ENG-0687487', created:'2026-10-12', due:'2026-11-11', stage:'New', status:null },
+      { id:'ENG-0686277', name:'FL Prepaid - Engagement - ENG-0686277', created:'2026-10-08', due:'2026-10-16', stage:'Closed', status:'Success' },
+      { id:'ENG-0674951', name:'Florida Prepaid: Anniversary Emails', created:'2026-09-03', due:'2026-10-03', stage:'Closed', status:'Success' },
+      { id:'ENG-0668655', name:'ATHR - 2026 - (Core) FL Prepaid College Board', created:'2026-08-17', due:'2026-08-31', stage:'Closed', status:'Success' },
+      { id:'ENG-0664804', name:'Architect: Architect Consultation', created:'2026-08-06', due:'2026-08-17', stage:'Closed', status:'Completed' },
+      { id:'ENG-0662634', name:'FL Prepaid - Engagement - ENG-0662634', created:'2026-08-03', due:'2026-12-31', stage:'New', status:null },
+      { id:'ENG-0662633', name:'FL Prepaid - Engagement - ENG-0662633', created:'2026-08-03', due:'2026-12-31', stage:'New', status:null },
+      { id:'ENG-0662632', name:'FL Prepaid - Engagement - ENG-0662632', created:'2026-08-03', due:'2026-12-31', stage:'New', status:null },
+      { id:'ENG-0659775', name:'FL Prepaid - Engagement - ENG-0659775', created:'2026-07-29', due:'2026-08-07', stage:'New', status:null },
+      { id:'ENG-0654066', name:'FY27 Q2 - FL Prepaid SHR Remediation', created:'2026-07-20', due:'2026-07-31', stage:'Deliver', status:null },
+      { id:'ENG-0652516', name:'FL Prepaid - Engagement - ENG-0652516', created:'2026-07-15', due:'2026-08-19', stage:'Closed', status:'Success' },
+      { id:'ENG-0651238', name:'FL Prepaid College Board - ENG-0651238', created:'2026-07-13', due:'2026-08-03', stage:'Closed', status:'Completed' },
+      { id:'ENG-0649953', name:'FL Prepaid College Board Go-Live - 2026-12-01', created:'2026-07-09', due:null, stage:'Prepare', status:null },
+      { id:'ENG-0641843', name:'FL Prepaid - MCE + Salesforce Personalization - Architecture Design Review', created:'2026-06-19', due:'2026-07-19', stage:'Closed', status:'Success' },
+      { id:'ENG-0640662', name:'FL Prepaid - Signature Onboarding - MCE', created:'2026-06-16', due:'2026-06-30', stage:'Closed', status:'Success' },
+      { id:'ENG-0640661', name:'FL Prepaid: Technical Health Review FY27', created:'2026-06-16', due:'2027-03-27', stage:'New', status:null },
+      { id:'ENG-0640648', name:'FL Prepaid: Winter MC Release Readiness FY27', created:'2026-06-16', due:'2026-12-31', stage:'Closed', status:'Success' },
+      { id:'ENG-0640643', name:'FL Prepaid: Summer MC Release Readiness FY27', created:'2026-06-16', due:'2026-06-30', stage:'Closed', status:'Success' },
+      { id:'ENG-0640636', name:'FL Prepaid: Success Review Q4 FY27', created:'2026-06-16', due:'2027-03-31', stage:'New', status:null },
+      { id:'ENG-0640634', name:'FL Prepaid: Success Review Q3 FY27', created:'2026-06-16', due:'2026-12-31', stage:'New', status:null },
+      { id:'ENG-0640633', name:'FL Prepaid: Success Review Q2 FY27', created:'2026-06-16', due:'2026-09-21', stage:'New', status:null },
+      { id:'ENG-0638744', name:'FL Prepaid - Loyalty Mgmt Survey Architecture Consultation', created:'2026-06-11', due:'2026-08-05', stage:'Closed', status:'Completed' },
+      { id:'ENG-0637846', name:'FL Prepaid College - MCE Loyalty Survey Architecture', created:'2026-06-09', due:'2026-07-06', stage:'Closed', status:'Completed' },
+      { id:'ENG-0637843', name:'FL Prepaid - MCE Loyalty Mgmt - Architecture Design Review', created:'2026-06-09', due:'2026-06-30', stage:'Closed', status:'Success' },
+      { id:'ENG-0636232', name:'Architect: Architecture Design Review', created:'2026-06-05', due:'2026-07-03', stage:'Closed', status:'Completed' },
+      { id:'ENG-0628293', name:'FL Prepaid - Engagement - ENG-0628293', created:'2026-05-18', due:'2026-12-25', stage:'Deliver', status:null },
+      { id:'ENG-0628233', name:'FL Prepaid - Engagement - ENG-0628233', created:'2026-05-18', due:'2026-06-17', stage:'Closed', status:'Success' },
+      { id:'ENG-0628220', name:'FL Prepaid - Engagement - ENG-0628220', created:'2026-05-18', due:'2026-06-17', stage:'Closed', status:'Success' },
+      { id:'ENG-0625692', name:'FL Prepaid College Board - ENG-0625692', created:'2026-05-12', due:'2026-05-22', stage:'Closed', status:'Completed' },
+      { id:'ENG-0622322', name:'Q2 FY27 - Orchestration', created:'2026-05-05', due:'2026-07-31', stage:'Deliver', status:null },
+      { id:'ENG-0622321', name:'Architect: Architect Consultation', created:'2026-05-05', due:'2026-06-01', stage:'Closed', status:'Completed' },
+      { id:'ENG-0618455', name:'Florida Prepaid FY27 ProM Review', created:'2026-04-27', due:'2026-09-17', stage:'Closed', status:'Success' },
+      { id:'ENG-0618452', name:'Florida Prepaid FY27 Weekly Calls', created:'2026-04-27', due:'2027-05-26', stage:'New', status:null },
+      { id:'ENG-0618449', name:'Florida Prepaid FY27 Emails', created:'2026-04-27', due:'2027-05-31', stage:'New', status:null },
+      { id:'ENG-0603269', name:'Expert Coaching - Tableau Next: Visualizations and Dashboards', created:'2026-03-25', due:'2026-04-30', stage:'New', status:null },
+      { id:'ENG-0603268', name:'Expert Coaching - Tableau Next: Home and Workspaces', created:'2026-03-25', due:'2026-04-30', stage:'New', status:null },
+      { id:'ENG-0603267', name:'Expert Coaching - Tableau Next: Security and Governance', created:'2026-03-25', due:'2026-04-30', stage:'New', status:null },
+      { id:'ENG-0603266', name:'Expert Coaching - Tableau Next: Share and Embed', created:'2026-03-25', due:'2026-04-30', stage:'New', status:null },
+      { id:'ENG-0603265', name:'Expert Coaching - Tableau Next: Data Connection and Semantic Models', created:'2026-03-25', due:'2026-04-30', stage:'Closed', status:'Success' },
+      { id:'ENG-0603263', name:'Expert Coaching - Tableau Next: AI and Agent Features', created:'2026-03-25', due:'2026-04-30', stage:'Closed', status:'Success' },
+      { id:'ENG-0603254', name:'Expert Coaching - Tableau Next: Setup', created:'2026-03-25', due:'2026-04-30', stage:'Closed', status:'Success' },
+      { id:'ENG-0596717', name:'FL Prepaid College: AF Observability Architect Consultation', created:'2026-03-12', due:'2026-04-15', stage:'Closed', status:'Completed' },
+      { id:'ENG-0602174', name:'FL Prepaid - Engagement - ENG-0602174', created:'2026-03-23', due:'2026-06-21', stage:'Closed', status:'Success' },
+      { id:'ENG-0602175', name:'FL Prepaid - Engagement - ENG-0602175', created:'2026-03-23', due:'2026-06-21', stage:'Closed', status:'Canceled - Customer Opt Out' },
+      { id:'ENG-0602173', name:'FL Prepaid: Success Review Q1 FY27', created:'2026-03-23', due:'2026-06-21', stage:'Closed', status:'Success' },
+      { id:'ENG-0602172', name:'FL Prepaid: Success Path Q1 FY 27', created:'2026-03-23', due:'2026-06-21', stage:'Closed', status:'Success' },
+      { id:'ENG-0558962', name:'Q4 FY26 Contact Review', created:'2026-01-08', due:'2026-01-31', stage:'Closed', status:'Success' },
+      { id:'ENG-0555647', name:'Q4 FY26 Contact Review', created:'2026-01-08', due:'2026-01-31', stage:'Closed', status:'Success' },
+      { id:'ENG-0536378', name:'Signature Onboarding', created:'2025-11-12', due:'2025-12-22', stage:'Closed', status:'Success' },
+      { id:'ENG-0523789', name:'Success Review', created:'2025-10-02', due:'2025-11-01', stage:'Closed', status:'Success' },
+      { id:'ENG-0523788', name:'Success Path', created:'2025-10-02', due:'2025-11-01', stage:'Closed', status:'Success' },
+      { id:'ENG-0515300', name:'Agentforce Activate', created:'2025-08-28', due:'2025-12-31', stage:'Closed', status:'Success' },
+      { id:'ENG-0490868', name:'Annual Technical Health Review - Core', created:'2025-07-07', due:'2026-01-03', stage:'Closed', status:'Canceled - Data Error' },
+      { id:'ENG-0490867', name:'KEM: Customer Go-Live Support', created:'2025-07-07', due:'2025-11-04', stage:'Closed', status:'Canceled - Data Error' },
+      { id:'ENG-0490863', name:'KEM: Highest Volume/Business Critical', created:'2025-07-07', due:'2025-11-04', stage:'Closed', status:'Canceled - Data Error' },
+      { id:'ENG-0490861', name:'Customer Success Score', created:'2025-07-07', due:'2026-01-03', stage:'Closed', status:'Canceled - Data Error' },
+      { id:'ENG-0490860', name:'KEM: Planned Maintenance', created:'2025-07-07', due:'2025-11-04', stage:'Closed', status:'Success' },
+      { id:'ENG-0477622', name:'Success Path Q2 - June 25th, 2025', created:'2025-06-05', due:'2025-06-25', stage:'Closed', status:'Canceled - Data Error' },
+    ],
+  };
+
+  const ACTIVITY_DATA = {
+    metroplus: [
+      { date:'2026-10-21', type:'Email', subject:'Re: [EXT] Enablement - Date Parameters' },
+      { date:'2026-10-21', type:'Email', subject:'Re: Request for Salesforce Review of Tableau Implementation' },
+      { date:'2026-10-21', type:'Email', subject:'MetroPlus/Tableau - Signature Success Touchpoint - 10/21/26' },
+      { date:'2026-10-13', type:'Email', subject:'MetroPlus/Tableau - Signature Success Touchpoint - 10/7/26' },
+      { date:'2026-10-08', type:'Email', subject:"Tableau Winter '27 Release (2026.3): Highlights for Your Tableau Cloud Site" },
+      { date:'2026-10-01', type:'Email', subject:'Re: [EXT] MetroPlus/Tableau - Signature Success Touchpoint - 9/9/26' },
+      { date:'2026-10-01', type:'Email', subject:'Enablement - Date Parameters' },
+      { date:'2026-10-01', type:'Email', subject:'Re: [EXT] Enablement - Date Parameters' },
+      { date:'2026-09-15', type:'Email', subject:'MetroPlus/Tableau - Signature Success Touchpoint - 9/9/26' },
+      { date:'2026-08-05', type:'Customer Meeting', subject:'Step 4: Awareness Meeting Completed' },
+    ],
+    nyits: [
+      { date:'2026-10-26', type:'Email', subject:'Re: OMH AWS Tableau Instance' },
+      { date:'2026-10-22', type:'Email', subject:'NYITS | Tableau - Signature Success Touchpoint - 10/22/26' },
+      { date:'2026-10-15', type:'Email', subject:'Re: FW: Tableau Issues – Request for Guidance and Workarounds' },
+      { date:'2026-10-14', type:'Email', subject:'Re: Windows Server 2022' },
+      { date:'2026-10-14', type:'Email', subject:'Re: Windows Server 2022' },
+      { date:'2026-10-14', type:'Email', subject:'Re: NYITS | Tableau - Signature Success Touchpoint - 9/10/26' },
+      { date:'2026-10-08', type:'Email', subject:'Re: NYITS | Tableau - Signature Success Touchpoint - 9/10/26' },
+      { date:'2026-10-05', type:'Email', subject:'Re: Windows Upgrade Status' },
+      { date:'2026-10-05', type:'Email', subject:'Windows Upgrade Status' },
+      { date:'2026-10-01', type:'Email', subject:'Re: License counts on Customer Portal' },
+    ],
+    njdep: [
+      { date:'2026-10-26', type:'Email', subject:'Re: [EXTERNAL] Re: Tableau Desktop Training' },
+      { date:'2026-09-30', type:'Email', subject:'Re: [EXTERNAL] Expert Coaching Series' },
+      { date:'2026-09-29', type:'Email', subject:'Expert Coaching Series' },
+      { date:'2026-09-22', type:'Email', subject:'Re: Tableau Training' },
+      { date:'2026-09-15', type:'Email', subject:'Re: [EXTERNAL] Re: Cloud IR with NJOIT' },
+      { date:'2026-09-15', type:'Email', subject:'Re: Cloud IR with NJOIT' },
+      { date:'2026-09-08', type:'Email', subject:'Re: Signature Weekly Cadence: Tableau x NJDEP' },
+      { date:'2026-09-01', type:'Email', subject:'Re: [EXTERNAL] Tableau Training' },
+      { date:'2026-08-13', type:'Email', subject:'Re: Tableau MFA Issue' },
+    ],
+    njdoh: [
+      { date:'2026-10-13', type:'Email', subject:'MOM: Tableau x NJDOH 10/9/26' },
+      { date:'2026-10-01', type:'Email', subject:'Impression Breakdown as of 10/1/26' },
+      { date:'2026-09-25', type:'Email', subject:'MOM: Tableau x NJDOH 9/25/26' },
+      { date:'2026-09-15', type:'Email', subject:'MOM: Tableau x NJDOH 9/11/26' },
+      { date:'2026-09-04', type:'Email', subject:'MOM: Tableau x NJDOH 9/4/26' },
+      { date:'2026-08-11', type:'Email', subject:'OIT statewide Upgrades' },
+      { date:'2026-08-04', type:'Email', subject:'Re: [EXTERNAL] Tableau Signature Support Weekly Meeting' },
+      { date:'2026-07-24', type:'Email', subject:'MOM: Tableau x NJDOH 7/24/26' },
+      { date:'2026-07-21', type:'Email', subject:'MOM: Tableau x NJDOH 7/20/26' },
+      { date:'2026-07-21', type:'Email', subject:'Re: Impression Breakdown' },
+    ],
+    flcommerce: [
+      { date:'2026-10-15', type:'Customer Meeting', subject:'Reviewed' },
+      { date:'2026-10-15', type:'Customer Meeting', subject:'Reviewed' },
+      { date:'2026-09-23', type:'Email', subject:'Support Case - MFA Exemption for Tableau Integration User (474651730)' },
+      { date:'2026-09-16', type:'Email', subject:'Tableau X IBM (FL Commerce) Check-in' },
+      { date:'2026-07-27', type:'Email', subject:'Re: Your case is closed! Case #474158725' },
+      { date:'2026-07-27', type:'Email', subject:'Re: Your case is closed! Case #474158725' },
+      { date:'2026-07-20', type:'Customer Meeting', subject:'Step 2: Self Service Communication Shared' },
+      { date:'2026-07-20', type:'Customer Meeting', subject:'Step 3: Self Service Awareness Meeting Completed' },
+      { date:'2026-07-20', type:'Customer Meeting', subject:'Step 3: Self Service Awareness Meeting Scheduled' },
+      { date:'2026-07-20', type:'Customer Meeting', subject:'Step 4: Security Health Review ReportMtg Scheduled' },
+    ],
+    flprepaid: [
+      { date:'2026-10-21', type:'Email', subject:'RE: Request for Salesforce Review of Tableau Implementation' },
+      { date:'2026-10-21', type:'Email', subject:'Re: Request for Salesforce Review of Tableau Implementation' },
+      { date:'2026-10-13', type:'Email', subject:'Re: Request for Salesforce Review of Tableau Implementation' },
+      { date:'2026-10-12', type:'Email', subject:"Florida Prepaid | Marketing Cloud Winter '27 Release Walkthrough - Follow Up" },
+      { date:'2026-10-09', type:'Customer Meeting', subject:'Winter Release' },
+      { date:'2026-09-16', type:'Email', subject:'Tableau Enablement Check-in' },
+      { date:'2026-09-15', type:'Customer Meeting', subject:'ProM' },
+      { date:'2026-09-08', type:'Customer Meeting', subject:'Email Anniversary MC NEXT.' },
+      { date:'2026-08-12', type:'Email', subject:'Tableau : FL Prepaid - Tableau Cloud and Tableau Next' },
+      { date:'2026-08-11', type:'Email', subject:'Re: FL Prepaid - Tableau Cloud/Tableau Next Status Check' },
+    ],
+  };
+
+  const CASE_DATA = {
+    metroplus: [
+      { num:'474673570', subject:'Tableau: Tableau Cloud', status:'Closed', severity:'—', created:'2026-09-25' },
+      { num:'474396840', subject:'Site is not responding. None of the dashboards is returning data.', status:'Closed', severity:'Sev 1', created:'2026-08-17' },
+      { num:'474374253', subject:'Tableau: Tableau Cloud', status:'Closed', severity:'—', created:'2026-08-13' },
+      { num:'474374215', subject:'Tableau: Tableau Cloud', status:'Closed', severity:'—', created:'2026-08-13' },
+      { num:'473758267', subject:'Tableau Cloud Report not running', status:'Closed', severity:'Sev 1', created:'2026-06-11' },
+      { num:'473453646', subject:'Immediate response needed for case', status:'Closed', severity:'—', created:'2026-05-12' },
+      { num:'473453493', subject:'Need to be able querying Lineage from the workbook connection', status:'Closed', severity:'Sev 1', created:'2026-05-12' },
+      { num:'473267763', subject:"Tableau Cloud table extensions excel export doesn't work", status:'Closed', severity:'Sev 3', created:'2026-04-16' },
+      { num:'472880927', subject:'Tableau: Governance', status:'Closed', severity:'—', created:'2026-02-26' },
+      { num:'472737516', subject:'Tableau: Security & Permissions', status:'Closed', severity:'—', created:'2026-02-10' },
+    ],
+    nyits: [
+      { num:'475942710', subject:'Scheduled Db2 extract refresh fails in Production', status:'Need More Information', severity:'Sev 2', created:'2026-10-21' },
+      { num:'475004825', subject:'Intermittent Tableau Desktop LBLM Activation Failures Following Windows Server Maintenance', status:'Solution Provided', severity:'Sev 2', created:'2026-10-08' },
+      { num:'474807891', subject:'Tableau production node failed after Windows OS upgrade', status:'Closed', severity:'Sev 1', created:'2026-10-03' },
+      { num:'474807628', subject:'Node issue after OS upgrade', status:'Closed', severity:'—', created:'2026-10-03' },
+      { num:'474807627', subject:'We are having issues with one node after the OS upgrade', status:'Closed', severity:'Sev 1', created:'2026-10-03' },
+      { num:'474658166', subject:'GO-LIVE-SUPPORT NYITS 02/10/2026', status:'Closed', severity:'Sev 2', created:'2026-09-23' },
+      { num:'474657971', subject:'Priority - RCA required for case number 474529363', status:'Closed', severity:'Sev 3', created:'2026-09-23' },
+      { num:'474657929', subject:'ATHR Request | NY ITS', status:'Need More Information', severity:'—', created:'2026-09-23' },
+      { num:'474529923', subject:'Need details on how did the user lose admin access', status:'Closed', severity:'Sev 3', created:'2026-09-03' },
+      { num:'474529363', subject:'License Key shows "Maintenance has expired" and "Maintenance expired on 2000-01-01"', status:'Closed', severity:'Sev 2', created:'2026-09-03' },
+    ],
+    njdep: [
+      { num:'474714742', subject:'Tableau: Tableau Desktop', status:'Closed', severity:'—', created:'2026-09-29' },
+      { num:'472343490', subject:'ATHR Request | New Jersey Department of Environmental Protection', status:'Closed', severity:'—', created:'2026-01-05' },
+      { num:'472075247', subject:'ATHR Request | New Jersey Department of Environmental Protection', status:'Closed', severity:'—', created:'2025-11-25' },
+      { num:'472075241', subject:'ATHR Request | New Jersey Department of Environmental Protection', status:'Closed', severity:'—', created:'2025-11-25' },
+      { num:'472050625', subject:'SAML sign-in issue for Tableau Cloud', status:'Closed', severity:'Sev 3', created:'2025-11-21' },
+      { num:'471710781', subject:'Tableau: Tableau Prep', status:'Closed', severity:'—', created:'2025-10-14' },
+      { num:'471559601', subject:'Need Federation ID for SAML sign-in', status:'Closed', severity:'Sev 3', created:'2025-09-24' },
+      { num:'470860688', subject:'Embedding issue with Tableau dashboards', status:'Closed', severity:'—', created:'2025-06-27' },
+      { num:'470667520', subject:'Authentication Issue with Multiple Embedded Dashboards', status:'Closed', severity:'Sev 2', created:'2025-06-04' },
+      { num:'470564629', subject:'Authentication Issue with Multiple Embedded Dashboards', status:'Closed', severity:'Sev 3', created:'2025-05-21' },
+    ],
+    njdoh: [
+      { num:'474135249', subject:'Step by step guidance on how to set up a tableau bridge connection from Tableau Cloud to an Excel file on a shared network drive', status:'Closed', severity:'—', created:'2026-07-21' },
+      { num:'472962504', subject:'Tableau: Tableau Cloud', status:'Closed', severity:'—', created:'2026-03-09' },
+      { num:'472550493', subject:"Connected Apps embeds intermittently don't authenticate", status:'Closed', severity:'Sev 3', created:'2026-01-26' },
+      { num:'472425950', subject:'Tableau Cloud not loading', status:'Closed', severity:'Sev 1', created:'2026-01-15' },
+      { num:'472193819', subject:'Tableau: Data Integration & Management', status:'Closed', severity:'—', created:'2025-12-11' },
+      { num:'472193811', subject:'Tableau: Beginner Dashboards', status:'Closed', severity:'—', created:'2025-12-11' },
+      { num:'472193797', subject:'Tableau: Tableau Desktop', status:'Closed', severity:'—', created:'2025-12-11' },
+      { num:'472193789', subject:'Tableau: Tableau Cloud', status:'Closed', severity:'—', created:'2025-12-11' },
+      { num:'472032706', subject:'ATHR Request | New Jersey Department of Health', status:'Closed', severity:'—', created:'2025-11-19' },
+      { num:'472032677', subject:'ATHR Request | New Jersey Department of Health', status:'Closed', severity:'—', created:'2025-11-19' },
+    ],
+    flcommerce: [
+      { num:'474669093', subject:'MFA Exemption for Tableau Integration User', status:'Closed', severity:'Sev 2', created:'2026-09-24' },
+      { num:'474184673', subject:'Tableau: Embedded Analytics', status:'Closed', severity:'—', created:'2026-07-27' },
+      { num:'474158725', subject:'Best Practice for Displaying Multiple Tableau Reports in Salesforce', status:'Closed', severity:'Sev 2', created:'2026-07-23' },
+      { num:'473561571', subject:'Tableau OAuth Configuration Issue – Publish Failure with Salesforce Connection', status:'Closed', severity:'Sev 1', created:'2026-05-26' },
+      { num:'473409730', subject:'Tableau Server has been setup. Unable to Connect Tableau Desktop to Server using the key provided.', status:'Closed', severity:'Sev 2', created:'2026-05-06' },
+    ],
+    flprepaid: [
+      { num:'475936232', subject:'ATHR Request | Florida Prepaid College Board', status:'Working', severity:'—', created:'2026-10-21' },
+      { num:'475307498', subject:'Florida Prepaid College Board | Tableau Implementation Review', status:'Closed', severity:'—', created:'2026-10-13' },
+      { num:'474228486', subject:'Tableau: Beginner Dashboards', status:'Closed', severity:'—', created:'2026-07-31' },
+      { num:'474097902', subject:'Tableau: Tableau Cloud', status:'Closed', severity:'—', created:'2026-07-15' },
+      { num:'473256356', subject:'Florida Prepaid Update Extract Refresh Failed', status:'Closed', severity:'Sev 3', created:'2026-04-15' },
+    ],
+  };
+
+  const OPEX_DATA = {
+    metroplus: {
+      sp: { s:'ok',   v:'Active',      d:'Tableau Cloud · Active Success Plan' },
+      sr: { s:'warn', v:'Q4 Planned',  d:'Success Review Q4 in New stage · due Oct 31, 2026 (ENG-0613127)' },
+      ep: { s:'ok',   v:'6 open',      d:'1 Deliver · 5 New stage engagements' },
+    },
+    nyits: {
+      sp: { s:'ok',   v:'Active',      d:'Tableau Server · Active Success Plan' },
+      sr: { s:'flag', v:'Missing',     d:'No Success Review engagement scheduled this fiscal year' },
+      ep: { s:'ok',   v:'7 open',      d:'1 Prepare (ATHR) · 6 New stage engagements' },
+    },
+    njdep: {
+      sp: { s:'ok',   v:'Active',      d:'Tableau Cloud · Active Success Plan' },
+      sr: { s:'flag', v:'Missing',     d:'No Success Review engagement scheduled this fiscal year' },
+      ep: { s:'ok',   v:'2 open',      d:'2 New stage engagements · due Nov 4, 2026' },
+    },
+    njdoh: {
+      sp: { s:'ok',   v:'Active',      d:'Tableau Cloud · Active Success Plan' },
+      sr: { s:'flag', v:'Missing',     d:'No Success Review engagement scheduled this fiscal year' },
+      ep: { s:'flag', v:'None',        d:'All 29 engagements Closed — no open or planned engagements' },
+    },
+    flcommerce: {
+      sp: { s:'ok',   v:'Active',      d:'Tableau Server · Active Plans (FL WINS Internal + External)' },
+      sr: { s:'flag', v:'Cancelled',   d:'All prior Success Review engagements cancelled (Customer Opt Out)' },
+      ep: { s:'ok',   v:'1 open',      d:'ENG-0688701 · Prepare stage · due Sep 1, 2027' },
+    },
+    flprepaid: {
+      sp: { s:'ok',   v:'Active',      d:'Tableau Cloud + MCE · 3 Active Success Plans' },
+      sr: { s:'ok',   v:'3 planned',   d:'SR Q2 (Sep 21), SR Q3 (Dec 31), SR Q4 FY27 (Mar 31) · all New stage' },
+      ep: { s:'ok',   v:'20 open',     d:'3 Deliver · 1 Prepare · 16 New stage engagements' },
+    },
+  };
+
+  function addOpexRow(id) {
+    const tags = document.querySelector('#card-' + id + ' .card-tags');
+    if (!tags || !OPEX_DATA[id]) return;
+    const d = OPEX_DATA[id];
+    const chip = (k, kpi) => {
+      const lbl = { sp:'SP', sr:'SR', ep:'EP' }[k];
+      return `<span class="opex-chip opex-${kpi.s}" title="${kpi.d}"><span class="opex-k">${lbl}</span>${kpi.v}</span>`;
+    };
+    tags.insertAdjacentHTML('afterend',
+      `<div class="opex-row"><span class="opex-row-lbl">Opex</span>${chip('sp',d.sp)}${chip('sr',d.sr)}${chip('ep',d.ep)}</div>`);
+  }
+
+  function addOpexSection(id) {
+    const inner = document.querySelector('#drawer-' + id + ' .drawer-inner');
+    if (!inner || !OPEX_DATA[id]) return;
+    const d = OPEX_DATA[id];
+    const box = (title, kpi) =>
+      `<div class="opex-kpi-box"><div class="opex-kpi-title">${title}</div>` +
+      `<div class="opex-kpi-val opex-${kpi.s}">${kpi.v}</div>` +
+      `<div class="opex-kpi-detail">${kpi.d}</div></div>`;
+    inner.insertAdjacentHTML('afterbegin',
+      `<div class="drawer-section">
+        <div class="drawer-section-header">
+          <div class="drawer-section-title">Opex KPIs</div>
+          <div class="source-badge orgcs-badge">OrgCS Derived</div>
+        </div>
+        <div class="opex-kpi-grid">
+          ${box('Success Plan', d.sp)}${box('Success Review', d.sr)}${box('Engagements Planned', d.ep)}
+        </div>
+        <div class="opex-src">Derived from OrgCS csc__Success_Plan__c + csc__Playbook__c · Synced Oct 27, 2026 · <a href="https://prod-uswest-c.online.tableau.com/#/site/salesforce/views/OperationalExcellenceKPIDashboard/KPIsOverview" target="_blank" rel="noopener" style="color:var(--navy-mid);">View live Opex Dashboard ↗</a></div>
+      </div>`);
+  }
+
+  function addLcsSection(id, d) {
+    const inner = document.querySelector('#drawer-' + id + ' .drawer-inner');
+    if (!inner) return;
+    const sc = d.status === 'above' ? 'lcs-above' : d.status === 'below' ? 'lcs-below' : d.status === 'na' ? 'lcs-na' : '';
+    const note = id === 'nyits' ? '<div class="lcs-note">NY ITS is a Tableau Server customer — LCS scores not applicable in CRM Analytics.</div>' : '';
+    const qLink = '<div class="lcs-note">Quarterly breakdown: <a href="https://orgcs.lightning.force.com/lightning/page/analytics?wave__assetId=0FKHx0000000MmvOAE" target="_blank" rel="noopener" style="color:var(--navy-mid);">View LCS Dashboard ↗</a></div>';
+    inner.insertAdjacentHTML('beforeend', `
+      <div class="drawer-section">
+        <div class="drawer-section-header">
+          <div class="drawer-section-title">LCS Score · FY26</div>
+          <div class="source-badge orgcs-badge">OrgCS</div>
+        </div>
+        <div class="lcs-grid">
+          <div class="lcs-item"><div class="lcs-label">Baseline</div><div class="lcs-value">${d.baseline}</div></div>
+          <div class="lcs-item"><div class="lcs-label">Target</div><div class="lcs-value">${d.target}</div></div>
+          <div class="lcs-item"><div class="lcs-label">Actual</div><div class="lcs-value ${sc}">${d.actual}</div></div>
+          <div class="lcs-item"><div class="lcs-label">AOV Weight</div><div class="lcs-value">${d.aov}</div></div>
+        </div>
+        ${note}${qLink}
+      </div>`);
+  }
+
+  function addEngagementsSection(id) {
+    const inner = document.querySelector('#drawer-' + id + ' .drawer-inner');
+    if (!inner || !ENGAGEMENT_DATA[id]) return;
+    const rows = ENGAGEMENT_DATA[id].map(e => {
+      const sc = (e.stage || '').toLowerCase().replace(/[^a-z]/g, '');
+      const stageCls = ['new','prepare','deliver','closed'].includes(sc) ? sc : 'closed';
+      const statusText = e.status ? ` <span style="color:var(--text-muted);font-size:10px;">(${e.status})</span>` : '';
+      return `<tr>
+        <td style="color:var(--text-muted);font-size:10px;white-space:nowrap;">${e.id}</td>
+        <td>${e.name}${statusText}</td>
+        <td style="color:var(--text-muted);white-space:nowrap;">${e.created}</td>
+        <td style="color:var(--text-muted);white-space:nowrap;">${e.due || '—'}</td>
+        <td><span class="eng-stage ${stageCls}">${e.stage}</span></td>
+      </tr>`;
+    }).join('');
+    inner.insertAdjacentHTML('beforeend', `
+      <div class="drawer-section">
+        <div class="drawer-section-header">
+          <div class="drawer-section-title">Engagements · OrgCS</div>
+          <div class="source-badge orgcs-badge">OrgCS</div>
+        </div>
+        <table class="eng-table">
+          <thead><tr><th>ID</th><th>Name</th><th>Created</th><th>Due Date</th><th>Stage</th></tr></thead>
+          <tbody>${rows}</tbody>
+        </table>
+      </div>`);
+  }
+
+  function addActivitiesSection(id) {
+    const inner = document.querySelector('#drawer-' + id + ' .drawer-inner');
+    if (!inner || !ACTIVITY_DATA[id]) return;
+    const items = ACTIVITY_DATA[id].map(a => {
+      const typeCls = a.type === 'Customer Meeting' ? 'meeting' : a.type === 'Internal Meeting' ? 'internal' : '';
+      return `<li class="act-item">
+        <span class="act-date">${a.date}</span>
+        <span class="act-type ${typeCls}">${a.type}</span>
+        <span class="act-subj">${a.subject}</span>
+      </li>`;
+    }).join('');
+    inner.insertAdjacentHTML('beforeend', `
+      <div class="drawer-section">
+        <div class="drawer-section-header">
+          <div class="drawer-section-title">Recent Activities (Top 10)</div>
+          <div class="source-badge orgcs-badge">OrgCS</div>
+        </div>
+        <ul class="act-list">${items}</ul>
+      </div>`);
+  }
+
+  function buildCasesPanel() {
+    const container = document.getElementById('cases-ov-rows');
+    if (!container) return;
+    const accounts = [
+      { key:'metroplus', label:'MetroPlus' },
+      { key:'nyits', label:'NY ITS' },
+      { key:'njdep', label:'NJ DEP' },
+      { key:'njdoh', label:'NJ DOH' },
+      { key:'flcommerce', label:'FL Commerce' },
+      { key:'flprepaid', label:'FL Prepaid' },
+    ];
+    let html = '';
+    accounts.forEach(acc => {
+      const cases = CASE_DATA[acc.key] || [];
+      if (cases.length === 0) return;
+      html += `<div style="font-size:10px;font-weight:700;color:var(--navy);padding:6px 8px 2px;text-transform:uppercase;letter-spacing:0.4px;" class="cases-acct-header" data-id="${acc.key}-case">${acc.label}</div>`;
+      cases.slice(0, 10).forEach(c => {
+        const statusCls = c.status === 'Closed' ? 'closed' : c.status === 'Working' ? 'working' : c.status.includes('Information') ? 'needinfo' : 'open';
+        const statusText = c.status === 'Need More Information' ? 'Need Info' : c.status;
+        const sevCls = c.severity === 'Sev 1' ? 'sev1' : c.severity === 'Sev 2' ? 'sev2' : c.severity === 'Sev 3' ? 'sev3' : '';
+        html += `<div class="cases-ov-row" data-id="${acc.key}-case">
+          <div class="cases-subj" title="${c.subject.replace(/"/g,'&quot;')}">${c.subject.length > 60 ? c.subject.slice(0,60)+'…' : c.subject}</div>
+          <div class="cases-status ${statusCls}">${statusText}</div>
+          <div class="cases-sev ${sevCls}">${c.severity}</div>
+          <div style="color:var(--text-muted);font-size:10px;">${c.created}</div>
+        </div>`;
+      });
+    });
+    container.innerHTML = html;
+  }
+
+  function casesFilterAccount(id) {
+    document.querySelectorAll('.cases-panel .lcs-pill').forEach(p => p.classList.toggle('active', p.dataset.id === id));
+    document.querySelectorAll('#cases-ov-rows .cases-ov-row, #cases-ov-rows .cases-acct-header').forEach(r => {
+      r.style.display = (id === 'all' || r.dataset.id === id) ? '' : 'none';
+    });
+  }
+
+  // ── Toggle card ──
+  function toggleCard(id) {
+    const card = document.getElementById('card-' + id);
+    const drawer = document.getElementById('drawer-' + id);
+    const summary = card.querySelector('.card-summary');
+    const isOpen = card.classList.contains('open');
+    card.classList.toggle('open', !isOpen);
+    summary.setAttribute('aria-expanded', String(!isOpen));
+    drawer.style.maxHeight = !isOpen ? drawer.scrollHeight + 'px' : '0';
+  }
+
+  // ── LCS Overview panel controls ──
+  function lcsSelectQuarter(q) {
+    document.querySelectorAll('.lcs-q-tab').forEach(t => t.classList.toggle('active', t.dataset.q === q));
+    document.querySelectorAll('.lcs-month-row').forEach(r => r.style.display = r.dataset.q === q ? 'flex' : 'none');
+    document.querySelectorAll('.lcs-quarter-data').forEach(d => d.style.display = d.dataset.q === q ? '' : 'none');
+    const defMonth = { Q1:'Feb', Q2:'May', Q3:'Oct', Q4:'Nov' };
+    document.querySelectorAll('.lcs-m-tab').forEach(t => t.classList.toggle('active', t.dataset.m === defMonth[q]));
+  }
+  function lcsSelectMonth(m) {
+    document.querySelectorAll('.lcs-m-tab').forEach(t => t.classList.toggle('active', t.dataset.m === m));
+  }
+  function lcsFilterAccount(id) {
+    document.querySelectorAll('.lcs-pill').forEach(p => p.classList.toggle('active', p.dataset.id === id));
+    document.querySelectorAll('.lcs-ov-row').forEach(r => {
+      r.style.display = (id === 'all' || r.dataset.id === id) ? '' : 'none';
+    });
+  }
+
+  // ── Initialize — read-only, all data from OrgCS + Org62 ──
+  function initDashboard() {
+    // Prevent all textarea/input fields from receiving any focus
+    document.querySelectorAll('.ef-textarea, .ef-input').forEach(el => el.setAttribute('tabindex', '-1'));
+    Object.keys(ORGCS_DATA).forEach(id => {
+      const o = ORG62_DATA[id] || {};
+
+      // AE (Tableau Specialist — OrgCS Success Plan cssf_Org62_AccountOwner__c)
+      const aeDisp = document.getElementById('ae-display-' + id);
+      if (aeDisp) { aeDisp.textContent = o.ae || '—'; aeDisp.classList.toggle('empty', !o.ae); }
+      const cardAe = document.getElementById('card-ae-' + id);
+      if (cardAe) cardAe.textContent = o.ae || '—';
+
+      // RM (Org62 Opportunity Owner)
+      const rmDisp = document.getElementById('rm-display-' + id);
+      if (rmDisp) { rmDisp.textContent = o.rm || '—'; rmDisp.classList.toggle('empty', !o.rm); }
+      const cardRm = document.getElementById('card-rm-' + id);
+      if (cardRm) cardRm.textContent = o.rm || '—';
+
+      // Renewal Opportunity inline fields (Org62)
+      ['stage','amount','prioracv','attrition'].forEach(f => {
+        const el = document.getElementById(f + '-display-' + id);
+        if (el) { el.textContent = o[f] || '—'; el.classList.toggle('empty', !o[f]); }
+      });
+
+      // Description (Org62 Opportunity.Description)
+      const descEl = document.getElementById('desc-' + id);
+      if (descEl) { descEl.value = o.description || ''; descEl.classList.toggle('empty', !o.description); }
+
+      // Next Steps (Org62 Next_Steps__c)
+      const nsDisp = document.getElementById('notes-display-ns-' + id);
+      if (nsDisp) {
+        if (o.nextSteps) { nsDisp.innerHTML = o.nextSteps.replace(/\n/g,'<br>'); nsDisp.classList.remove('empty'); }
+        else nsDisp.classList.add('empty');
+      }
+
+      // CSG Notes (Org62 SEM_Notes__c)
+      const csgDisp = document.getElementById('notes-display-csg-' + id);
+      if (csgDisp) {
+        if (o.csgNotes) { csgDisp.innerHTML = o.csgNotes.replace(/\n/g,'<br>'); csgDisp.classList.remove('empty'); }
+        else csgDisp.classList.add('empty');
+      }
+
+      // LCS Section (OrgCS Success Plan cssf_Team_Notes__c)
+      if (LCS_DATA[id]) addLcsSection(id, LCS_DATA[id]);
+
+      // Engagements and Activities (OrgCS)
+      addEngagementsSection(id);
+      addActivitiesSection(id);
+
+      // Opex KPI chips on card + detail in drawer
+      addOpexRow(id);
+      addOpexSection(id);
+    });
+
+    // Cases panel (right sidebar)
+    buildCasesPanel();
+  }
+
+  // ── Renewal Timeline ──
+  const TODAY = new Date(2026, 9, 15);
+  const renewals = [
+    { name: "FL Commerce",  date: new Date(2026, 9, 24),  color: "#D64045", cardId: "flcommerce" },
+    { name: "NY ITS",       date: new Date(2026, 11, 4),  color: "#E8892C", cardId: "nyits" },
+    { name: "NJ DEP",       date: new Date(2027, 2, 24),  color: "#00A878", cardId: "njdep" },
+    { name: "FL Prepaid",   date: new Date(2027, 2, 27),  color: "#2B6CB0", cardId: "flprepaid" },
+    { name: "NJ DOH",       date: new Date(2027, 4, 18),  color: "#1B4F8A", cardId: "njdoh" },
+    { name: "MetroPlus",    date: new Date(2027, 11, 31), color: "#0F2644", cardId: "metroplus" },
+  ];
+  const START = new Date(2026, 9, 1);
+  const END   = new Date(2028, 0, 31);
+  const SPAN  = END - START;
+  function pct(d) { return Math.max(0, Math.min(100, (d - START) / SPAN * 100)); }
+
+  const axis = document.getElementById('timeline-axis');
+  const nowPct = pct(TODAY);
+  axis.innerHTML = `<div class="timeline-now-marker" style="left:${nowPct}%;"><div class="timeline-now-label">Today</div></div>`;
+
+  const eventsEl = document.getElementById('timeline-events');
+  eventsEl.innerHTML = renewals.map(r => {
+    const p = pct(r.date);
+    const mo = r.date.toLocaleDateString('en-US', { month: 'short', year: '2-digit' });
+    return `
+      <div class="timeline-event" style="left:${p}%;"
+           onclick="scrollToCard('${r.cardId}')" title="Go to ${r.name}">
+        <div class="timeline-event-dot" style="background:${r.color};"></div>
+        <div class="timeline-event-name">${r.name}</div>
+        <div class="timeline-event-date">${mo}</div>
+      </div>`;
+  }).join('');
+
+  const months = document.getElementById('timeline-months');
+  const quarters = [];
+  let d = new Date(START);
+  while (d <= END) { quarters.push(new Date(d)); d = new Date(d.getFullYear(), d.getMonth() + 3, 1); }
+  months.innerHTML = quarters.map(q =>
+    `<span class="timeline-month">${q.toLocaleDateString('en-US',{month:'short',year:'2-digit'})}</span>`
+  ).join('');
+
+  function scrollToCard(id) {
+    const card = document.getElementById('card-' + id);
+    if (!card) return;
+    card.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    if (!card.classList.contains('open')) toggleCard(id);
+    card.style.outline = '2px solid #2B6CB0';
+    card.style.outlineOffset = '2px';
+    setTimeout(() => { card.style.outline = ''; card.style.outlineOffset = ''; }, 1800);
+  }
+
+  // Run on load
+  initDashboard();
+</script>
+</body>
+</html>
