@@ -534,6 +534,25 @@
   .opex-ov-cell { background:var(--bg); border-radius:7px; padding:8px 10px; }
   .opex-ov-acct { font-size:11px; font-weight:700; color:var(--text); margin-bottom:5px; }
   .opex-ov-chips { display:flex; gap:4px; flex-wrap:wrap; }
+  /* Account filter bar */
+  .acct-filter-bar { display:flex; flex-wrap:wrap; align-items:center; gap:6px; padding:10px 14px; background:var(--card); border:1px solid var(--border); border-radius:10px; margin-bottom:16px; }
+  .acct-filter-label { font-size:10.5px; font-weight:700; color:var(--text-muted); text-transform:uppercase; letter-spacing:.05em; margin-right:2px; white-space:nowrap; }
+  .acct-filter-btn { padding:4px 11px; border-radius:99px; border:1px solid var(--border); background:var(--bg); color:var(--text-secondary); font-size:11.5px; font-weight:600; cursor:pointer; transition:background .12s,border-color .12s,color .12s; }
+  .acct-filter-btn:hover { border-color:var(--navy-mid); color:var(--navy); }
+  .acct-filter-btn.af-active { background:var(--navy); color:white; border-color:var(--navy); }
+  /* Renewal pipeline card */
+  .ren-q-tab { flex:1; padding:4px 5px; border-radius:5px; border:1px solid var(--border); background:var(--bg); color:var(--text-secondary); font-size:10px; font-weight:600; cursor:pointer; text-align:center; transition:all .12s; white-space:nowrap; }
+  .ren-q-tab:hover { border-color:var(--navy-mid); }
+  .ren-q-tab.ren-active { background:var(--navy); color:white; border-color:var(--navy); }
+  .ren-row { display:flex; align-items:center; gap:6px; padding:4px 0; border-bottom:1px solid var(--border); }
+  .ren-row:last-of-type { border-bottom:none; }
+  .ren-acct { flex:1; font-size:11.5px; font-weight:600; color:var(--text); }
+  .ren-amt { font-size:11.5px; font-weight:700; min-width:44px; text-align:right; }
+  .ren-stage-tag { font-size:10px; color:var(--text-muted); min-width:88px; text-align:right; }
+  .ren-closed { color:#065F46; }
+  .ren-open { color:#92400E; }
+  .ren-commit { color:#1A5FA8; }
+  .ren-total { font-size:10.5px; color:var(--text-secondary); margin-top:6px; text-align:right; font-style:italic; }
 </style>
 </head>
 <body>
@@ -560,7 +579,7 @@
     </div>
     <div class="meta-divider"></div>
     <div class="meta-stat">
-      <div class="meta-stat-value" style="color:#F5B85A;">2d</div>
+      <div class="meta-stat-value" style="color:#F5B85A;">27d</div>
       <div class="meta-stat-label">Next renewal</div>
     </div>
     <div class="meta-divider"></div>
@@ -584,6 +603,18 @@
     <div class="alert-text">
       <strong>FL Commerce</strong> renews in <strong>27 days (Nov 24, 2026)</strong> — Renewal opp "Florida Commerce - 2nd Org Renewal 98 Tableau" in Stage 03 Agreed ($1.17M). Courtesy Extension active. Engagement in Prepare stage.
     </div>
+  </div>
+
+  <!-- Account filter bar -->
+  <div class="acct-filter-bar">
+    <span class="acct-filter-label">Filter:</span>
+    <button class="acct-filter-btn af-active" data-acct="all" onclick="acctFilter('all')">All Accounts</button>
+    <button class="acct-filter-btn" data-acct="metroplus" onclick="acctFilter('metroplus')">MetroPlus</button>
+    <button class="acct-filter-btn" data-acct="nyits" onclick="acctFilter('nyits')">NY ITS</button>
+    <button class="acct-filter-btn" data-acct="njdep" onclick="acctFilter('njdep')">NJ DEP</button>
+    <button class="acct-filter-btn" data-acct="njdoh" onclick="acctFilter('njdoh')">NJ DOH</button>
+    <button class="acct-filter-btn" data-acct="flcommerce" onclick="acctFilter('flcommerce')">FL Commerce</button>
+    <button class="acct-filter-btn" data-acct="flprepaid" onclick="acctFilter('flprepaid')">FL Prepaid</button>
   </div>
 
   <div class="grid-two">
@@ -1633,6 +1664,61 @@
         </div>
       </div>
 
+      <!-- FY27 Renewal Pipeline + Attrition -->
+      <div class="panel-card">
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;">
+          <div class="panel-title" style="margin-bottom:0;">Renewal Pipeline · FY27</div>
+          <div class="source-badge" style="font-size:9.5px;padding:2px 7px;background:rgba(0,168,120,0.12);border:1px solid rgba(0,168,120,0.3);color:#00705A;border-radius:5px;font-weight:700;">Org62</div>
+        </div>
+        <!-- Quarter tabs -->
+        <div style="display:flex;gap:3px;margin-bottom:10px;">
+          <button class="ren-q-tab" data-rq="Q1" onclick="renSelectQ('Q1')">Q1 ✓</button>
+          <button class="ren-q-tab" data-rq="Q2" onclick="renSelectQ('Q2')">Q2 ✓</button>
+          <button class="ren-q-tab" data-rq="Q3" onclick="renSelectQ('Q3')">Q3 —</button>
+          <button class="ren-q-tab ren-active" data-rq="Q4" onclick="renSelectQ('Q4')">Q4 Open ●</button>
+        </div>
+        <!-- Q1 -->
+        <div class="ren-q-data" data-rq="Q1" style="display:none;">
+          <div style="font-size:10px;color:var(--text-muted);margin-bottom:5px;">Feb – Apr 2026 · All Closed ✓</div>
+          <div class="ren-row"><span class="ren-acct">NJ DEP</span><span class="ren-amt ren-closed">$207K</span><span class="ren-stage-tag">Closed · Mar 24</span></div>
+          <div class="ren-row"><span class="ren-acct">FL Prepaid</span><span class="ren-amt ren-closed">$170K</span><span class="ren-stage-tag">Closed · Mar 27</span></div>
+          <div class="ren-row"><span class="ren-acct">NY ITS</span><span class="ren-amt ren-closed">$1.1M</span><span class="ren-stage-tag">Closed · Apr 7</span></div>
+          <div class="ren-total">Q1 closed: <strong>$1.48M</strong></div>
+        </div>
+        <!-- Q2 -->
+        <div class="ren-q-data" data-rq="Q2" style="display:none;">
+          <div style="font-size:10px;color:var(--text-muted);margin-bottom:5px;">May – Jul 2026 · All Closed ✓</div>
+          <div class="ren-row"><span class="ren-acct">NJ DOH</span><span class="ren-amt ren-closed">$407K</span><span class="ren-stage-tag">Closed · May 19</span></div>
+          <div class="ren-row"><span class="ren-acct">NY ITS</span><span class="ren-amt ren-closed">$89K</span><span class="ren-stage-tag">Closed · Jun 18</span></div>
+          <div class="ren-total">Q2 closed: <strong>$496K</strong></div>
+        </div>
+        <!-- Q3 -->
+        <div class="ren-q-data" data-rq="Q3" style="display:none;">
+          <div style="font-size:10px;color:var(--text-muted);margin-bottom:5px;">Aug – Oct 2026</div>
+          <div style="font-size:12px;color:var(--text-secondary);padding:8px 0;">No Tableau renewals due this quarter.</div>
+        </div>
+        <!-- Q4 (default visible) -->
+        <div class="ren-q-data" data-rq="Q4">
+          <div style="font-size:10px;color:var(--text-muted);margin-bottom:5px;">Nov 2026 – Jan 2027 · Open pipeline</div>
+          <div class="ren-row"><span class="ren-acct">MetroPlus</span><span class="ren-amt ren-open">$117K</span><span class="ren-stage-tag">Stg 02 · Nov 12</span></div>
+          <div class="ren-row"><span class="ren-acct">FL Commerce</span><span class="ren-amt ren-commit">$1.17M</span><span class="ren-stage-tag">Stg 03 · Nov 24</span></div>
+          <div class="ren-row"><span class="ren-acct">NY ITS</span><span class="ren-amt ren-open">$2.2M</span><span class="ren-stage-tag">Stg 02 · Dec 4</span></div>
+          <div class="ren-total">Q4 pipeline: <strong>$3.48M</strong></div>
+        </div>
+        <!-- Attrition -->
+        <div style="margin-top:12px;padding-top:10px;border-top:1px solid var(--border);">
+          <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:6px;">
+            <div style="font-size:10.5px;font-weight:700;color:var(--text);letter-spacing:.04em;text-transform:uppercase;">Attrition · FY27</div>
+            <div style="font-size:10px;color:var(--text-muted);">All $0 dead</div>
+          </div>
+          <div class="ren-row"><span class="ren-acct" style="font-size:11px;">MetroPlus</span><span style="font-size:10.5px;color:var(--text-muted);text-align:right;">3× Sandbox cancelled Aug–Sep</span></div>
+          <div class="ren-row"><span class="ren-acct" style="font-size:11px;">FL Prepaid</span><span style="font-size:10.5px;color:var(--text-muted);text-align:right;">MuleSoft/Platform Oct 2026</span></div>
+          <div style="font-size:10px;color:var(--text-muted);margin-top:7px;font-style:italic;">
+            OU targets: <a href="https://org62.lightning.force.com/analytics/dashboard/0FKed00000F3huDGAR" target="_blank" rel="noopener" style="color:var(--navy-mid);">Org62 dashboard ↗</a> (requires auth)
+          </div>
+        </div>
+      </div>
+
       <!-- Deployment mix -->
       <div class="panel-card">
         <div class="panel-title">Deployment Mix</div>
@@ -2426,6 +2512,35 @@
     card.style.outline = '2px solid #2B6CB0';
     card.style.outlineOffset = '2px';
     setTimeout(() => { card.style.outline = ''; card.style.outlineOffset = ''; }, 1800);
+  }
+
+  // Account filter bar
+  function acctFilter(acct) {
+    document.querySelectorAll('.acct-filter-btn').forEach(b =>
+      b.classList.toggle('af-active', b.dataset.acct === acct));
+    const keys = ['metroplus','nyits','njdep','njdoh','flcommerce','flprepaid'];
+    if (acct === 'all') {
+      document.querySelectorAll('.account-card').forEach(el => el.style.display = '');
+      document.querySelectorAll('.cohort-header').forEach(el => el.style.display = '');
+      document.querySelectorAll('.opex-ov').forEach(el => el.style.display = '');
+      return;
+    }
+    keys.forEach(key => {
+      const card = document.getElementById('card-' + key);
+      if (card) card.style.display = key === acct ? '' : 'none';
+    });
+    document.querySelectorAll('.cohort-header').forEach(el => el.style.display = 'none');
+    document.querySelectorAll('.opex-ov').forEach(el => el.style.display = 'none');
+    const target = document.getElementById('card-' + acct);
+    if (target) setTimeout(() => target.scrollIntoView({ behavior:'smooth', block:'nearest' }), 50);
+  }
+
+  // Renewal pipeline quarter tabs
+  function renSelectQ(q) {
+    document.querySelectorAll('.ren-q-tab').forEach(t =>
+      t.classList.toggle('ren-active', t.dataset.rq === q));
+    document.querySelectorAll('.ren-q-data').forEach(d =>
+      d.style.display = d.dataset.rq === q ? '' : 'none');
   }
 
   // Run on load
