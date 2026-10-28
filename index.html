@@ -553,6 +553,20 @@
   .ren-open { color:#92400E; }
   .ren-commit { color:#1A5FA8; }
   .ren-total { font-size:10.5px; color:var(--text-secondary); margin-top:6px; text-align:right; font-style:italic; }
+  /* Attrition tracker card */
+  .att-header-row { display:flex; gap:4px; padding:4px 0 3px; border-bottom:2px solid var(--border); margin-bottom:2px; }
+  .att-acct-col { flex:1.5; font-size:9px; font-weight:700; color:var(--text-muted); text-transform:uppercase; letter-spacing:.04em; }
+  .att-num-col { flex:1; font-size:9px; font-weight:700; color:var(--text-muted); text-transform:uppercase; letter-spacing:.04em; text-align:right; }
+  .att-delta-col { flex:.65; font-size:9px; font-weight:700; color:var(--text-muted); text-transform:uppercase; letter-spacing:.04em; text-align:right; }
+  .att-row { display:flex; align-items:center; gap:4px; padding:3px 0; border-bottom:1px solid var(--border); }
+  .att-row:last-of-type { border-bottom:none; }
+  .att-acct { flex:1.5; font-size:11px; font-weight:600; color:var(--text); }
+  .att-num { flex:1; font-size:11px; color:var(--text-secondary); text-align:right; }
+  .att-delta { flex:.65; font-size:11px; font-weight:700; text-align:right; }
+  .att-ok { color:#065F46; }
+  .att-bad { color:#991B1B; }
+  .att-warn { color:#92400E; }
+  .att-total { font-size:10px; color:var(--text-secondary); margin-top:6px; text-align:right; font-style:italic; line-height:1.5; }
 </style>
 </head>
 <body>
@@ -1705,18 +1719,92 @@
           <div class="ren-row"><span class="ren-acct">NY ITS</span><span class="ren-amt ren-open">$2.2M</span><span class="ren-stage-tag">Stg 02 · Dec 4</span></div>
           <div class="ren-total">Q4 pipeline: <strong>$3.48M</strong></div>
         </div>
-        <!-- Attrition -->
-        <div style="margin-top:12px;padding-top:10px;border-top:1px solid var(--border);">
-          <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:6px;">
-            <div style="font-size:10.5px;font-weight:700;color:var(--text);letter-spacing:.04em;text-transform:uppercase;">Attrition · FY27</div>
-            <div style="font-size:10px;color:var(--text-muted);">All $0 dead</div>
+      </div>
+
+      <!-- FY27 Attrition Tracker -->
+      <div class="panel-card">
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;">
+          <div class="panel-title" style="margin-bottom:0;">Attrition Tracker · FY27</div>
+          <div class="source-badge" style="font-size:9.5px;padding:2px 7px;background:rgba(0,168,120,0.12);border:1px solid rgba(0,168,120,0.3);color:#00705A;border-radius:5px;font-weight:700;">Org62</div>
+        </div>
+
+        <!-- FY27 closed summary (Q1+Q2 only) -->
+        <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:5px;margin-bottom:12px;">
+          <div style="background:var(--bg);border-radius:6px;padding:7px 6px;text-align:center;">
+            <div style="font-size:13px;font-weight:700;color:var(--text);letter-spacing:-.02em;">$2.02M</div>
+            <div style="font-size:9px;color:var(--text-muted);font-weight:600;text-transform:uppercase;letter-spacing:.04em;margin-top:2px;">Target</div>
           </div>
-          <div class="ren-row"><span class="ren-acct" style="font-size:11px;">MetroPlus</span><span style="font-size:10.5px;color:var(--text-muted);text-align:right;">3× Sandbox cancelled Aug–Sep</span></div>
-          <div class="ren-row"><span class="ren-acct" style="font-size:11px;">FL Prepaid</span><span style="font-size:10.5px;color:var(--text-muted);text-align:right;">MuleSoft/Platform Oct 2026</span></div>
-          <div style="font-size:10px;color:var(--text-muted);margin-top:7px;font-style:italic;">
-            OU targets: <a href="https://org62.lightning.force.com/analytics/dashboard/0FKed00000F3huDGAR" target="_blank" rel="noopener" style="color:var(--navy-mid);">Org62 dashboard ↗</a> (requires auth)
+          <div style="background:var(--bg);border-radius:6px;padding:7px 6px;text-align:center;">
+            <div style="font-size:13px;font-weight:700;color:#065F46;letter-spacing:-.02em;">$1.98M</div>
+            <div style="font-size:9px;color:var(--text-muted);font-weight:600;text-transform:uppercase;letter-spacing:.04em;margin-top:2px;">Actual</div>
+          </div>
+          <div style="background:var(--bg);border-radius:6px;padding:7px 6px;text-align:center;">
+            <div style="font-size:13px;font-weight:700;color:#991B1B;letter-spacing:-.02em;">-$38K</div>
+            <div style="font-size:9px;color:var(--text-muted);font-weight:600;text-transform:uppercase;letter-spacing:.04em;margin-top:2px;">Attrited</div>
           </div>
         </div>
+        <div style="font-size:9.5px;color:var(--text-muted);margin-bottom:10px;font-style:italic;">Closed Q1+Q2 · Tableau ARR only · Q4 $3.48M open</div>
+
+        <!-- Quarter tabs -->
+        <div style="display:flex;gap:3px;margin-bottom:8px;">
+          <button class="ren-q-tab att-q-tab" data-aq="Q1" onclick="attrSelectQ('Q1')">Q1 ✓</button>
+          <button class="ren-q-tab att-q-tab" data-aq="Q2" onclick="attrSelectQ('Q2')">Q2 ✗ -$38K</button>
+          <button class="ren-q-tab att-q-tab ren-active" data-aq="Q3" onclick="attrSelectQ('Q3')">Q3 —</button>
+          <button class="ren-q-tab att-q-tab" data-aq="Q4" onclick="attrSelectQ('Q4')">Q4 Open ●</button>
+        </div>
+
+        <!-- Column header -->
+        <div class="att-header-row">
+          <span class="att-acct-col">Account</span>
+          <span class="att-num-col">Target</span>
+          <span class="att-num-col">Actual</span>
+          <span class="att-delta-col">Δ</span>
+        </div>
+
+        <!-- Q1 -->
+        <div class="att-q-data" data-aq="Q1" style="display:none;">
+          <div style="font-size:10px;color:var(--text-muted);margin-bottom:4px;">Feb – Apr 2026 · All closed · Tableau</div>
+          <div class="att-row"><span class="att-acct">NJ DEP</span><span class="att-num">$207K</span><span class="att-num">$207K</span><span class="att-delta att-ok">$0</span></div>
+          <div class="att-row"><span class="att-acct">FL Prepaid</span><span class="att-num">$170K</span><span class="att-num">$170K</span><span class="att-delta att-ok">$0</span></div>
+          <div class="att-row"><span class="att-acct">NY ITS</span><span class="att-num">$1.1M</span><span class="att-num">$1.1M</span><span class="att-delta att-ok">$0</span></div>
+          <div class="att-total">Target $1.48M · Actual $1.48M · <strong style="color:#065F46;">$0 attrition</strong></div>
+        </div>
+
+        <!-- Q2 -->
+        <div class="att-q-data" data-aq="Q2" style="display:none;">
+          <div style="font-size:10px;color:var(--text-muted);margin-bottom:4px;">May – Jul 2026 · Tableau</div>
+          <div class="att-row"><span class="att-acct">NJ DOH</span><span class="att-num">$445K</span><span class="att-num">$407K</span><span class="att-delta att-bad">-$38K</span></div>
+          <div class="att-row"><span class="att-acct">NY ITS</span><span class="att-num">$89K</span><span class="att-num">$89K</span><span class="att-delta att-ok">$0</span></div>
+          <div class="att-total">Target $534K · Actual $496K · <strong style="color:#991B1B;">-$38K attrition</strong> (7.1%)</div>
+          <div style="font-size:10px;color:var(--text-muted);margin-top:5px;">NJ DOH: impressions 300K→250K at renewal</div>
+        </div>
+
+        <!-- Q3 (default — current quarter) -->
+        <div class="att-q-data" data-aq="Q3">
+          <div style="font-size:10px;color:var(--text-muted);margin-bottom:4px;">Aug – Oct 2026 · No Tableau ARR at risk</div>
+          <div style="font-size:11.5px;color:var(--text-secondary);padding:4px 0 6px;">No Tableau renewals due this quarter.</div>
+          <div style="font-size:10.5px;font-weight:700;color:var(--text);margin-bottom:3px;text-transform:uppercase;letter-spacing:.04em;font-size:9.5px;">Dead Attrition events ($0 ARR)</div>
+          <div class="att-row"><span class="att-acct">MetroPlus</span><span style="font-size:10px;color:var(--text-muted);flex:1;text-align:right;">3× Sandbox cancelled</span></div>
+          <div class="att-row"><span class="att-acct">FL Prepaid</span><span style="font-size:10px;color:var(--text-muted);flex:1;text-align:right;">MuleSoft + Platform</span></div>
+          <div class="att-total"><strong style="color:#065F46;">$0 Tableau revenue attrition in Q3</strong></div>
+        </div>
+
+        <!-- Q4 -->
+        <div class="att-q-data" data-aq="Q4" style="display:none;">
+          <div style="font-size:10px;color:var(--text-muted);margin-bottom:4px;">Nov 2026 – Jan 2027 · Open / Forecast</div>
+          <div class="att-row"><span class="att-acct">MetroPlus</span><span class="att-num">$117K</span><span class="att-num">$117K</span><span class="att-delta att-ok">$0</span></div>
+          <div class="att-row"><span class="att-acct">FL Commerce</span><span class="att-num">$1.17M</span><span class="att-num">$1.17M</span><span class="att-delta att-ok">$0</span></div>
+          <div class="att-row"><span class="att-acct">NY ITS</span><span class="att-num">$2.2M</span><span class="att-num">$2.19M</span><span class="att-delta att-warn">-$5.4K</span></div>
+          <div class="att-total">Target $3.48M · Forecast $3.48M · <strong style="color:#92400E;">-$5.4K risk</strong> (forecast)</div>
+          <div style="font-size:10px;color:var(--text-muted);margin-top:5px;">NY ITS: minor SKU delta · FL Commerce: $0 Tableau attrition confirmed</div>
+        </div>
+
+        <a href="https://org62.lightning.force.com/analytics/dashboard/0FKed00000F3huDGAR"
+           target="_blank" rel="noopener"
+           style="display:flex;align-items:center;gap:5px;font-size:10.5px;font-weight:600;color:var(--navy-mid);text-decoration:none;margin-top:10px;padding-top:10px;border-top:1px solid var(--border);">
+          <svg width="12" height="12" fill="none" viewBox="0 0 14 14"><path d="M2 7h10M7 2l5 5-5 5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          View Attrition Dashboard in Org62 ↗
+        </a>
       </div>
 
       <!-- Deployment mix -->
@@ -2533,6 +2621,14 @@
     document.querySelectorAll('.opex-ov').forEach(el => el.style.display = 'none');
     const target = document.getElementById('card-' + acct);
     if (target) setTimeout(() => target.scrollIntoView({ behavior:'smooth', block:'nearest' }), 50);
+  }
+
+  // Attrition tracker quarter tabs
+  function attrSelectQ(q) {
+    document.querySelectorAll('.att-q-tab').forEach(t =>
+      t.classList.toggle('ren-active', t.dataset.aq === q));
+    document.querySelectorAll('.att-q-data').forEach(d =>
+      d.style.display = d.dataset.aq === q ? '' : 'none');
   }
 
   // Renewal pipeline quarter tabs
