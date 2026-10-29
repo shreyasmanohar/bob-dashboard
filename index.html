@@ -1525,7 +1525,7 @@
         <div style="border-radius:7px;overflow:hidden;background:var(--bg);">
           <tableau-viz
             id="rto-viz"
-            src="https://prod-uswest-c.online.tableau.com/t/salesforce/views/Manager_360/OfficeAttendance"
+            src="https://prod-uswest-c.online.tableau.com/t/salesforce/views/Manager_360/YourData"
             toolbar="no"
             hide-tabs
             style="width:100%;height:260px;display:block;">
@@ -1535,7 +1535,7 @@
         <div style="font-size:9px;color:var(--text-muted);margin-top:5px;">Live · Emp360 · Filtered: Shreyas Manohar · Sign in when prompted</div>
       </div>
 
-      <!-- Agentblazer Status -->
+      <!-- Agentblazer      <!-- Agentblazer Status -->
       <div class="panel-card">
         <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;">
           <div class="panel-title" style="margin-bottom:0;">Agentblazer Status</div>
@@ -1547,7 +1547,8 @@
         </script>
         <div style="border-radius:7px;overflow:hidden;background:var(--bg);">
           <tableau-viz
-            src="https://prod-uswest-c.online.tableau.com/t/salesforce/views/Manager_360/Agentblazer2026Status"
+            id="ab-viz"
+            src="https://prod-uswest-c.online.tableau.com/t/salesforce/views/Manager_360/YourData"
             toolbar="no"
             hide-tabs
             style="width:100%;height:280px;display:block;">
@@ -1566,7 +1567,7 @@
         <div style="border-radius:7px;overflow:hidden;background:var(--bg);">
           <tableau-viz
             id="vto-viz"
-            src="https://prod-uswest-c.online.tableau.com/t/salesforce/views/Manager_360/VTOFY27"
+            src="https://prod-uswest-c.online.tableau.com/t/salesforce/views/Manager_360/YourData"
             toolbar="no"
             hide-tabs
             style="width:100%;height:220px;display:block;">
@@ -2848,36 +2849,46 @@
 </script>
 
 
-  <!-- ── RTO period filter for Office Attendance (Emp360) ── -->
+  <!-- ── Emp360 Tableau sheet navigation + RTO period filter ── -->
   <script>
+  // Navigate each viz to its relevant sheet after first-interactive
+  function emp360NavigateSheet(vizId, sheetName) {
+    const viz = document.getElementById(vizId);
+    if (!viz) return;
+    viz.addEventListener('firstinteractive', async () => {
+      try {
+        await viz.workbook.activateSheetAsync(sheetName);
+      } catch (e) {
+        // Sheet not found by that name — list sheets to help debug
+        try {
+          const sheets = viz.workbook.publishedSheetsInfo;
+          console.warn('Sheet "' + sheetName + '" not found in ' + vizId +
+            '. Available:', sheets.map(s => s.name));
+        } catch (_) {}
+      }
+    });
+  }
+  emp360NavigateSheet('rto-viz',  'Office Attendance');
+  emp360NavigateSheet('rto-viz',  'OfficeAttendance');   // alt name
+  emp360NavigateSheet('ab-viz',   'Agentblazer 2026 Status');
+  emp360NavigateSheet('vto-viz',  'VTOFY27');
+
+  // RTO period filter pills
   async function setRTOPeriod(period, btn) {
     document.querySelectorAll('.rto-pill').forEach(p => p.classList.remove('rto-active'));
     btn.classList.add('rto-active');
-
     const viz = document.getElementById('rto-viz');
-    if (!viz || !viz.workbook) return;   // viz not yet loaded
-
+    if (!viz || !viz.workbook) return;
     const sheet = viz.workbook.activeSheet;
-    // "Date" is the most common field name; update if the view uses a different one
-    const dateField = 'Date';
+    const dateField = 'Date';   // update if dashboard uses a different field name
     try {
-      if (period === 'week') {
-        await sheet.applyRelativeDateFilterAsync(dateField,
-          { periodType: 'week', rangeType: 'current', anchorDate: new Date() });
-      } else if (period === 'month') {
-        await sheet.applyRelativeDateFilterAsync(dateField,
-          { periodType: 'month', rangeType: 'current', anchorDate: new Date() });
-      } else if (period === 'quarter') {
-        await sheet.applyRelativeDateFilterAsync(dateField,
-          { periodType: 'quarter', rangeType: 'current', anchorDate: new Date() });
-      }
+      await sheet.applyRelativeDateFilterAsync(dateField,
+        { periodType: period, rangeType: 'current', anchorDate: new Date() });
     } catch (e) {
-      // Field name mismatch — list available filters to help debug
       try {
         const filters = await sheet.getFiltersAsync();
-        console.warn('RTO filter failed. Available filter fields:', filters.map(f => f.fieldName));
+        console.warn('Date filter failed. Available fields:', filters.map(f => f.fieldName));
       } catch (_) {}
-      console.warn('setRTOPeriod error:', e);
     }
   }
   </script>
