@@ -570,6 +570,24 @@
   .att-bad { color:#991B1B; }
   .att-warn { color:#92400E; }
   .att-total { font-size:10px; color:var(--text-secondary); margin-top:6px; text-align:right; font-style:italic; line-height:1.5; }
+
+    /* ── Personal Dev / Learning Hub ── */
+    .pd-section-label { font-size: 10px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 8px; }
+    .pd-iframe { width: 100%; border: none; border-radius: 6px; background: var(--bg); display: block; }
+    .th-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; margin-bottom: 10px; }
+    .th-stat { background: var(--bg); border-radius: 6px; padding: 9px 10px; }
+    .th-stat-val { font-size: 20px; font-weight: 700; color: var(--navy-mid); letter-spacing: -.02em; }
+    .th-stat-label { font-size: 9.5px; font-weight: 600; color: var(--text-muted); text-transform: uppercase; letter-spacing: .04em; margin-top: 2px; }
+    .th-rank-chip { display: inline-flex; align-items: center; gap: 5px; padding: 4px 10px; background: linear-gradient(135deg, rgba(27,79,138,.12), rgba(43,108,176,.06)); border: 1px solid var(--border); border-radius: 5px; font-size: 11px; font-weight: 700; color: var(--navy-mid); }
+    /* ── Attrition Risk per account ── */
+    .att-risk-section { padding-top: 12px; margin-top: 12px; border-top: 1px solid var(--border); }
+    .att-risk-hdr { display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px; }
+    .att-risk-title { font-size: 9.5px; font-weight: 700; text-transform: uppercase; letter-spacing: .06em; color: var(--text); }
+    .att-risk-chips { display: flex; flex-wrap: wrap; gap: 4px; margin-bottom: 4px; }
+    .arc { font-size: 9.5px; font-weight: 600; padding: 2px 8px; border-radius: 4px; }
+    .arc-none { background: rgba(0,168,120,.12); border: 1px solid rgba(0,168,120,.3); color: #00705A; }
+    .arc-flag { background: rgba(239,68,68,.1); border: 1px solid rgba(239,68,68,.3); color: #991B1B; }
+    .arc-unknown { background: var(--bg); border: 1px solid var(--border); color: var(--text-muted); }
 </style>
 </head>
 <body>
@@ -848,6 +866,15 @@
               <textarea class="notes-textarea" id="notes-textarea-csg-metroplus" placeholder="CSG team notes…"></textarea>
               <button class="notes-save-btn" id="notes-save-csg-metroplus" onclick="saveNote('csg-metroplus')">Save</button>
             </div>
+            <div class="att-risk-section">
+              <div class="att-risk-hdr">
+                <div class="att-risk-title">Attrition Risk · Tableau</div>
+                <a href="https://prod-uswest-c.online.tableau.com/#/site/salesforce/views/SuccessDashboardV3_1/Overview" target="_blank" rel="noopener"
+                   style="font-size:9.5px;color:var(--navy-mid);text-decoration:none;font-weight:600;">View Dashboard ↗</a>
+              </div>
+              <div class="att-risk-chips"><span class="arc arc-none">Tableau Cloud: No active risk</span></div>
+              <div style="font-size:9px;color:var(--text-muted);margin-top:5px;">Source: Success Dashboard V3 · Analytics › Tableau products</div>
+            </div>
           </div>
         </div>
       </div>
@@ -956,6 +983,15 @@
               <div class="notes-display csg-notes-display" id="notes-display-csg-nyits" onclick="editNote('csg-nyits')"></div>
               <textarea class="notes-textarea" id="notes-textarea-csg-nyits" placeholder="CSG team notes…"></textarea>
               <button class="notes-save-btn" id="notes-save-csg-nyits" onclick="saveNote('csg-nyits')">Save</button>
+            </div>
+            <div class="att-risk-section">
+              <div class="att-risk-hdr">
+                <div class="att-risk-title">Attrition Risk · Tableau</div>
+                <a href="https://prod-uswest-c.online.tableau.com/#/site/salesforce/views/SuccessDashboardV3_1/Overview" target="_blank" rel="noopener"
+                   style="font-size:9.5px;color:var(--navy-mid);text-decoration:none;font-weight:600;">View Dashboard ↗</a>
+              </div>
+              <div class="att-risk-chips"><span class="arc arc-none">Tableau Server: No active risk</span></div>
+              <div style="font-size:9px;color:var(--text-muted);margin-top:5px;">Source: Success Dashboard V3 · Analytics › Tableau products</div>
             </div>
           </div>
         </div>
@@ -1071,6 +1107,15 @@
               <textarea class="notes-textarea" id="notes-textarea-csg-njdep" placeholder="CSG team notes…"></textarea>
               <button class="notes-save-btn" id="notes-save-csg-njdep" onclick="saveNote('csg-njdep')">Save</button>
             </div>
+            <div class="att-risk-section">
+              <div class="att-risk-hdr">
+                <div class="att-risk-title">Attrition Risk · Tableau</div>
+                <a href="https://prod-uswest-c.online.tableau.com/#/site/salesforce/views/SuccessDashboardV3_1/Overview" target="_blank" rel="noopener"
+                   style="font-size:9.5px;color:var(--navy-mid);text-decoration:none;font-weight:600;">View Dashboard ↗</a>
+              </div>
+              <div class="att-risk-chips"><span class="arc arc-none">Tableau Cloud: No active risk</span></div>
+              <div style="font-size:9px;color:var(--text-muted);margin-top:5px;">Source: Success Dashboard V3 · Analytics › Tableau products</div>
+            </div>
           </div>
         </div>
       </div>
@@ -1184,6 +1229,16 @@
               <div class="notes-display csg-notes-display" id="notes-display-csg-njdoh" onclick="editNote('csg-njdoh')"></div>
               <textarea class="notes-textarea" id="notes-textarea-csg-njdoh" placeholder="CSG team notes…"></textarea>
               <button class="notes-save-btn" id="notes-save-csg-njdoh" onclick="saveNote('csg-njdoh')">Save</button>
+            </div>
+            <div class="att-risk-section">
+              <div class="att-risk-hdr">
+                <div class="att-risk-title">Attrition Risk · Tableau</div>
+                <a href="https://prod-uswest-c.online.tableau.com/#/site/salesforce/views/SuccessDashboardV3_1/Overview" target="_blank" rel="noopener"
+                   style="font-size:9.5px;color:var(--navy-mid);text-decoration:none;font-weight:600;">View Dashboard ↗</a>
+              </div>
+              <div class="att-risk-chips"><span class="arc arc-flag">Tableau Cloud: Risk flagged — review dashboard</span></div>
+              <div style="font-size:9.5px;color:#991B1B;margin-top:4px;font-weight:500;">Q2 FY27: $38K attrition · impressions 300K→250K at renewal</div>
+              <div style="font-size:9px;color:var(--text-muted);margin-top:5px;">Source: Success Dashboard V3 · Analytics › Tableau products</div>
             </div>
           </div>
         </div>
@@ -1308,6 +1363,15 @@
               <textarea class="notes-textarea" id="notes-textarea-csg-flcommerce" placeholder="CSG team notes…"></textarea>
               <button class="notes-save-btn" id="notes-save-csg-flcommerce" onclick="saveNote('csg-flcommerce')">Save</button>
             </div>
+            <div class="att-risk-section">
+              <div class="att-risk-hdr">
+                <div class="att-risk-title">Attrition Risk · Tableau</div>
+                <a href="https://prod-uswest-c.online.tableau.com/#/site/salesforce/views/SuccessDashboardV3_1/Overview" target="_blank" rel="noopener"
+                   style="font-size:9.5px;color:var(--navy-mid);text-decoration:none;font-weight:600;">View Dashboard ↗</a>
+              </div>
+              <div class="att-risk-chips"><span class="arc arc-none">Tableau Cloud: No active risk</span></div>
+              <div style="font-size:9px;color:var(--text-muted);margin-top:5px;">Source: Success Dashboard V3 · Analytics › Tableau products</div>
+            </div>
           </div>
         </div>
       </div>
@@ -1422,6 +1486,15 @@
               <textarea class="notes-textarea" id="notes-textarea-csg-flprepaid" placeholder="CSG team notes…"></textarea>
               <button class="notes-save-btn" id="notes-save-csg-flprepaid" onclick="saveNote('csg-flprepaid')">Save</button>
             </div>
+            <div class="att-risk-section">
+              <div class="att-risk-hdr">
+                <div class="att-risk-title">Attrition Risk · Tableau</div>
+                <a href="https://prod-uswest-c.online.tableau.com/#/site/salesforce/views/SuccessDashboardV3_1/Overview" target="_blank" rel="noopener"
+                   style="font-size:9.5px;color:var(--navy-mid);text-decoration:none;font-weight:600;">View Dashboard ↗</a>
+              </div>
+              <div class="att-risk-chips"><span class="arc arc-none">Tableau Cloud: No active risk</span></div>
+              <div style="font-size:9px;color:var(--text-muted);margin-top:5px;">Source: Success Dashboard V3 · Analytics › Tableau products</div>
+            </div>
           </div>
         </div>
       </div>
@@ -1431,69 +1504,133 @@
     <!-- ── RIGHT PANEL ── -->
     <div class="right-panel">
 
-      <!-- GDC Allocation -->
+      <!-- Agentblazer Status -->
       <div class="panel-card">
-        <div class="panel-title">GDC Allocation by Account</div>
-        <div class="donut-wrap">
-          <svg class="donut-svg" width="110" height="110" viewBox="0 0 110 110" aria-hidden="true">
-            <circle cx="55" cy="55" r="42" fill="none" stroke="#0F2644" stroke-width="14"
-              stroke-dasharray="63.46 202.23" stroke-dashoffset="0" transform="rotate(-90 55 55)"/>
-            <circle cx="55" cy="55" r="42" fill="none" stroke="#1B4F8A" stroke-width="14"
-              stroke-dasharray="63.46 202.23" stroke-dashoffset="-63.46" transform="rotate(-90 55 55)"/>
-            <circle cx="55" cy="55" r="42" fill="none" stroke="#2B6CB0" stroke-width="14"
-              stroke-dasharray="68.76 197.93" stroke-dashoffset="-126.92" transform="rotate(-90 55 55)"/>
-            <circle cx="55" cy="55" r="42" fill="none" stroke="#5B9BD5" stroke-width="14"
-              stroke-dasharray="44.98 220.71" stroke-dashoffset="-195.68" transform="rotate(-90 55 55)"/>
-            <circle cx="55" cy="55" r="42" fill="none" stroke="#90C0E8" stroke-width="14"
-              stroke-dasharray="44.98 220.71" stroke-dashoffset="-240.66" transform="rotate(-90 55 55)"/>
-            <circle cx="55" cy="55" r="42" fill="none" stroke="#C5DCF0" stroke-width="14"
-              stroke-dasharray="44.98 220.71" stroke-dashoffset="-285.64" transform="rotate(-90 55 55)"/>
-            <text x="55" y="51" text-anchor="middle" class="donut-center-text">125%</text>
-            <text x="55" y="63" text-anchor="middle" class="donut-center-sub">GDC Alloc.</text>
-          </svg>
-          <div class="donut-legend">
-            <div class="legend-item"><div class="legend-swatch" style="background:#0F2644;"></div><div class="legend-name">MetroPlus</div><div class="legend-pct">24%</div></div>
-            <div class="legend-item"><div class="legend-swatch" style="background:#1B4F8A;"></div><div class="legend-name">New York ITS</div><div class="legend-pct">24%</div></div>
-            <div class="legend-item"><div class="legend-swatch" style="background:#2B6CB0;"></div><div class="legend-name">FL Prepaid</div><div class="legend-pct">26%</div></div>
-            <div class="legend-item"><div class="legend-swatch" style="background:#5B9BD5;"></div><div class="legend-name">NJ DEP</div><div class="legend-pct">17%</div></div>
-            <div class="legend-item"><div class="legend-swatch" style="background:#90C0E8;"></div><div class="legend-name">NJ DOH</div><div class="legend-pct">17%</div></div>
-            <div class="legend-item"><div class="legend-swatch" style="background:#C5DCF0;"></div><div class="legend-name">FL Commerce</div><div class="legend-pct">17%</div></div>
-          </div>
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;">
+          <div class="panel-title" style="margin-bottom:0;">Agentblazer Status</div>
+          <div class="source-badge" style="font-size:9.5px;padding:2px 7px;background:rgba(27,79,138,.12);border:1px solid rgba(27,79,138,.3);color:var(--navy-mid);border-radius:5px;font-weight:700;">Tableau Cloud</div>
         </div>
+        <div style="background:var(--bg);border-radius:6px;padding:4px;overflow:hidden;">
+          <iframe
+            src="https://prod-uswest-c.online.tableau.com/t/salesforce/views/AITransformation-Private/Agentblazer?:embed=yes&:toolbar=no&:tabs=no&:showShareOptions=false"
+            class="pd-iframe"
+            height="200"
+            sandbox="allow-scripts allow-same-origin allow-forms allow-popups allow-top-navigation-by-user-activation"
+            allowfullscreen
+            title="Agentblazer Status Dashboard">
+          </iframe>
+        </div>
+        <div style="font-size:9.5px;color:var(--text-muted);margin-top:5px;">Requires Salesforce SSO — sign in when prompted</div>
       </div>
 
-      <!-- Health cohorts -->
+      <!-- Personal Learning Hub -->
       <div class="panel-card">
-        <div class="panel-title">Health Cohort Breakdown</div>
-        <div class="cohort-summary">
-          <div class="cohort-row">
-            <div class="cohort-row-label" style="color:var(--green); font-weight:600;">Healthy</div>
-            <div class="cohort-bar-track"><div class="cohort-bar-fill" style="width:66.7%; background:var(--green);"></div></div>
-            <div class="cohort-row-count">4</div>
+        <div class="panel-title">Personal Learning</div>
+
+        <!-- Trailhead -->
+        <div style="margin-bottom:14px;padding-bottom:14px;border-bottom:1px solid var(--border);">
+          <div class="pd-section-label">Trailhead · n7icr3u9komwkk48ta</div>
+          <div class="th-stats">
+            <div class="th-stat">
+              <div class="th-stat-val" id="th-badges">—</div>
+              <div class="th-stat-label">Badges</div>
+            </div>
+            <div class="th-stat">
+              <div class="th-stat-val" id="th-points">—</div>
+              <div class="th-stat-label">Points</div>
+            </div>
           </div>
-          <div class="cohort-row">
-            <div class="cohort-row-label" style="color:var(--amber); font-weight:600;">Observation</div>
-            <div class="cohort-bar-track"><div class="cohort-bar-fill" style="width:33.3%; background:var(--amber);"></div></div>
-            <div class="cohort-row-count">2</div>
-          </div>
-          <div class="cohort-row">
-            <div class="cohort-row-label" style="color:var(--red); font-weight:600;">Priority Risk</div>
-            <div class="cohort-bar-track"><div class="cohort-bar-fill" style="width:0%; background:var(--red);"></div></div>
-            <div class="cohort-row-count">0</div>
+          <div class="th-rank-chip" id="th-rank">Rank: — &nbsp;·&nbsp; Next: —</div>
+          <a href="https://www.salesforce.com/trailblazer/n7icr3u9komwkk48ta" target="_blank" rel="noopener"
+             style="display:flex;align-items:center;gap:5px;font-size:10.5px;font-weight:600;color:var(--navy-mid);text-decoration:none;margin-top:9px;padding-top:9px;border-top:1px solid var(--border);">
+            <svg width="12" height="12" fill="none" viewBox="0 0 14 14"><path d="M2 7h10M7 2l5 5-5 5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            View live Trailhead profile ↗
+          </a>
+          <div style="font-size:9px;color:var(--text-muted);margin-top:3px;">Live stats require login — click link above to see current data</div>
+        </div>
+
+        <!-- ACT Assigned Learning -->
+        <div class="pd-section-label">Assigned Learning (ACT)</div>
+        <div style="background:var(--bg);border-radius:6px;padding:4px;overflow:hidden;margin-bottom:5px;">
+          <iframe
+            src="https://readiness.my.site.com/act/"
+            class="pd-iframe"
+            height="240"
+            sandbox="allow-scripts allow-same-origin allow-forms allow-popups allow-top-navigation-by-user-activation"
+            title="ACT Assigned Learning">
+          </iframe>
+        </div>
+        <div style="font-size:9.5px;color:var(--text-muted);">Requires Salesforce SSO — sign in when prompted</div>
+      </div>
+
+      <!-- Portfolio Health (GDC + Cohort combined) -->
+      <div class="panel-card">
+        <div class="panel-title">Portfolio Health</div>
+
+        <!-- GDC Allocation sub-section -->
+        <div style="margin-bottom:14px;padding-bottom:14px;border-bottom:1px solid var(--border);">
+          <div class="pd-section-label">GDC Allocation by Account</div>
+          <div class="donut-wrap">
+            <svg class="donut-svg" width="90" height="90" viewBox="0 0 110 110" aria-hidden="true">
+              <circle cx="55" cy="55" r="42" fill="none" stroke="#0F2644" stroke-width="14"
+                stroke-dasharray="63.46 202.23" stroke-dashoffset="0" transform="rotate(-90 55 55)"/>
+              <circle cx="55" cy="55" r="42" fill="none" stroke="#1B4F8A" stroke-width="14"
+                stroke-dasharray="63.46 202.23" stroke-dashoffset="-63.46" transform="rotate(-90 55 55)"/>
+              <circle cx="55" cy="55" r="42" fill="none" stroke="#2B6CB0" stroke-width="14"
+                stroke-dasharray="68.76 197.93" stroke-dashoffset="-126.92" transform="rotate(-90 55 55)"/>
+              <circle cx="55" cy="55" r="42" fill="none" stroke="#5B9BD5" stroke-width="14"
+                stroke-dasharray="44.98 220.71" stroke-dashoffset="-195.68" transform="rotate(-90 55 55)"/>
+              <circle cx="55" cy="55" r="42" fill="none" stroke="#90C0E8" stroke-width="14"
+                stroke-dasharray="44.98 220.71" stroke-dashoffset="-240.66" transform="rotate(-90 55 55)"/>
+              <circle cx="55" cy="55" r="42" fill="none" stroke="#C5DCF0" stroke-width="14"
+                stroke-dasharray="44.98 220.71" stroke-dashoffset="-285.64" transform="rotate(-90 55 55)"/>
+              <text x="55" y="51" text-anchor="middle" class="donut-center-text">125%</text>
+              <text x="55" y="63" text-anchor="middle" class="donut-center-sub">GDC Alloc.</text>
+            </svg>
+            <div class="donut-legend">
+              <div class="legend-item"><div class="legend-swatch" style="background:#0F2644;"></div><div class="legend-name">MetroPlus</div><div class="legend-pct">24%</div></div>
+              <div class="legend-item"><div class="legend-swatch" style="background:#1B4F8A;"></div><div class="legend-name">New York ITS</div><div class="legend-pct">24%</div></div>
+              <div class="legend-item"><div class="legend-swatch" style="background:#2B6CB0;"></div><div class="legend-name">FL Prepaid</div><div class="legend-pct">26%</div></div>
+              <div class="legend-item"><div class="legend-swatch" style="background:#5B9BD5;"></div><div class="legend-name">NJ DEP</div><div class="legend-pct">17%</div></div>
+              <div class="legend-item"><div class="legend-swatch" style="background:#90C0E8;"></div><div class="legend-name">NJ DOH</div><div class="legend-pct">17%</div></div>
+              <div class="legend-item"><div class="legend-swatch" style="background:#C5DCF0;"></div><div class="legend-name">FL Commerce</div><div class="legend-pct">17%</div></div>
+            </div>
           </div>
         </div>
-        <div style="margin-top:14px; padding-top:14px; border-top:1px solid var(--border); display:flex; gap:16px;">
-          <div style="flex:1; text-align:center;">
-            <div style="font-size:11px; color:var(--text-muted); margin-bottom:4px;">Green</div>
-            <div style="font-size:22px; font-weight:700; color:var(--green); letter-spacing:-0.02em;">4</div>
+
+        <!-- Health Cohort sub-section -->
+        <div>
+          <div class="pd-section-label">Health Cohort Breakdown</div>
+          <div class="cohort-summary">
+            <div class="cohort-row">
+              <div class="cohort-row-label" style="color:var(--green); font-weight:600;">Healthy</div>
+              <div class="cohort-bar-track"><div class="cohort-bar-fill" style="width:66.7%; background:var(--green);"></div></div>
+              <div class="cohort-row-count">4</div>
+            </div>
+            <div class="cohort-row">
+              <div class="cohort-row-label" style="color:var(--amber); font-weight:600;">Observation</div>
+              <div class="cohort-bar-track"><div class="cohort-bar-fill" style="width:33.3%; background:var(--amber);"></div></div>
+              <div class="cohort-row-count">2</div>
+            </div>
+            <div class="cohort-row">
+              <div class="cohort-row-label" style="color:var(--red); font-weight:600;">Priority Risk</div>
+              <div class="cohort-bar-track"><div class="cohort-bar-fill" style="width:0%; background:var(--red);"></div></div>
+              <div class="cohort-row-count">0</div>
+            </div>
           </div>
-          <div style="flex:1; text-align:center;">
-            <div style="font-size:11px; color:var(--text-muted); margin-bottom:4px;">Yellow</div>
-            <div style="font-size:22px; font-weight:700; color:var(--amber); letter-spacing:-0.02em;">2</div>
-          </div>
-          <div style="flex:1; text-align:center;">
-            <div style="font-size:11px; color:var(--text-muted); margin-bottom:4px;">Red</div>
-            <div style="font-size:22px; font-weight:700; color:var(--text-muted); letter-spacing:-0.02em;">0</div>
+          <div style="margin-top:12px;padding-top:12px;border-top:1px solid var(--border);display:flex;gap:12px;">
+            <div style="flex:1;text-align:center;">
+              <div style="font-size:10px;color:var(--text-muted);margin-bottom:3px;">Green</div>
+              <div style="font-size:20px;font-weight:700;color:var(--green);letter-spacing:-0.02em;">4</div>
+            </div>
+            <div style="flex:1;text-align:center;">
+              <div style="font-size:10px;color:var(--text-muted);margin-bottom:3px;">Yellow</div>
+              <div style="font-size:20px;font-weight:700;color:var(--amber);letter-spacing:-0.02em;">2</div>
+            </div>
+            <div style="flex:1;text-align:center;">
+              <div style="font-size:10px;color:var(--text-muted);margin-bottom:3px;">Red</div>
+              <div style="font-size:20px;font-weight:700;color:var(--text-muted);letter-spacing:-0.02em;">0</div>
+            </div>
           </div>
         </div>
       </div>
