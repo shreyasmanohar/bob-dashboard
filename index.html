@@ -1506,81 +1506,68 @@
 
       <!-- Agentblazer Status -->
       <div class="panel-card">
-        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;">
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;">
           <div class="panel-title" style="margin-bottom:0;">Agentblazer Status</div>
           <div class="source-badge" style="font-size:9.5px;padding:2px 7px;background:rgba(27,79,138,.12);border:1px solid rgba(27,79,138,.3);color:var(--navy-mid);border-radius:5px;font-weight:700;">Tableau Cloud</div>
         </div>
-        <!-- Agentblazer editable stat tiles -->
-        <div class="th-stats" style="margin-bottom:12px;">
-          <div class="th-stat" style="cursor:pointer;" onclick="editStat('ab-modules','Modules Completed')" title="Click to edit">
-            <div class="th-stat-val" id="ab-modules-display">—</div>
-            <div class="th-stat-label">Modules Done</div>
-          </div>
-          <div class="th-stat" style="cursor:pointer;" onclick="editStat('ab-badges','Agentblazer Badges')" title="Click to edit">
-            <div class="th-stat-val" id="ab-badges-display">—</div>
-            <div class="th-stat-label">Badges Earned</div>
-          </div>
+        <!-- Tableau Embedding API v3 — official embed, handles SSO in-component -->
+        <script type="module"
+          src="https://prod-uswest-c.online.tableau.com/javascripts/api/tableau.embedding.3.latest.min.js">
+        </script>
+        <div style="border-radius:7px;overflow:hidden;background:var(--bg);">
+          <tableau-viz
+            src="https://prod-uswest-c.online.tableau.com/t/salesforce/views/AITransformation-Private/Agentblazer"
+            toolbar="no"
+            hide-tabs
+            style="width:100%;height:280px;display:block;">
+          </tableau-viz>
         </div>
-        <!-- Agentblazer rank / status chip -->
-        <div style="margin-bottom:12px;">
-          <div class="th-rank-chip" id="ab-rank-display" style="cursor:pointer;display:inline-flex;" onclick="editStat('ab-rank','Agentblazer Rank / Status')" title="Click to edit">
-            Status: — &nbsp;·&nbsp; Click to update
-          </div>
-        </div>
-        <!-- launch button -->
-        <a href="https://prod-uswest-c.online.tableau.com/#/site/salesforce/views/AITransformation-Private/Agentblazer?:iid=1"
-           target="_blank" rel="noopener"
-           style="display:flex;align-items:center;justify-content:center;gap:6px;padding:9px 16px;background:var(--navy-mid);color:white;border-radius:7px;text-decoration:none;font-size:11.5px;font-weight:700;letter-spacing:.02em;margin-bottom:8px;">
-          <svg width="13" height="13" fill="none" viewBox="0 0 14 14"><path d="M2 7h10M7 2l5 5-5 5" stroke="white" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          Open Agentblazer Dashboard
-        </a>
-        <div style="font-size:9px;color:var(--text-muted);">Opens in Tableau Cloud · Requires Salesforce SSO · Click tiles above to save your stats locally</div>
+        <div style="font-size:9px;color:var(--text-muted);margin-top:5px;">Live · Salesforce Tableau Cloud · Sign in when prompted</div>
       </div>
 
       <!-- Personal Learning Hub -->
       <div class="panel-card">
         <div class="panel-title">Personal Learning</div>
 
-        <!-- ── Trailhead ── -->
+        <!-- ── Trailhead ─────────────────────────────────────────────────── -->
+        <!-- trailhead.salesforce.com + www.salesforce.com both return       -->
+        <!-- X-Frame-Options: DENY and frame-ancestors: 'none' — hard block  -->
+        <!-- No embeddable API exists; direct link is the only live option.  -->
         <div style="margin-bottom:14px;padding-bottom:14px;border-bottom:1px solid var(--border);">
-          <div class="pd-section-label">Trailhead — click tiles to update</div>
-          <div class="th-stats">
-            <div class="th-stat" style="cursor:pointer;" onclick="editStat('th-badges','Number of Badges')" title="Click to edit">
-              <div class="th-stat-val" id="th-badges-display">—</div>
-              <div class="th-stat-label">Badges</div>
+          <div class="pd-section-label">Trailhead · n7icr3u9komwkk48ta</div>
+          <div style="background:var(--bg);border-radius:8px;padding:14px 14px 12px;margin-bottom:2px;">
+            <div style="display:flex;align-items:center;gap:10px;margin-bottom:10px;">
+              <div style="width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,#1B4F8A,#5B9BD5);display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+                <svg width="18" height="18" fill="none" viewBox="0 0 24 24"><path d="M12 2l2.4 7.4H22l-6.2 4.5 2.4 7.4L12 17l-6.2 4.3 2.4-7.4L2 9.4h7.6L12 2z" fill="white"/></svg>
+              </div>
+              <div>
+                <div style="font-size:12px;font-weight:700;color:var(--text);">Shreyas Manohar</div>
+                <div style="font-size:10px;color:var(--text-muted);">Trailblazer · n7icr3u9komwkk48ta</div>
+              </div>
             </div>
-            <div class="th-stat" style="cursor:pointer;" onclick="editStat('th-points','Total Points')" title="Click to edit">
-              <div class="th-stat-val" id="th-points-display">—</div>
-              <div class="th-stat-label">Points</div>
-            </div>
+            <a href="https://www.salesforce.com/trailblazer/n7icr3u9komwkk48ta" target="_blank" rel="noopener"
+               style="display:flex;align-items:center;justify-content:center;gap:6px;padding:8px 14px;background:var(--navy-mid);color:white;border-radius:6px;text-decoration:none;font-size:11px;font-weight:700;letter-spacing:.02em;width:100%;box-sizing:border-box;">
+              <svg width="12" height="12" fill="none" viewBox="0 0 14 14"><path d="M2 7h10M7 2l5 5-5 5" stroke="white" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              View Live Trailhead Profile
+            </a>
           </div>
-          <div style="display:flex;align-items:center;gap:6px;flex-wrap:wrap;">
-            <div class="th-rank-chip" id="th-rank-display" style="cursor:pointer;" onclick="editStat('th-rank','Current Rank · Next Rank (e.g. Ranger · Double Star Ranger')" title="Click to edit">
-              Rank: — &nbsp;·&nbsp; Click to update
-            </div>
-          </div>
-          <a href="https://www.salesforce.com/trailblazer/n7icr3u9komwkk48ta" target="_blank" rel="noopener"
-             style="display:flex;align-items:center;gap:5px;font-size:10.5px;font-weight:600;color:var(--navy-mid);text-decoration:none;margin-top:10px;padding-top:10px;border-top:1px solid var(--border);">
-            <svg width="12" height="12" fill="none" viewBox="0 0 14 14"><path d="M2 7h10M7 2l5 5-5 5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
-            Open Trailhead profile to check live stats ↗
-          </a>
+          <div style="font-size:9px;color:var(--text-muted);padding:3px 2px;">Salesforce blocks iframe embedding on all Trailhead domains — live stats only available on the profile page above</div>
         </div>
 
-        <!-- ── ACT Assigned Learning ── -->
-        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px;">
-          <div class="pd-section-label" style="margin-bottom:0;">Assigned Learning (ACT)</div>
-          <button onclick="addActItem()" style="font-size:10px;font-weight:700;color:var(--navy-mid);background:none;border:1px solid var(--border);border-radius:4px;padding:2px 8px;cursor:pointer;">+ Add</button>
+        <!-- ── ACT Assigned Learning ────────────────────────────────────── -->
+        <div class="pd-section-label">Assigned Learning (ACT)</div>
+        <div style="border-radius:7px;overflow:hidden;background:var(--bg);margin-bottom:6px;">
+          <iframe
+            src="https://readiness.my.site.com/act/"
+            style="width:100%;height:280px;border:none;display:block;"
+            sandbox="allow-scripts allow-same-origin allow-forms allow-popups allow-top-navigation-by-user-activation allow-storage-access-by-user-activation"
+            title="ACT Assigned Learning">
+          </iframe>
         </div>
-        <div id="act-list" style="display:flex;flex-direction:column;gap:5px;margin-bottom:8px;"></div>
-        <a href="https://readiness.my.site.com/act/" target="_blank" rel="noopener"
-           style="display:flex;align-items:center;gap:5px;font-size:10.5px;font-weight:600;color:var(--navy-mid);text-decoration:none;padding-top:8px;border-top:1px solid var(--border);">
-          <svg width="12" height="12" fill="none" viewBox="0 0 14 14"><path d="M2 7h10M7 2l5 5-5 5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          Open ACT portal ↗
-        </a>
-        <div style="font-size:9px;color:var(--text-muted);margin-top:3px;">Add assignments from the ACT portal above — saved locally in your browser</div>
+        <div style="font-size:9px;color:var(--text-muted);">Live · Salesforce Experience Cloud · Sign in with SSO when prompted</div>
       </div>
 
-      <!-- Portfolio Health (GDC + Cohort combined) -->
+      <!-- Portfolio Health      <!-- Portfolio Health (GDC + Cohort combined) -->
       <div class="panel-card">
         <div class="panel-title">Portfolio Health</div>
 
@@ -2797,83 +2784,6 @@
   // Run on load
   initDashboard();
 </script>
-
-  <!-- ── Editable stat tiles (Trailhead + Agentblazer) + ACT list ── -->
-  <script>
-  // ── Generic editable stat tiles ──────────────────────────────────────────
-  const STAT_KEYS = ['th-badges','th-points','th-rank','ab-modules','ab-badges','ab-rank'];
-  function loadStats() {
-    STAT_KEYS.forEach(k => {
-      const v = localStorage.getItem('stat:' + k);
-      const el = document.getElementById(k + '-display');
-      if (el && v) el.textContent = v;
-    });
-  }
-  function editStat(key, label) {
-    const el = document.getElementById(key + '-display');
-    const cur = localStorage.getItem('stat:' + key) || '';
-    const val = prompt('Update "' + label + '":', cur);
-    if (val === null) return;               // cancelled
-    const trimmed = val.trim() || '—';
-    localStorage.setItem('stat:' + key, trimmed);
-    if (el) el.textContent = trimmed;
-  }
-
-  // ── ACT Assigned Learning list ────────────────────────────────────────────
-  function loadActList() {
-    const raw = localStorage.getItem('act-items');
-    const items = raw ? JSON.parse(raw) : [];
-    renderActList(items);
-  }
-  function saveActList(items) {
-    localStorage.setItem('act-items', JSON.stringify(items));
-  }
-  function renderActList(items) {
-    const el = document.getElementById('act-list');
-    if (!el) return;
-    if (items.length === 0) {
-      el.innerHTML = '<div style="font-size:11px;color:var(--text-muted);padding:6px 0;">No assignments yet — open ACT portal and add your modules below.</div>';
-      return;
-    }
-    el.innerHTML = items.map((it, i) => `
-      <div style="background:var(--bg);border-radius:6px;padding:8px 10px;display:flex;align-items:center;gap:8px;">
-        <input type="checkbox" ${it.done ? 'checked' : ''} onchange="toggleActItem(${i})"
-               style="width:14px;height:14px;cursor:pointer;accent-color:var(--navy-mid);flex-shrink:0;">
-        <div style="flex:1;min-width:0;">
-          <div style="font-size:11.5px;font-weight:600;color:var(--text);${it.done ? 'text-decoration:line-through;opacity:.55;' : ''}white-space:nowrap;overflow:hidden;text-overflow:ellipsis;" title="${escHtml(it.name)}">${escHtml(it.name)}</div>
-          <div style="font-size:10px;color:var(--text-muted);margin-top:1px;">Due: ${escHtml(it.due || '—')}</div>
-        </div>
-        <span style="font-size:9px;font-weight:700;padding:2px 6px;border-radius:4px;flex-shrink:0;${it.done ? 'background:rgba(0,168,120,.12);border:1px solid rgba(0,168,120,.3);color:#00705A;' : 'background:rgba(245,184,90,.12);border:1px solid rgba(245,184,90,.3);color:#92400E;'}">${it.done ? 'Done' : 'Pending'}</span>
-        <button onclick="removeActItem(${i})" style="background:none;border:none;cursor:pointer;color:var(--text-muted);font-size:14px;padding:0 0 0 2px;line-height:1;" title="Remove">×</button>
-      </div>`).join('');
-  }
-  function escHtml(s) { const d = document.createElement('div'); d.textContent = s; return d.innerHTML; }
-  function addActItem() {
-    const name = prompt('Learning module name:');
-    if (!name || !name.trim()) return;
-    const due  = prompt('Due date (e.g. Nov 15, 2026):') || '—';
-    const raw  = localStorage.getItem('act-items');
-    const items = raw ? JSON.parse(raw) : [];
-    items.push({ name: name.trim(), due: due.trim(), done: false });
-    saveActList(items);
-    renderActList(items);
-  }
-  function toggleActItem(i) {
-    const raw = localStorage.getItem('act-items');
-    const items = raw ? JSON.parse(raw) : [];
-    if (items[i]) items[i].done = !items[i].done;
-    saveActList(items);
-    renderActList(items);
-  }
-  function removeActItem(i) {
-    const raw = localStorage.getItem('act-items');
-    const items = raw ? JSON.parse(raw) : [];
-    items.splice(i, 1);
-    saveActList(items);
-    renderActList(items);
-  }
-  document.addEventListener('DOMContentLoaded', () => { loadStats(); loadActList(); });
-  </script>
 
 </body>
 </html>
