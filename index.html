@@ -588,6 +588,12 @@
     .arc-none { background: rgba(0,168,120,.12); border: 1px solid rgba(0,168,120,.3); color: #00705A; }
     .arc-flag { background: rgba(239,68,68,.1); border: 1px solid rgba(239,68,68,.3); color: #991B1B; }
     .arc-unknown { background: var(--bg); border: 1px solid var(--border); color: var(--text-muted); }
+
+    /* ── RTO / Emp360 period filter pills ── */
+    .rto-pills { display: flex; gap: 4px; margin-bottom: 10px; }
+    .rto-pill { font-size: 10px; font-weight: 700; padding: 3px 10px; border-radius: 20px; border: 1px solid var(--border); background: var(--bg); color: var(--text-muted); cursor: pointer; transition: all .15s; }
+    .rto-pill.rto-active { background: var(--navy-mid); border-color: var(--navy-mid); color: white; }
+    .rto-pill:hover:not(.rto-active) { border-color: var(--navy-mid); color: var(--navy-mid); }
 </style>
 </head>
 <body>
@@ -1504,6 +1510,31 @@
     <!-- ── RIGHT PANEL ── -->
     <div class="right-panel">
 
+
+      <!-- Office Attendance · RTO (Emp360) -->
+      <div class="panel-card">
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;">
+          <div class="panel-title" style="margin-bottom:0;">Office Attendance · RTO</div>
+          <div class="source-badge" style="font-size:9.5px;padding:2px 7px;background:rgba(27,79,138,.12);border:1px solid rgba(27,79,138,.3);color:var(--navy-mid);border-radius:5px;font-weight:700;">Emp360</div>
+        </div>
+        <div class="rto-pills">
+          <button class="rto-pill rto-active" onclick="setRTOPeriod('week',this)">This Week</button>
+          <button class="rto-pill" onclick="setRTOPeriod('month',this)">This Month</button>
+          <button class="rto-pill" onclick="setRTOPeriod('quarter',this)">This Quarter</button>
+        </div>
+        <div style="border-radius:7px;overflow:hidden;background:var(--bg);">
+          <tableau-viz
+            id="rto-viz"
+            src="https://prod-uswest-c.online.tableau.com/t/salesforce/views/Manager_360/OfficeAttendance"
+            toolbar="no"
+            hide-tabs
+            style="width:100%;height:260px;display:block;">
+            <viz-filter field="Employee Name" value="Shreyas Manohar"></viz-filter>
+          </tableau-viz>
+        </div>
+        <div style="font-size:9px;color:var(--text-muted);margin-top:5px;">Live · Emp360 · Filtered: Shreyas Manohar · Sign in when prompted</div>
+      </div>
+
       <!-- Agentblazer Status -->
       <div class="panel-card">
         <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;">
@@ -1516,17 +1547,33 @@
         </script>
         <div style="border-radius:7px;overflow:hidden;background:var(--bg);">
           <tableau-viz
-            src="https://prod-uswest-c.online.tableau.com/t/salesforce/views/AITransformation-Private/Agentblazer"
+            src="https://prod-uswest-c.online.tableau.com/t/salesforce/views/Manager_360/Agentblazer2026Status"
             toolbar="no"
             hide-tabs
             style="width:100%;height:280px;display:block;">
-            <!-- Filter to show only Shreyas Manohar's Agentblazer data.        -->
-            <!-- "User Name" is the standard field; update if the dashboard     -->
-            <!-- uses a different field name (e.g. "Employee" or "IC Name").    -->
             <viz-filter field="Employee Name" value="Shreyas Manohar"></viz-filter>
           </tableau-viz>
         </div>
-        <div style="font-size:9px;color:var(--text-muted);margin-top:5px;">Live · Filtered: Shreyas Manohar · Sign in when prompted</div>
+        <div style="font-size:9px;color:var(--text-muted);margin-top:5px;">Live · Emp360 · Filtered: Shreyas Manohar · Sign in when prompted</div>
+      </div>
+
+      <!-- VTOFY27 (Emp360) -->
+      <div class="panel-card">
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;">
+          <div class="panel-title" style="margin-bottom:0;">VTO · FY27</div>
+          <div class="source-badge" style="font-size:9.5px;padding:2px 7px;background:rgba(27,79,138,.12);border:1px solid rgba(27,79,138,.3);color:var(--navy-mid);border-radius:5px;font-weight:700;">Emp360</div>
+        </div>
+        <div style="border-radius:7px;overflow:hidden;background:var(--bg);">
+          <tableau-viz
+            id="vto-viz"
+            src="https://prod-uswest-c.online.tableau.com/t/salesforce/views/Manager_360/VTOFY27"
+            toolbar="no"
+            hide-tabs
+            style="width:100%;height:220px;display:block;">
+            <viz-filter field="Employee Name" value="Shreyas Manohar"></viz-filter>
+          </tableau-viz>
+        </div>
+        <div style="font-size:9px;color:var(--text-muted);margin-top:5px;">Live · Emp360 · Filtered: Shreyas Manohar · Sign in when prompted</div>
       </div>
 
       <!-- Personal Learning Hub -->
@@ -2799,6 +2846,41 @@
   // Run on load
   initDashboard();
 </script>
+
+
+  <!-- ── RTO period filter for Office Attendance (Emp360) ── -->
+  <script>
+  async function setRTOPeriod(period, btn) {
+    document.querySelectorAll('.rto-pill').forEach(p => p.classList.remove('rto-active'));
+    btn.classList.add('rto-active');
+
+    const viz = document.getElementById('rto-viz');
+    if (!viz || !viz.workbook) return;   // viz not yet loaded
+
+    const sheet = viz.workbook.activeSheet;
+    // "Date" is the most common field name; update if the view uses a different one
+    const dateField = 'Date';
+    try {
+      if (period === 'week') {
+        await sheet.applyRelativeDateFilterAsync(dateField,
+          { periodType: 'week', rangeType: 'current', anchorDate: new Date() });
+      } else if (period === 'month') {
+        await sheet.applyRelativeDateFilterAsync(dateField,
+          { periodType: 'month', rangeType: 'current', anchorDate: new Date() });
+      } else if (period === 'quarter') {
+        await sheet.applyRelativeDateFilterAsync(dateField,
+          { periodType: 'quarter', rangeType: 'current', anchorDate: new Date() });
+      }
+    } catch (e) {
+      // Field name mismatch — list available filters to help debug
+      try {
+        const filters = await sheet.getFiltersAsync();
+        console.warn('RTO filter failed. Available filter fields:', filters.map(f => f.fieldName));
+      } catch (_) {}
+      console.warn('setRTOPeriod error:', e);
+    }
+  }
+  </script>
 
 </body>
 </html>
