@@ -594,6 +594,17 @@
     .rto-pill { font-size: 10px; font-weight: 700; padding: 3px 10px; border-radius: 20px; border: 1px solid var(--border); background: var(--bg); color: var(--text-muted); cursor: pointer; transition: all .15s; }
     .rto-pill.rto-active { background: var(--navy-mid); border-color: var(--navy-mid); color: white; }
     .rto-pill:hover:not(.rto-active) { border-color: var(--navy-mid); color: var(--navy-mid); }
+    /* ── Emp360 data cards ── */
+    .emp360-loading { font-size: 11px; color: var(--text-muted); font-style: italic; }
+    .emp360-error   { font-size: 11px; color: var(--text-muted); text-align: center; }
+    .emp360-big     { font-size: 36px; font-weight: 700; color: var(--navy-mid); letter-spacing: -.03em; line-height: 1; }
+    .emp360-sub     { font-size: 10px; font-weight: 600; color: var(--text-muted); text-transform: uppercase; letter-spacing: .05em; margin-top: 5px; }
+    .emp360-status  { font-size: 13px; font-weight: 700; padding: 6px 14px; border-radius: 6px; display: inline-block; }
+    .emp360-status-ok   { background: rgba(0,168,120,.12); border: 1px solid rgba(0,168,120,.3); color: #00705A; }
+    .emp360-status-warn { background: rgba(245,184,90,.12); border: 1px solid rgba(245,184,90,.3); color: #92400E; }
+    .emp360-status-na   { background: var(--bg); border: 1px solid var(--border); color: var(--text-muted); }
+    .emp360-row     { display: flex; gap: 16px; width: 100%; justify-content: space-around; }
+    .emp360-col     { text-align: center; }
 </style>
 </head>
 <body>
@@ -1518,63 +1529,38 @@
           <div class="source-badge" style="font-size:9.5px;padding:2px 7px;background:rgba(27,79,138,.12);border:1px solid rgba(27,79,138,.3);color:var(--navy-mid);border-radius:5px;font-weight:700;">Emp360</div>
         </div>
         <div class="rto-pills">
-          <button class="rto-pill rto-active" onclick="setRTOPeriod('week',this)">This Week</button>
-          <button class="rto-pill" onclick="setRTOPeriod('month',this)">This Month</button>
-          <button class="rto-pill" onclick="setRTOPeriod('quarter',this)">This Quarter</button>
+          <button class="rto-pill rto-active" onclick="filterRTO('week',this)">This Week</button>
+          <button class="rto-pill" onclick="filterRTO('month',this)">This Month</button>
+          <button class="rto-pill" onclick="filterRTO('quarter',this)">This Quarter</button>
         </div>
-        <div style="border-radius:7px;overflow:hidden;background:var(--bg);">
-          <tableau-viz
-            id="rto-viz"
-            src="https://prod-uswest-c.online.tableau.com/t/salesforce/views/Manager_360/YourData"
-            toolbar="no"
-            hide-tabs
-            style="width:100%;height:260px;display:block;">
-            <viz-filter field="Employee Name" value="Shreyas Manohar"></viz-filter>
-          </tableau-viz>
+        <div id="rto-display" style="background:var(--bg);border-radius:8px;padding:16px;min-height:80px;display:flex;align-items:center;justify-content:center;">
+          <div class="emp360-loading">Loading from Emp360…</div>
         </div>
-        <div style="font-size:9px;color:var(--text-muted);margin-top:5px;">Live · Emp360 · Filtered: Shreyas Manohar · Sign in when prompted</div>
+        <div style="font-size:9px;color:var(--text-muted);margin-top:5px;">Live · Emp360 · Filtered: Shreyas Manohar</div>
       </div>
 
-      <!-- Agentblazer      <!-- Agentblazer Status -->
-      <div class="panel-card">
+      <!-- Agentblazer Status (Emp360) -->
+      <div class="panel-card" id="card-emp360-ab">
         <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;">
-          <div class="panel-title" style="margin-bottom:0;">Agentblazer Status</div>
-          <div class="source-badge" style="font-size:9.5px;padding:2px 7px;background:rgba(27,79,138,.12);border:1px solid rgba(27,79,138,.3);color:var(--navy-mid);border-radius:5px;font-weight:700;">Tableau Cloud</div>
+          <div class="panel-title" style="margin-bottom:0;">Agentblazer 2026 Status</div>
+          <div class="source-badge" style="font-size:9.5px;padding:2px 7px;background:rgba(27,79,138,.12);border:1px solid rgba(27,79,138,.3);color:var(--navy-mid);border-radius:5px;font-weight:700;">Emp360</div>
         </div>
-        <!-- Tableau Embedding API v3 — official embed, handles SSO in-component -->
-        <script type="module"
-          src="https://prod-uswest-c.online.tableau.com/javascripts/api/tableau.embedding.3.latest.min.js">
-        </script>
-        <div style="border-radius:7px;overflow:hidden;background:var(--bg);">
-          <tableau-viz
-            id="ab-viz"
-            src="https://prod-uswest-c.online.tableau.com/t/salesforce/views/Manager_360/YourData"
-            toolbar="no"
-            hide-tabs
-            style="width:100%;height:280px;display:block;">
-            <viz-filter field="Employee Name" value="Shreyas Manohar"></viz-filter>
-          </tableau-viz>
+        <div id="ab-display" style="background:var(--bg);border-radius:8px;padding:16px;min-height:80px;display:flex;align-items:center;justify-content:center;">
+          <div class="emp360-loading">Loading from Emp360…</div>
         </div>
-        <div style="font-size:9px;color:var(--text-muted);margin-top:5px;">Live · Emp360 · Filtered: Shreyas Manohar · Sign in when prompted</div>
+        <div style="font-size:9px;color:var(--text-muted);margin-top:5px;">Live · Emp360 · Filtered: Shreyas Manohar</div>
       </div>
 
       <!-- VTOFY27 (Emp360) -->
-      <div class="panel-card">
+      <div class="panel-card" id="card-emp360-vto">
         <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;">
           <div class="panel-title" style="margin-bottom:0;">VTO · FY27</div>
           <div class="source-badge" style="font-size:9.5px;padding:2px 7px;background:rgba(27,79,138,.12);border:1px solid rgba(27,79,138,.3);color:var(--navy-mid);border-radius:5px;font-weight:700;">Emp360</div>
         </div>
-        <div style="border-radius:7px;overflow:hidden;background:var(--bg);">
-          <tableau-viz
-            id="vto-viz"
-            src="https://prod-uswest-c.online.tableau.com/t/salesforce/views/Manager_360/YourData"
-            toolbar="no"
-            hide-tabs
-            style="width:100%;height:220px;display:block;">
-            <viz-filter field="Employee Name" value="Shreyas Manohar"></viz-filter>
-          </tableau-viz>
+        <div id="vto-display" style="background:var(--bg);border-radius:8px;padding:16px;min-height:80px;display:flex;align-items:center;justify-content:center;">
+          <div class="emp360-loading">Loading from Emp360…</div>
         </div>
-        <div style="font-size:9px;color:var(--text-muted);margin-top:5px;">Live · Emp360 · Filtered: Shreyas Manohar · Sign in when prompted</div>
+        <div style="font-size:9px;color:var(--text-muted);margin-top:5px;">Live · Emp360 · Filtered: Shreyas Manohar</div>
       </div>
 
       <!-- Personal Learning Hub -->
@@ -2849,48 +2835,142 @@
 </script>
 
 
-  <!-- ── Emp360 Tableau sheet navigation + RTO period filter ── -->
-  <script>
-  // Navigate each viz to its relevant sheet after first-interactive
-  function emp360NavigateSheet(vizId, sheetName) {
-    const viz = document.getElementById(vizId);
-    if (!viz) return;
-    viz.addEventListener('firstinteractive', async () => {
-      try {
-        await viz.workbook.activateSheetAsync(sheetName);
-      } catch (e) {
-        // Sheet not found by that name — list sheets to help debug
-        try {
-          const sheets = viz.workbook.publishedSheetsInfo;
-          console.warn('Sheet "' + sheetName + '" not found in ' + vizId +
-            '. Available:', sheets.map(s => s.name));
-        } catch (_) {}
-      }
-    });
-  }
-  emp360NavigateSheet('rto-viz',  'Office Attendance');
-  emp360NavigateSheet('rto-viz',  'OfficeAttendance');   // alt name
-  emp360NavigateSheet('ab-viz',   'Agentblazer 2026 Status');
-  emp360NavigateSheet('vto-viz',  'VTOFY27');
+  <!-- ── Emp360: single hidden viz loads YourData, JS extracts each metric ── -->
+  <div style="position:absolute;width:1px;height:1px;overflow:hidden;left:-9999px;" aria-hidden="true">
+    <tableau-viz
+      id="emp360-hidden-viz"
+      src="https://prod-uswest-c.online.tableau.com/t/salesforce/views/Manager_360/YourData"
+      toolbar="no"
+      hide-tabs>
+      <viz-filter field="Employee Name" value="Shreyas Manohar"></viz-filter>
+    </tableau-viz>
+  </div>
 
-  // RTO period filter pills
-  async function setRTOPeriod(period, btn) {
-    document.querySelectorAll('.rto-pill').forEach(p => p.classList.remove('rto-active'));
-    btn.classList.add('rto-active');
-    const viz = document.getElementById('rto-viz');
-    if (!viz || !viz.workbook) return;
-    const sheet = viz.workbook.activeSheet;
-    const dateField = 'Date';   // update if dashboard uses a different field name
-    try {
-      await sheet.applyRelativeDateFilterAsync(dateField,
-        { periodType: period, rangeType: 'current', anchorDate: new Date() });
-    } catch (e) {
-      try {
-        const filters = await sheet.getFiltersAsync();
-        console.warn('Date filter failed. Available fields:', filters.map(f => f.fieldName));
-      } catch (_) {}
+  <script>
+  (function () {
+    const LINK = 'https://prod-uswest-c.online.tableau.com/#/site/salesforce/views/Manager_360/YourData?:iid=1';
+
+    function fallback(id) {
+      const el = document.getElementById(id);
+      if (!el) return;
+      el.innerHTML = '<div class="emp360-error">'
+        + '<div style="margin-bottom:8px;">Sign in to Salesforce to load live data.</div>'
+        + '<a href="' + LINK + '" target="_blank" rel="noopener" '
+        + 'style="font-size:10.5px;font-weight:700;color:var(--navy-mid);text-decoration:none;">'
+        + 'Open Emp360 ↗</a></div>';
     }
-  }
+
+    /* ── render helpers ─────────────────────────────────────── */
+    function renderRTO(rows, cols) {
+      const el = document.getElementById('rto-display');
+      if (!el) return;
+      const numCol = cols.find(c => /day|count|office|rto|visit|attend/i.test(c));
+      if (!numCol) { fallback('rto-display'); return; }
+      const idx = cols.indexOf(numCol);
+      let total = 0, found = false;
+      rows.forEach(r => {
+        const v = parseFloat(String(r[idx]?.value ?? r[idx]?.formattedValue ?? '').replace(/,/g,''));
+        if (!isNaN(v)) { total += v; found = true; }
+      });
+      if (!found) { fallback('rto-display'); return; }
+      el.innerHTML = '<div class="emp360-col">'
+        + '<div class="emp360-big">' + Math.round(total) + '</div>'
+        + '<div class="emp360-sub">Days in Office</div></div>';
+    }
+
+    function renderAB(rows, cols) {
+      const el = document.getElementById('ab-display');
+      if (!el) return;
+      const statCol = cols.find(c => /status|certif|complet|badge|level|achiev|progress/i.test(c));
+      if (!statCol) { fallback('ab-display'); return; }
+      const idx = cols.indexOf(statCol);
+      const val = String(rows[0]?.[idx]?.formattedValue ?? rows[0]?.[idx]?.value ?? '—');
+      const cls = /certif|complet|achiev|pass|yes|done/i.test(val)  ? 'emp360-status-ok'
+                : /no|not|incomplet|pending|in.?progress/i.test(val) ? 'emp360-status-warn'
+                : 'emp360-status-na';
+      el.innerHTML = '<div class="emp360-col">'
+        + '<div class="emp360-status ' + cls + '">' + val + '</div>'
+        + '<div class="emp360-sub" style="margin-top:8px;">Agentblazer 2026</div></div>';
+    }
+
+    function renderVTO(rows, cols) {
+      const el = document.getElementById('vto-display');
+      if (!el) return;
+      const vtoCol   = cols.find(c => /vto|volunteer|used|taken/i.test(c));
+      const availCol = cols.find(c => /avail|remain|balance|total/i.test(c));
+      if (!vtoCol) { fallback('vto-display'); return; }
+      const vi = cols.indexOf(vtoCol);
+      const ai = availCol ? cols.indexOf(availCol) : -1;
+      const used  = String(rows[0]?.[vi]?.formattedValue ?? rows[0]?.[vi]?.value ?? '—');
+      const avail = ai >= 0 ? String(rows[0]?.[ai]?.formattedValue ?? rows[0]?.[ai]?.value ?? '') : '';
+      el.innerHTML = '<div class="emp360-row">'
+        + '<div class="emp360-col"><div class="emp360-big" style="color:#00705A;">' + used + '</div>'
+        + '<div class="emp360-sub">Days Used</div></div>'
+        + (avail ? '<div class="emp360-col"><div class="emp360-big" style="font-size:26px;color:var(--text-secondary);">' + avail + '</div>'
+          + '<div class="emp360-sub">Available</div></div>' : '')
+        + '</div>';
+    }
+
+    /* ── main extraction ────────────────────────────────────── */
+    async function extractAll(viz) {
+      const dashboard = viz.workbook.activeSheet;
+      const sheets = dashboard.worksheets ?? [];
+      console.log('[Emp360] worksheets:', sheets.map(s => s.name));
+
+      for (const sheet of sheets) {
+        const n = sheet.name;
+        const type = /attendance|rto|office/i.test(n) ? 'rto'
+                   : /agent|blazer/i.test(n)          ? 'ab'
+                   : /vto|volunteer/i.test(n)          ? 'vto'
+                   : null;
+        if (!type) continue;
+        try {
+          const dt = await sheet.getSummaryDataAsync({ ignoreAliases: false, ignoreSelection: true, maxRows: 100 });
+          const cols = dt.columns.map(c => c.fieldName);
+          console.log('[Emp360] "' + n + '" (' + type + ') cols:', cols);
+          if (type === 'rto') renderRTO(dt.data, cols);
+          else if (type === 'ab')  renderAB(dt.data, cols);
+          else if (type === 'vto') renderVTO(dt.data, cols);
+        } catch (e) {
+          console.warn('[Emp360] could not read "' + n + '":', e.message);
+          fallback(type + '-display');
+        }
+      }
+      // Fall back any cards still showing loading spinner
+      ['rto-display','ab-display','vto-display'].forEach(id => {
+        const el = document.getElementById(id);
+        if (el && el.querySelector('.emp360-loading')) fallback(id);
+      });
+    }
+
+    /* ── RTO period filter ──────────────────────────────────── */
+    window.filterRTO = async function (period, btn) {
+      document.querySelectorAll('.rto-pill').forEach(p => p.classList.remove('rto-active'));
+      btn.classList.add('rto-active');
+      const viz = document.getElementById('emp360-hidden-viz');
+      if (!viz?.workbook) return;
+      const sheets = viz.workbook.activeSheet.worksheets ?? [];
+      const rtoSheet = sheets.find(s => /attendance|rto|office/i.test(s.name));
+      if (!rtoSheet) return;
+      try {
+        const filters = await rtoSheet.getFiltersAsync();
+        const dateF = filters.find(f => /date|week|period|month|quarter/i.test(f.fieldName));
+        if (dateF) {
+          await rtoSheet.applyRelativeDateFilterAsync(dateF.fieldName,
+            { periodType: period, rangeType: 'current', anchorDate: new Date() });
+          const dt = await rtoSheet.getSummaryDataAsync({ ignoreAliases: false, ignoreSelection: true, maxRows: 100 });
+          renderRTO(dt.data, dt.columns.map(c => c.fieldName));
+        } else {
+          console.warn('[Emp360] no date filter found. Available:', filters.map(f => f.fieldName));
+        }
+      } catch (e) { console.warn('[Emp360] filterRTO:', e.message); }
+    };
+
+    document.addEventListener('DOMContentLoaded', () => {
+      const viz = document.getElementById('emp360-hidden-viz');
+      if (viz) viz.addEventListener('firstinteractive', () => extractAll(viz));
+    });
+  })();
   </script>
 
 </body>
